@@ -6,18 +6,58 @@
 //  Copyright © 2016 Arthur Tonelli. All rights reserved.
 //
 
+#import <Spotify/Spotify.h>
 #import "AppDelegate.h"
+#import "Config.h"
+#import "MusicViewController.h"
 
 @interface AppDelegate ()
+
+@property (nonatomic,strong) SPTSession *session;
+@property (nonatomic,strong) SPTAudioStreamingController *player;
 
 @end
 
 @implementation AppDelegate
 
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
+    
+    SPTAuth *auth = [SPTAuth defaultInstance];
+    
+    [auth setClientID:@kClientId];
+    [auth setRedirectURL:[NSURL URLWithString:@kCallbackURL]];
+    [auth setRequestedScopes:@[SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPrivateScope,SPTAuthPlaylistModifyPublicScope, @"user-top-read"]];
+    
+    NSURL *loginURL = [auth loginURL];
+    
+    [application performSelector:@selector(openURL:) withObject:loginURL afterDelay:0.1];
+    
     return YES;
+}
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
+    SPTAuth *auth = [SPTAuth defaultInstance];
+    
+    SPTAuthCallback authCallback = ^(NSError *error, SPTSession *session){
+        
+        if (error != nil){
+            NSLog(@"*** Autherror: %@", error);
+            return;
+        }
+        
+        auth.session = session;
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"sessionUpdated" object:self];
+        
+    };
+    
+    if([auth canHandleURL:url]) {
+        [auth handleAuthCallbackWithTriggeredAuthURL:url callback:authCallback];
+        
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
