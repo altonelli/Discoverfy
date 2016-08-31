@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Spotify/Spotify.h>
 #import <AVFoundation/AVFoundation.h>
+#import "User.h"
 
 @interface SpotifyService : NSObject
 
@@ -23,11 +24,16 @@
 
 +(id)sharedService;
 
--(void)getArtistsListWithAccessToken:(NSString *)accessToken callback:(void (^)(void))callbackBlock;
--(void)fetchURIsFromArtistsWithAccessToken:(NSString *)accessToken artists:(NSMutableArray *)artists callback:(void(^)(void))callbackBlock;
--(void)verifyDiscoverfyPlaylistWithAccessToken:(NSString *)accessToken session:(SPTSession *)session offset:(int)offset;
+-(void)getArtistsListWithAccessToken:(NSString *)accessToken queue:(dispatch_queue_t)queue callback:(void (^)(void))callbackBlock;
+
+-(void)fetchPlaylistSongsWithAccessToken:(NSString *)accessToken session:(SPTSession *)session offset:(int)offset user:(User *)user queue:(dispatch_queue_t)queue  callback:(void(^)(void))callbackBlock;
+
+-(void)fetchRecommendedSongsFromArtists:(NSMutableArray *)artists accessToken:(NSString *)accessToken queue:(dispatch_queue_t)queue callback:(void(^)(NSArray *))callbackBlock;
+
+-(void)convertTracksWithTracks:(NSArray *)tracks user:(User *)user completion:(nullable void (^)(void))callbackBlock;
+
+-(void)queueSongsWithAccessToken:(NSString *)accessToken user:(User*)user queue:(dispatch_queue_t)queue callback:(nullable void (^)(void))callbackBlock;
 
 -(NSMutableArray *)getRandomArtists;
--(void)loadTracks;
 
 @end

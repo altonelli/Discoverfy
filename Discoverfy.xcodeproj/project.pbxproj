@@ -7,27 +7,88 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E1248101D553E2F00F5B477 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12480F1D553E2F00F5B477 /* AppDelegate.m */; };
+		9E12481C1D553E6800F5B477 /* LogInController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1248131D553E6800F5B477 /* LogInController.m */; };
+		9E12481D1D553E6800F5B477 /* MusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1248151D553E6800F5B477 /* MusicViewController.m */; };
+		9E12481E1D553E6800F5B477 /* SpotifyService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1248171D553E6800F5B477 /* SpotifyService.m */; };
+		9E12481F1D553E6800F5B477 /* Track.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1248191D553E6800F5B477 /* Track.m */; };
+		9E1248201D553E6800F5B477 /* TrackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12481B1D553E6800F5B477 /* TrackViewController.m */; };
+		9E1248261D553F6D00F5B477 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E1248251D553F6D00F5B477 /* AVFoundation.framework */; };
+		9E1248281D553FD700F5B477 /* Spotify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E1248271D553FD700F5B477 /* Spotify.framework */; };
+		9E12482B1D5540A400F5B477 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E12482A1D5540A400F5B477 /* SystemConfiguration.framework */; };
+		9E12483D1D5BC04600F5B477 /* CoreDataService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12483C1D5BC04600F5B477 /* CoreDataService.m */; };
+		9E1248541D5CF1A900F5B477 /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12484C1D5CF1A900F5B477 /* User+CoreDataProperties.m */; };
+		9E1248551D5CF1A900F5B477 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12484D1D5CF1A900F5B477 /* Song.m */; };
+		9E1248561D5CF1A900F5B477 /* Song+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12484E1D5CF1A900F5B477 /* Song+CoreDataProperties.m */; };
+		9E1248591D5CF1A900F5B477 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1248511D5CF1A900F5B477 /* User.m */; };
+		9E12485B1D5D1F4500F5B477 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E12485A1D5D1F4500F5B477 /* CoreData.framework */; };
 		9E135D741D47E18200B52C47 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E135D731D47E18200B52C47 /* main.m */; };
-		9E135D771D47E18200B52C47 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E135D761D47E18200B52C47 /* AppDelegate.m */; };
-		9E135D7A1D47E18200B52C47 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E135D791D47E18200B52C47 /* ViewController.m */; };
 		9E135D7D1D47E18200B52C47 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E135D7B1D47E18200B52C47 /* Main.storyboard */; };
 		9E135D801D47E18200B52C47 /* Discoverfy.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9E135D7E1D47E18200B52C47 /* Discoverfy.xcdatamodeld */; };
 		9E135D821D47E18200B52C47 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E135D811D47E18200B52C47 /* Assets.xcassets */; };
 		9E135D851D47E18200B52C47 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9E135D831D47E18200B52C47 /* LaunchScreen.storyboard */; };
+		9E203A7B1D6D00C600D0490C /* playButtonImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E203A771D6D00C600D0490C /* playButtonImage.png */; };
+		9E203A7C1D6D00C600D0490C /* skipButtonImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E203A781D6D00C600D0490C /* skipButtonImage.png */; };
+		9E203A7D1D6D00C600D0490C /* repeatButtonImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E203A791D6D00C600D0490C /* repeatButtonImage.png */; };
+		9E203A7E1D6D00C600D0490C /* pauseButtonImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E203A7A1D6D00C600D0490C /* pauseButtonImage.png */; };
+		9E203A801D6E653800D0490C /* demoAlbumArt.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E203A7F1D6E653800D0490C /* demoAlbumArt.png */; };
+		9E203A821D6E661100D0490C /* demoAlbumArt2.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E203A811D6E661100D0490C /* demoAlbumArt2.png */; };
+		9E203A851D70D56500D0490C /* DiscoverfyService.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E203A841D70D56500D0490C /* DiscoverfyService.m */; };
+		9E203A881D72931700D0490C /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E203A871D72931700D0490C /* Reachability.m */; };
+		9E203A8B1D72AB9100D0490C /* ErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E203A8A1D72AB9100D0490C /* ErrorViewController.m */; };
+		9E2283D21D6B7AA7004C4AD7 /* addSongImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E2283D11D6B7AA7004C4AD7 /* addSongImage.jpg */; };
+		9E2283D41D6B7C3E004C4AD7 /* removeSongImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E12480E1D553E2F00F5B477 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		9E12480F1D553E2F00F5B477 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		9E1248111D553E6800F5B477 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
+		9E1248121D553E6800F5B477 /* LogInController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogInController.h; sourceTree = "<group>"; };
+		9E1248131D553E6800F5B477 /* LogInController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogInController.m; sourceTree = "<group>"; };
+		9E1248141D553E6800F5B477 /* MusicViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicViewController.h; sourceTree = "<group>"; };
+		9E1248151D553E6800F5B477 /* MusicViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicViewController.m; sourceTree = "<group>"; };
+		9E1248161D553E6800F5B477 /* SpotifyService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpotifyService.h; sourceTree = "<group>"; };
+		9E1248171D553E6800F5B477 /* SpotifyService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpotifyService.m; sourceTree = "<group>"; };
+		9E1248181D553E6800F5B477 /* Track.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Track.h; sourceTree = "<group>"; };
+		9E1248191D553E6800F5B477 /* Track.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Track.m; sourceTree = "<group>"; };
+		9E12481A1D553E6800F5B477 /* TrackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TrackViewController.h; sourceTree = "<group>"; };
+		9E12481B1D553E6800F5B477 /* TrackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TrackViewController.m; sourceTree = "<group>"; };
+		9E1248251D553F6D00F5B477 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9E1248271D553FD700F5B477 /* Spotify.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Spotify.framework; sourceTree = "<group>"; };
+		9E12482A1D5540A400F5B477 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		9E12483B1D5BC04600F5B477 /* CoreDataService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataService.h; sourceTree = "<group>"; };
+		9E12483C1D5BC04600F5B477 /* CoreDataService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataService.m; sourceTree = "<group>"; };
+		9E12484A1D5CF1A900F5B477 /* Song+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Song+CoreDataProperties.h"; sourceTree = "<group>"; };
+		9E12484B1D5CF1A900F5B477 /* User+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "User+CoreDataProperties.h"; sourceTree = "<group>"; };
+		9E12484C1D5CF1A900F5B477 /* User+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataProperties.m"; sourceTree = "<group>"; };
+		9E12484D1D5CF1A900F5B477 /* Song.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
+		9E12484E1D5CF1A900F5B477 /* Song+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "Song+CoreDataProperties.m"; sourceTree = "<group>"; };
+		9E12484F1D5CF1A900F5B477 /* User.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		9E1248501D5CF1A900F5B477 /* Song.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
+		9E1248511D5CF1A900F5B477 /* User.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		9E12485A1D5D1F4500F5B477 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9E135D6F1D47E18200B52C47 /* Discoverfy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Discoverfy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E135D731D47E18200B52C47 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9E135D751D47E18200B52C47 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		9E135D761D47E18200B52C47 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		9E135D781D47E18200B52C47 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		9E135D791D47E18200B52C47 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9E135D7C1D47E18200B52C47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9E135D7F1D47E18200B52C47 /* Discoverfy.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Discoverfy.xcdatamodel; sourceTree = "<group>"; };
 		9E135D811D47E18200B52C47 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9E135D841D47E18200B52C47 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9E135D861D47E18200B52C47 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E203A771D6D00C600D0490C /* playButtonImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playButtonImage.png; sourceTree = "<group>"; };
+		9E203A781D6D00C600D0490C /* skipButtonImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = skipButtonImage.png; sourceTree = "<group>"; };
+		9E203A791D6D00C600D0490C /* repeatButtonImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = repeatButtonImage.png; sourceTree = "<group>"; };
+		9E203A7A1D6D00C600D0490C /* pauseButtonImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pauseButtonImage.png; sourceTree = "<group>"; };
+		9E203A7F1D6E653800D0490C /* demoAlbumArt.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = demoAlbumArt.png; sourceTree = "<group>"; };
+		9E203A811D6E661100D0490C /* demoAlbumArt2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = demoAlbumArt2.png; sourceTree = "<group>"; };
+		9E203A831D70D56500D0490C /* DiscoverfyService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverfyService.h; sourceTree = "<group>"; };
+		9E203A841D70D56500D0490C /* DiscoverfyService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverfyService.m; sourceTree = "<group>"; };
+		9E203A861D72931700D0490C /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Reachability.h; sourceTree = "<group>"; };
+		9E203A871D72931700D0490C /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Reachability.m; sourceTree = "<group>"; };
+		9E203A891D72AB9100D0490C /* ErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorViewController.h; sourceTree = "<group>"; };
+		9E203A8A1D72AB9100D0490C /* ErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorViewController.m; sourceTree = "<group>"; };
+		9E2283D11D6B7AA7004C4AD7 /* addSongImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addSongImage.jpg; sourceTree = "<group>"; };
+		9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = removeSongImage.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +96,89 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E12485B1D5D1F4500F5B477 /* CoreData.framework in Frameworks */,
+				9E12482B1D5540A400F5B477 /* SystemConfiguration.framework in Frameworks */,
+				9E1248261D553F6D00F5B477 /* AVFoundation.framework in Frameworks */,
+				9E1248281D553FD700F5B477 /* Spotify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9E1248211D553EA600F5B477 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				9E12484F1D5CF1A900F5B477 /* User.h */,
+				9E1248511D5CF1A900F5B477 /* User.m */,
+				9E12484B1D5CF1A900F5B477 /* User+CoreDataProperties.h */,
+				9E12484C1D5CF1A900F5B477 /* User+CoreDataProperties.m */,
+				9E1248501D5CF1A900F5B477 /* Song.h */,
+				9E12484D1D5CF1A900F5B477 /* Song.m */,
+				9E12484A1D5CF1A900F5B477 /* Song+CoreDataProperties.h */,
+				9E12484E1D5CF1A900F5B477 /* Song+CoreDataProperties.m */,
+				9E1248181D553E6800F5B477 /* Track.h */,
+				9E1248191D553E6800F5B477 /* Track.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		9E1248221D553EAC00F5B477 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				9E135D7B1D47E18200B52C47 /* Main.storyboard */,
+				9E135D831D47E18200B52C47 /* LaunchScreen.storyboard */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		9E1248231D553EC000F5B477 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				9E1248121D553E6800F5B477 /* LogInController.h */,
+				9E1248131D553E6800F5B477 /* LogInController.m */,
+				9E1248141D553E6800F5B477 /* MusicViewController.h */,
+				9E1248151D553E6800F5B477 /* MusicViewController.m */,
+				9E12481A1D553E6800F5B477 /* TrackViewController.h */,
+				9E12481B1D553E6800F5B477 /* TrackViewController.m */,
+				9E203A891D72AB9100D0490C /* ErrorViewController.h */,
+				9E203A8A1D72AB9100D0490C /* ErrorViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		9E1248241D553ED900F5B477 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				9E1248161D553E6800F5B477 /* SpotifyService.h */,
+				9E1248171D553E6800F5B477 /* SpotifyService.m */,
+				9E12483B1D5BC04600F5B477 /* CoreDataService.h */,
+				9E12483C1D5BC04600F5B477 /* CoreDataService.m */,
+				9E203A831D70D56500D0490C /* DiscoverfyService.h */,
+				9E203A841D70D56500D0490C /* DiscoverfyService.m */,
+				9E203A861D72931700D0490C /* Reachability.h */,
+				9E203A871D72931700D0490C /* Reachability.m */,
+			);
+			name = Services;
+			sourceTree = "<group>";
+		};
+		9E1248291D553FF000F5B477 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9E12485A1D5D1F4500F5B477 /* CoreData.framework */,
+				9E12482A1D5540A400F5B477 /* SystemConfiguration.framework */,
+				9E1248251D553F6D00F5B477 /* AVFoundation.framework */,
+				9E1248271D553FD700F5B477 /* Spotify.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		9E135D661D47E18200B52C47 = {
 			isa = PBXGroup;
 			children = (
 				9E135D711D47E18200B52C47 /* Discoverfy */,
 				9E135D701D47E18200B52C47 /* Products */,
+				9E1248291D553FF000F5B477 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -60,13 +193,14 @@
 		9E135D711D47E18200B52C47 /* Discoverfy */ = {
 			isa = PBXGroup;
 			children = (
-				9E135D751D47E18200B52C47 /* AppDelegate.h */,
-				9E135D761D47E18200B52C47 /* AppDelegate.m */,
-				9E135D781D47E18200B52C47 /* ViewController.h */,
-				9E135D791D47E18200B52C47 /* ViewController.m */,
-				9E135D7B1D47E18200B52C47 /* Main.storyboard */,
+				9E1248111D553E6800F5B477 /* Config.h */,
+				9E12480E1D553E2F00F5B477 /* AppDelegate.h */,
+				9E12480F1D553E2F00F5B477 /* AppDelegate.m */,
+				9E1248241D553ED900F5B477 /* Services */,
+				9E1248231D553EC000F5B477 /* Controller */,
+				9E1248221D553EAC00F5B477 /* View */,
+				9E1248211D553EA600F5B477 /* Model */,
 				9E135D811D47E18200B52C47 /* Assets.xcassets */,
-				9E135D831D47E18200B52C47 /* LaunchScreen.storyboard */,
 				9E135D861D47E18200B52C47 /* Info.plist */,
 				9E135D7E1D47E18200B52C47 /* Discoverfy.xcdatamodeld */,
 				9E135D721D47E18200B52C47 /* Supporting Files */,
@@ -77,6 +211,14 @@
 		9E135D721D47E18200B52C47 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9E203A771D6D00C600D0490C /* playButtonImage.png */,
+				9E203A781D6D00C600D0490C /* skipButtonImage.png */,
+				9E203A791D6D00C600D0490C /* repeatButtonImage.png */,
+				9E203A7A1D6D00C600D0490C /* pauseButtonImage.png */,
+				9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */,
+				9E2283D11D6B7AA7004C4AD7 /* addSongImage.jpg */,
+				9E203A7F1D6E653800D0490C /* demoAlbumArt.png */,
+				9E203A811D6E661100D0490C /* demoAlbumArt2.png */,
 				9E135D731D47E18200B52C47 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -139,9 +281,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E203A7C1D6D00C600D0490C /* skipButtonImage.png in Resources */,
 				9E135D851D47E18200B52C47 /* LaunchScreen.storyboard in Resources */,
+				9E203A821D6E661100D0490C /* demoAlbumArt2.png in Resources */,
+				9E203A7E1D6D00C600D0490C /* pauseButtonImage.png in Resources */,
+				9E203A7D1D6D00C600D0490C /* repeatButtonImage.png in Resources */,
 				9E135D821D47E18200B52C47 /* Assets.xcassets in Resources */,
+				9E203A7B1D6D00C600D0490C /* playButtonImage.png in Resources */,
 				9E135D7D1D47E18200B52C47 /* Main.storyboard in Resources */,
+				9E2283D41D6B7C3E004C4AD7 /* removeSongImage.jpg in Resources */,
+				9E2283D21D6B7AA7004C4AD7 /* addSongImage.jpg in Resources */,
+				9E203A801D6E653800D0490C /* demoAlbumArt.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,10 +302,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9E135D7A1D47E18200B52C47 /* ViewController.m in Sources */,
+				9E1248551D5CF1A900F5B477 /* Song.m in Sources */,
+				9E1248561D5CF1A900F5B477 /* Song+CoreDataProperties.m in Sources */,
+				9E1248591D5CF1A900F5B477 /* User.m in Sources */,
+				9E203A851D70D56500D0490C /* DiscoverfyService.m in Sources */,
+				9E203A881D72931700D0490C /* Reachability.m in Sources */,
+				9E1248541D5CF1A900F5B477 /* User+CoreDataProperties.m in Sources */,
+				9E12481D1D553E6800F5B477 /* MusicViewController.m in Sources */,
+				9E12481C1D553E6800F5B477 /* LogInController.m in Sources */,
 				9E135D801D47E18200B52C47 /* Discoverfy.xcdatamodeld in Sources */,
-				9E135D771D47E18200B52C47 /* AppDelegate.m in Sources */,
+				9E203A8B1D72AB9100D0490C /* ErrorViewController.m in Sources */,
 				9E135D741D47E18200B52C47 /* main.m in Sources */,
+				9E1248201D553E6800F5B477 /* TrackViewController.m in Sources */,
+				9E12483D1D5BC04600F5B477 /* CoreDataService.m in Sources */,
+				9E12481E1D553E6800F5B477 /* SpotifyService.m in Sources */,
+				9E1248101D553E2F00F5B477 /* AppDelegate.m in Sources */,
+				9E12481F1D553E6800F5B477 /* Track.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -269,8 +431,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Discoverfy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.altonelli.Discoverfy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -280,8 +450,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = Discoverfy/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(OTHER_LDFLAGS)",
+					"-ObjC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.altonelli.Discoverfy;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -306,6 +484,7 @@
 				9E135D8B1D47E18200B52C47 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

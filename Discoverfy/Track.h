@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Spotify/Spotify.h>
 #import <AVFoundation/AVFoundation.h>
+#import "SpotifyService.h"
 
 @interface Track : NSObject
 
@@ -16,5 +17,6 @@
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 
 -(id)initWithSpotifyTrack:(SPTPartialTrack *)track;
+-(void)addToService:(SpotifyService *)spot;
 
 @end

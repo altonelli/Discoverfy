@@ -7,7 +7,12 @@
 //
 
 #import "LogInController.h"
+#import "MusicViewController.h"
+#import "AppDelegate.h"
+#import "User.h"
+#import "User+CoreDataProperties.h"
 #import <Spotify/Spotify.h>
+#import "DiscoverfyService.h"
 
 @interface LogInController () <SPTAuthViewDelegate>
 
@@ -17,6 +22,24 @@
 @end
 
 @implementation LogInController
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    
+    MusicViewController *mainView = [segue destinationViewController];
+    NSString *username = [[[SPTAuth defaultInstance]session]canonicalUsername];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    NSManagedObjectContext *context = [appDelegate managedObjectContext];
+
+    mainView.user = [User findUserWithUsername:username inManagedObjectContext:context];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        
+        [[DiscoverfyService sharedService]createUser:username];
+        
+    });
+    
+    NSLog(@"testUser: %@", mainView.user );
+}
 
 - (void)viewDidLoad {
 //    [super viewDidLoad];
