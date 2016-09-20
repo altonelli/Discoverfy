@@ -31,6 +31,12 @@
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
 
     mainView.user = [User findUserWithUsername:username inManagedObjectContext:context];
+    for (NSManagedObject *song in mainView.user.songs){
+        [context deleteObject:song];
+    }
+    [context save:nil];
+    NSLog(@"Successfully deleted songs from user. Count now: %u",mainView.user.songs.count);
+
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         

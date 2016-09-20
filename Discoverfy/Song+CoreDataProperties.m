@@ -19,6 +19,7 @@
 @dynamic user;
 
 +(Song *)storeSongWithSongID:(NSString *)songID ofType:(NSString *)type withUser:(User*)user inManangedObjectContext:(NSManagedObjectContext *)context{
+    
     Song *song = nil;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"Song"];

@@ -17,6 +17,6 @@
 @property (nonatomic, strong) AVPlayerItem *playerItem;
 
 -(id)initWithSpotifyTrack:(SPTPartialTrack *)track;
--(void)addToService:(SpotifyService *)spot;
+-(void)addToService:(SpotifyService *)spot withQueue:(dispatch_queue_t)queue;
 
 @end

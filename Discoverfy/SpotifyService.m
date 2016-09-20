@@ -46,7 +46,12 @@
         _artistList = [[NSMutableArray alloc]init];
         _uriList = [[NSMutableArray alloc]init];
         _partialTrackList = [[NSMutableArray alloc]init];
-        self.player = [[AVQueuePlayer alloc]init];
+//        self.player = [[AVQueuePlayer alloc]init];
+
+        _player = [[AVQueuePlayer alloc]init];
+        
+        _spot_service_queue = dispatch_queue_create("com.discoverfy.addToPlayerQueue", DISPATCH_QUEUE_SERIAL);
+
         self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
 
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -105,7 +110,7 @@
                 [self convertTracksWithTracks:resultTracks user:user];
                     
                     if (callbackBlock != nil) {
-                        callbackBlock();
+                        return callbackBlock();
                     }
             }];
         }];
@@ -171,7 +176,7 @@
             NSLog(@"player: %@", self.player);
             NSLog(@"partial playlist: %@", self.partialTrackList);
             
-            [newTrack addToService:self];
+            [newTrack addToService:self withQueue:self.spot_service_queue];
             
             
         } else {
@@ -233,7 +238,7 @@
         } else if (items.count < 50 && hasDiscoverfyPlaylist != YES){
             NSLog(@"Below limit and no item found. Creating new Playlist.");
             
-            [SPTPlaylistList createPlaylistWithName:@"Discoverfy App" publicFlag:NO session:session callback:^(NSError *error, SPTPlaylistSnapshot *returnedPlaylist) {
+            [SPTPlaylistList createPlaylistWithName:@"Discoverfy App" publicFlag:YES session:session callback:^(NSError *error, SPTPlaylistSnapshot *returnedPlaylist) {
                 if (error != nil){
                     NSLog(@"*** Error on playlist create %@",error);
                 } else {

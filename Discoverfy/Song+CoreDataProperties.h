@@ -24,6 +24,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(BOOL)songExistsForUser:(User *)user trackID:(NSString *)trackID inManagedObjectContext:(NSManagedObjectContext *)context;
 
+
 @end
 
 NS_ASSUME_NONNULL_END

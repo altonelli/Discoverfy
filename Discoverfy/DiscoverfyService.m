@@ -27,7 +27,7 @@
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
-    [request setURL:[NSURL URLWithString:@"http://localhost:3000/api/users"]];
+    [request setURL:[NSURL URLWithString:@"https://discoverfy.herokuapp.com/api/users"]];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:postData];
     
@@ -50,7 +50,7 @@
     NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
     NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject];
     
-    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:3000/api/user/%@/songs",user]];
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://discoverfy.herokuapp.com/api/user/%@/songs",user]];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
@@ -77,7 +77,7 @@
     NSData *postData = [post dataUsingEncoding:NSASCIIStringEncoding];
     
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc]init];
-    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"http://localhost:3000/api/users/%@/songs",user]]];
+    [request setURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://discoverfy.herokuapp.com/api/users/%@/songs",user]]];
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:postData];
     

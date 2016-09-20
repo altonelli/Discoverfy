@@ -362,6 +362,10 @@
         <scene sceneID="mIg-bN-Xpl">
             <objects>
                 <viewController id="iut-v1-BfU" customClass="ErrorViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="PPW-vw-Uip"/>
+                        <viewControllerLayoutGuide type="bottom" id="fpt-M4-p1L"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uo4-6e-wxX">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

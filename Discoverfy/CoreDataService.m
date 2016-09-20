@@ -66,6 +66,7 @@
 //}
 
 -(void)storeSong:(NSString *)songID user:(User *)user type:(NSString *)type date:(NSDate * _Nullable)date{
+    
     NSEntityDescription *songEntityDesc = [NSEntityDescription entityForName:@"Song" inManagedObjectContext:context];
     Song *song = [[Song alloc]initWithEntity:songEntityDesc insertIntoManagedObjectContext:context];
     
@@ -85,6 +86,7 @@
         NSLog(@"*** Error on song save: %@", error);
     } else {
         NSLog(@"Song saved: %@",song);
+        
         NSLog(@"User song count now: %d", user.songs.count);
     }
     

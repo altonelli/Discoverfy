@@ -20,6 +20,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 +(User *)findUserWithUsername:(NSString *)username inManagedObjectContext:(NSManagedObjectContext *)context;
 
+-(void)removeAllSongsFromUser:(NSString *)username inManagedObjectContext:(NSManagedObjectContext *)context;
+
 
 @end
 

@@ -18,6 +18,9 @@
 @property (nonatomic) BOOL firstPlay;
 @property (nonatomic) BOOL queuing;
 
+@property (weak, nonatomic) IBOutlet UIView *mainContainer;
+
+
 
 
 -(void)printArtists;

@@ -42,7 +42,11 @@
     
             [spot queueSongsWithAccessToken:accessToken user:self.user queue:dispatch_get_main_queue() callback:^{
                 self.parentController.queuing = NO;
+                self.parentController.mainContainer.userInteractionEnabled = YES;
+                [spot.player play];
+                self.view.hidden = YES;
             }];
+        
     } else if ([self.errorState isEqualToString:@"intial"]){
         
         dispatch_group_t group = dispatch_group_create();

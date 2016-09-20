@@ -27,7 +27,7 @@
 }
 
 @property (weak, nonatomic) IBOutlet UIView *rearContainer;
-@property (weak, nonatomic) IBOutlet UIView *mainContainer;
+//@property (weak, nonatomic) IBOutlet UIView *mainContainer;
 @property (nonatomic,strong) TrackViewController *rearTrackController;
 @property (nonatomic,strong) TrackViewController *trackController;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navbar;
@@ -80,6 +80,7 @@
     
     // Set up context
     spot_data_queue = dispatch_queue_create("com.discoverfy.songsQueue", DISPATCH_QUEUE_CONCURRENT);
+    
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     context = [appDelegate managedObjectContext];
@@ -218,6 +219,8 @@
 -(void)wasDraggedWithGesture:(UIPanGestureRecognizer *)gesture{
     if(gesture.state == UIGestureRecognizerStateBegan){
 //        NSLog(@"Card selected!!! %@", [[[[spot partialTrackList]firstObject]spotifyTrack]name]);
+        NSLog(@"Card selected!!! %@", [NSThread currentThread]);
+
     }
     
     CGPoint coords = [gesture translationInView:self.view];
@@ -241,15 +244,15 @@
     
     card.center = CGPointMake(cardCenterX,cardCenterY);
     
-    NSLog(@"image constraints: %@",self.trackController.overlayImage.constraints);
+//    NSLog(@"image constraints: %@",self.trackController.overlayImage.constraints);
     if (cardCenterX < viewCenterX * .9){
         self.trackController.overlayImage.hidden = NO;
         self.trackController.overlayImage.image = [UIImage imageNamed:@"removeSongImage.jpg"];
-        NSLog(@"image constraints: %@",self.trackController.overlayImage.constraints);
+//        NSLog(@"image constraints: %@",self.trackController.overlayImage.constraints);
     } else if (cardCenterX > viewCenterX * 1.1){
         self.trackController.overlayImage.hidden = NO;
         self.trackController.overlayImage.image = [UIImage imageNamed:@"addSongImage.jpg"];
-        NSLog(@"image constraints: %@",self.trackController.overlayImage.constraints);
+//        NSLog(@"image constraints: %@",self.trackController.overlayImage.constraints);
     } else {
         self.trackController.overlayImage.hidden = YES;
     }
@@ -262,9 +265,9 @@
         
         Track *track = spot.partialTrackList[0];
         if (card.center.x < viewWidth * .15) {
-            [self songRejectedWithTrack:track.spotifyTrack];
+                [self songRejectedWithTrack:track.spotifyTrack];
         } else if (card.center.x > viewWidth * .85) {
-            [self songAcceptedWithTrack:track.spotifyTrack];
+                [self songAcceptedWithTrack:track.spotifyTrack];
         }
         
         self.trackController.overlayImage.hidden = YES;
@@ -285,21 +288,35 @@
 -(void)advanceSong{
 
     if(spot.partialTrackList.count < 10 && self.queuing != YES){
-        self.queuing = YES;
         
-        dispatch_async(spot_data_queue, ^{
-//            NSLog(@"fetch thread | 0 queue: %@",[NSThread currentThread]);
-
-            [spot queueSongsWithAccessToken:accessToken user:self.user queue:spot_data_queue callback:^{
-                NSLog(@"hit song queue call back, %hhd", self.queuing);
-                self.queuing = NO;
-            }];
-        });
+        if([[DiscoverfyService sharedService]hasNetworkConnection]){
+            
+            self.queuing = YES;
+            
+            dispatch_async(spot_data_queue, ^{
+                //            NSLog(@"fetch thread | 0 queue: %@",[NSThread currentThread]);
+                
+                [spot queueSongsWithAccessToken:accessToken user:self.user queue:spot_data_queue callback:^{
+                    NSLog(@"hit song queue call back, %hhd", self.queuing);
+                    self.queuing = NO;
+                }];
+            });
+            
+        } else {
+            
+            [spot.player pause];
+            self.mainContainer.userInteractionEnabled = NO;
+            self.errorController.view.hidden = NO;
+            self.errorController.errorState = @"batchError";
+            
+        }
+            
         
-    }
+        }
     
     
-    if (spot.partialTrackList.count == 2 && self.queuing != YES) {
+    
+    if (spot.partialTrackList.count == 3 && self.queuing != YES) {
         
         [spot.player pause];
         self.mainContainer.userInteractionEnabled = NO;
@@ -321,37 +338,46 @@
 }
 
 -(void)songAcceptedWithTrack:(SPTPartialTrack *)track{
-    NSLog(@"Accepted");
-    NSMutableArray *trackArray = [[NSMutableArray alloc]init ];
-    [trackArray addObject:track];
-    NSArray *immutable = [NSArray arrayWithObject:(SPTPartialTrack *)track];
+    dispatch_async(spot_data_queue, ^{
 
-    accessToken = [[[SPTAuth defaultInstance] session] accessToken];
-    
-    NSError *postPlaylistError;
-    NSURLRequest *req = [SPTPlaylistSnapshot createRequestForAddingTracks:immutable toPlaylist:spot.discoverfyPlaylist.uri withAccessToken:accessToken error:&postPlaylistError];
-    
-    [[SPTRequest sharedHandler] performRequest:req callback:^(NSError *error, NSURLResponse *response, NSData *data) {
-        if(error != nil){
-            NSLog(@"*** Error in adding track %@",error);
-        }
-        NSLog(@"response from post %@",response);
-    }];
-    
-    [Song storeSongWithSongID:track.identifier ofType:@"Liked" withUser:self.user inManangedObjectContext:context];
-    
-    [[DiscoverfyService sharedService] postSongWithSongID:track.identifier type:@"Liked" user:self.user.name];
+        NSLog(@"Accepted");
+        NSMutableArray *trackArray = [[NSMutableArray alloc]init ];
+        [trackArray addObject:track];
+        NSArray *immutable = [NSArray arrayWithObject:(SPTPartialTrack *)track];
+        
+        accessToken = [[[SPTAuth defaultInstance] session] accessToken];
+        
+        NSError *postPlaylistError;
+        NSURLRequest *req = [SPTPlaylistSnapshot createRequestForAddingTracks:immutable toPlaylist:spot.discoverfyPlaylist.uri withAccessToken:accessToken error:&postPlaylistError];
+        
+        [[SPTRequest sharedHandler] performRequest:req callback:^(NSError *error, NSURLResponse *response, NSData *data) {
+            if(error != nil){
+                NSLog(@"*** Error in adding track %@",error);
+            }
+            NSLog(@"response from post %@",response);
+        }];
+        
+        [Song storeSongWithSongID:track.identifier ofType:@"Liked" withUser:self.user inManangedObjectContext:context];
+        
+        [[DiscoverfyService sharedService] postSongWithSongID:track.identifier type:@"Liked" user:self.user.name];
+        
+    });
     
     [self advanceSong];
     
 }
 
 -(void)songRejectedWithTrack:(SPTPartialTrack *)track{
-    NSLog(@"Rejected");
+    dispatch_async(spot_data_queue, ^{
+        
+        NSLog(@"Rejected");
+        
+        [Song storeSongWithSongID:track.identifier ofType:@"Disliked" withUser:self.user inManangedObjectContext:context];
+        
+        [[DiscoverfyService sharedService] postSongWithSongID:track.identifier type:@"Disliked" user:self.user.name];
+        
+    });
     
-    [Song storeSongWithSongID:track.identifier ofType:@"Disliked" withUser:self.user inManangedObjectContext:context];
-    
-    [[DiscoverfyService sharedService] postSongWithSongID:track.identifier type:@"Disliked" user:self.user.name];
     
     [self advanceSong];
     

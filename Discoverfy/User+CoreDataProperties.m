@@ -17,7 +17,7 @@
 @dynamic songs;
 
 +(User *)findUserWithUsername:(NSString *)username inManagedObjectContext:(NSManagedObjectContext *)context{
-    NSLog(@"in function");
+//    NSLog(@"in function");
     User *user = nil;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
@@ -39,6 +39,28 @@
     NSLog(@"Here is your user: %@", user);
     
     return user;
+}
+
+-(void)removeAllSongsFromUser:(NSString *)username inManagedObjectContext:(NSManagedObjectContext *)context{
+    User *user = nil;
+    
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+    request.predicate = [NSPredicate predicateWithFormat: @"name = %@",username];
+    NSError *error;
+    NSArray *matches = [context executeFetchRequest:request error:&error];
+    
+    if(!matches || error || matches.count > 1){
+        NSLog(@"*** Error on use fetch: %@",error);
+    } else {
+        user = [matches firstObject];
+        for (NSManagedObject *song in user.songs){
+            [context deleteObject:song];
+        }
+        NSLog(@"Successfully deleted songs from user. Count now: %u",user.songs.count);
+    }
+    
+    
+    
 }
 
 @end
