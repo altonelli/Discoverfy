@@ -185,4 +185,12 @@
     self.trackSlider.value = CMTimeGetSeconds(spot.player.currentTime);
 }
 
+- (IBAction)restartButtonPressed:(id)sender {
+    
+    CMTime time = CMTimeMake(0, 1);
+    
+    [spot.player seekToTime:time];
+    
+}
+
 @end

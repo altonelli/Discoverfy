@@ -38,4 +38,6 @@
 
 -(NSMutableArray *)getRandomArtists;
 
+-(void)emptyArrays;
+
 @end

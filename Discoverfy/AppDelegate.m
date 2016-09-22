@@ -30,9 +30,9 @@
     [auth setRedirectURL:[NSURL URLWithString:@kCallbackURL]];
     [auth setRequestedScopes:@[SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPrivateScope,SPTAuthPlaylistModifyPublicScope, @"user-top-read"]];
     
-    NSURL *loginURL = [auth loginURL];
-    
-    [application performSelector:@selector(openURL:) withObject:loginURL afterDelay:0.1];
+//    NSURL *loginURL = [auth loginURL];
+//    
+//    [application performSelector:@selector(openURL:) withObject:loginURL afterDelay:0.5];
     
     return YES;
 }
@@ -41,6 +41,8 @@
     SPTAuth *auth = [SPTAuth defaultInstance];
     
     SPTAuthCallback authCallback = ^(NSError *error, SPTSession *session){
+        
+        NSLog(@"call back called");
         
         if (error != nil){
             NSLog(@"*** Autherror: %@", error);
@@ -51,6 +53,8 @@
         [[NSNotificationCenter defaultCenter]postNotificationName:@"sessionUpdated" object:self];
         
     };
+    
+    NSLog(@"auth url trying to open: %@", url);
     
     if([auth canHandleURL:url]) {
         [auth handleAuthCallbackWithTriggeredAuthURL:url callback:authCallback];

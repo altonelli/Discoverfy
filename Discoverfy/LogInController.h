@@ -10,6 +10,7 @@
 
 @interface LogInController : UIViewController
 
+@property (atomic, readwrite) BOOL firstLoad;
 
 @end
 

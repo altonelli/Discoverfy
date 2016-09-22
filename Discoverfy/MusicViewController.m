@@ -16,6 +16,7 @@
 #import "User.h"
 #import "Song.h"
 #import "Reachability.h"
+#import "LogInController.h"
 
 
 @interface MusicViewController (){
@@ -61,7 +62,24 @@
         self.errorController.view.hidden = YES;
         self.errorController.user = self.user;
         self.errorController.parentController = self;
-        NSLog(@"******************************************************** parent view controller for errorCtrl and current ctrl: %@ | %@",self.errorController.parentViewController, self);
+//        NSLog(@"******************************************************** parent view controller for errorCtrl and current ctrl: %@ | %@",self.errorController.parentViewController, self);
+    }
+    
+    if([segueName isEqualToString:@"logOutSegue"]){
+        
+        NSLog(@"************* LOG OUT CALLED ****************");
+        
+        [[spot player]pause];
+        
+        [[SPTAuthViewController authenticationViewController]clearCookies:nil];
+        
+        [[SPTAuth defaultInstance]setSession:nil];
+        
+        [spot emptyArrays];
+        
+        LogInController *logInCtrl = [segue destinationViewController];
+        
+        logInCtrl.firstLoad = YES;
     }
     
 }
@@ -77,6 +95,14 @@
                                             selector:@selector(batchReady:)
                                                 name:@"BatchReady"
                                               object:nil];
+
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(pauseAppWithNotification:)
+                                                name:@"ConnectivityError"
+                                              object:nil];
+    
+    
+    
     
     // Set up context
     spot_data_queue = dispatch_queue_create("com.discoverfy.songsQueue", DISPATCH_QUEUE_CONCURRENT);
@@ -216,6 +242,23 @@
     }
 }
 
+-(void)pauseApp{
+    
+//    NSLog(@"pause app called");
+//    [spot.player pause];
+    self.mainContainer.userInteractionEnabled = NO;
+    
+}
+
+-(void)pauseAppWithNotification:(NSNotification *)notification{
+    
+    NSLog(@"pause app with notification called");
+    [spot.player pause];
+    self.mainContainer.userInteractionEnabled = NO;
+
+    
+}
+
 -(void)wasDraggedWithGesture:(UIPanGestureRecognizer *)gesture{
     if(gesture.state == UIGestureRecognizerStateBegan){
 //        NSLog(@"Card selected!!! %@", [[[[spot partialTrackList]firstObject]spotifyTrack]name]);
@@ -304,9 +347,11 @@
             
         } else {
             
-            [spot.player pause];
-            self.mainContainer.userInteractionEnabled = NO;
-            self.errorController.view.hidden = NO;
+//            [spot.player pause];
+//            self.mainContainer.userInteractionEnabled = NO;
+//            self.errorController.view.hidden = NO;
+            [self pauseApp];
+            [[NSNotificationCenter defaultCenter]postNotificationName:@"ConnectivityError" object:nil];
             self.errorController.errorState = @"batchError";
             
         }
@@ -318,18 +363,26 @@
     
     if (spot.partialTrackList.count == 3 && self.queuing != YES) {
         
-        [spot.player pause];
-        self.mainContainer.userInteractionEnabled = NO;
-        self.errorController.view.hidden = NO;
+//        [spot.player pause];
+//        self.mainContainer.userInteractionEnabled = NO;
+//        self.errorController.view.hidden = NO;
+        [self pauseApp];
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"ConnectivityError" object:nil];
         self.errorController.errorState = @"batchError";
         
         
     } else {
         
-        [spot.player advanceToNextItem];
-        [self.trackController updateUIWithTrack:spot.partialTrackList[1]];
-        [self.rearTrackController updateUIWithTrack:spot.partialTrackList[2]];
-        [spot.partialTrackList removeObjectAtIndex:0];
+            
+            [spot.player advanceToNextItem];
+            [self.trackController updateUIWithTrack:spot.partialTrackList[1]];
+            [self.rearTrackController updateUIWithTrack:spot.partialTrackList[2]];
+            [spot.partialTrackList removeObjectAtIndex:0];
+            
+        if (self.errorController.view.hidden == NO){
+            [spot.player pause];
+        }
+        
         
     }
     
@@ -382,6 +435,8 @@
     [self advanceSong];
     
 }
+
+
 
 
 -(void)printArtists{

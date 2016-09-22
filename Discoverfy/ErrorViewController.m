@@ -23,7 +23,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"******************************************************** parent of error view controller and current ctrl: %@ | %@",self.parentViewController, self);
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(displayView:)
+                                                name:@"ConnectivityError"
+                                              object:nil];
+//    NSLog(@"******************************************************** parent of error view controller and current ctrl: %@ | %@",self.parentViewController, self);
+}
+
+-(void)displayView:(NSNotification *)notification{
+    
+    self.view.hidden = NO;
+    
 }
 
 - (void)didReceiveMemoryWarning {

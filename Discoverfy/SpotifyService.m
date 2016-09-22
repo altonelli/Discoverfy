@@ -330,5 +330,15 @@
     }];
 }
 
+-(void)emptyArrays{
+    
+    [self.player removeAllItems];
+    [self.artistList removeAllObjects];
+    [self.uriList removeAllObjects];
+    [self.partialTrackList removeAllObjects];
+    self.discoverfyPlaylist = nil;
+    
+}
+
 
 @end

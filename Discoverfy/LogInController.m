@@ -17,7 +17,7 @@
 @interface LogInController () <SPTAuthViewDelegate>
 
 @property (atomic, readwrite) SPTAuthViewController *authViewController;
-@property (atomic, readwrite) BOOL firstLoad;
+//@property (atomic, readwrite) BOOL firstLoad;
 
 @end
 
@@ -56,6 +56,8 @@
 }
 
 -(void)sessionUpdateNotification:(NSNotification *)notification {
+    
+    NSLog(@"session updated. in session update notification method.");
     
     if(self.navigationController.topViewController == self){
         SPTAuth *auth = [SPTAuth defaultInstance];
@@ -133,6 +135,11 @@
 
 - (IBAction)logInButtonPressed:(id)sender {
     [self openLoginPage];
+    NSURL *loginURL = [[SPTAuth defaultInstance] loginURL];
+    
+    [[UIApplication sharedApplication] performSelector:@selector(openURL:) withObject:loginURL afterDelay:0.5];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning {
