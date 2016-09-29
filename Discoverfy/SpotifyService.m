@@ -172,15 +172,15 @@
         if (![Song songExistsForUser:user trackID:partialtrack.identifier inManagedObjectContext:context]){
             
             Track *newTrack = [[Track alloc]initWithSpotifyTrack:partialtrack];
-            NSLog(@"testing 1235");
-            NSLog(@"player: %@", self.player);
-            NSLog(@"partial playlist: %@", self.partialTrackList);
+//            NSLog(@"testing 1235");
+//            NSLog(@"player: %@", self.player);
+//            NSLog(@"partial playlist: %@", self.partialTrackList);
             
             [newTrack addToService:self withQueue:self.spot_service_queue];
             
             
         } else {
-            NSLog(@"Already have song, ignoring.");
+//            NSLog(@"Already have song, ignoring.");
         }
     };
     
@@ -225,7 +225,7 @@
             
             if ([username isEqualToString:ownerName]){
                 
-                NSLog(@"playlist of %@: %@",username,partialPlaylist.name);
+//                NSLog(@"playlist of %@: %@",username,partialPlaylist.name);
 
                 [self getTracksFromPlaylist:partialPlaylist user:user accessToken:auth.session.accessToken offset:0];
                 
@@ -233,17 +233,17 @@
         }
         
         if ((items.count == 50) && hasDiscoverfyPlaylist != YES){
-            NSLog(@"Reached limit and no playlist found");
+//            NSLog(@"Reached limit and no playlist found");
             [self fetchPlaylistSongsWithAccessToken:accessToken session:session offset:(offset + 50) user:user queue:queue callback:nil];
         } else if (items.count < 50 && hasDiscoverfyPlaylist != YES){
-            NSLog(@"Below limit and no item found. Creating new Playlist.");
+//            NSLog(@"Below limit and no item found. Creating new Playlist.");
             
             [SPTPlaylistList createPlaylistWithName:@"Discoverfy App" publicFlag:YES session:session callback:^(NSError *error, SPTPlaylistSnapshot *returnedPlaylist) {
                 if (error != nil){
                     NSLog(@"*** Error on playlist create %@",error);
                 } else {
                     self.discoverfyPlaylist = returnedPlaylist;
-                    NSLog(@"Discoverfy playlist created");
+//                    NSLog(@"Discoverfy playlist created");
                 }
                 
                 dispatch_async(queue, ^{
@@ -255,11 +255,11 @@
             }];
             
         } else if(items.count == 50 && hasDiscoverfyPlaylist == YES) {
-            NSLog(@"Below limit and item found! %@",self.discoverfyPlaylist.name);
-            NSLog(@"Retrieving other playlists");
+//            NSLog(@"Below limit and item found! %@",self.discoverfyPlaylist.name);
+//            NSLog(@"Retrieving other playlists");
             [self fetchPlaylistSongsWithAccessToken:accessToken session:session offset:(offset + 50) user:user queue:queue callback:nil];
         } else {
-            NSLog(@"Below limit and item was previously found; name: %@",self.discoverfyPlaylist.name);
+//            NSLog(@"Below limit and item was previously found; name: %@",self.discoverfyPlaylist.name);
             dispatch_async(queue, ^{
 
             callbackBlock();

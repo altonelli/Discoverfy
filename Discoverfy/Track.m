@@ -34,7 +34,7 @@
             self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
             
             if([spot.player canInsertItem:self.playerItem afterItem:nil]){
-                NSLog(@"queued song: %@ on thread: %@", self.spotifyTrack.name, [NSThread currentThread]);
+//                NSLog(@"queued song: %@ on thread: %@", self.spotifyTrack.name, [NSThread currentThread]);
                 
                 //// Here is your error!
                 
@@ -48,7 +48,7 @@
                 [spot.player insertItem:self.playerItem afterItem:nil];
                 [spot.partialTrackList addObject:self];
                 
-                NSLog(@"track added: %@; count: %lu on thread: %@",self.spotifyTrack.name, (unsigned long)spot.player.items.count, [NSThread currentThread]);
+//                NSLog(@"track added: %@; count: %lu on thread: %@",self.spotifyTrack.name, (unsigned long)spot.player.items.count, [NSThread currentThread]);
                 
                 //            }
                 

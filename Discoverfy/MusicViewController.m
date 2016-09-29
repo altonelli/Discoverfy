@@ -17,6 +17,7 @@
 #import "Song.h"
 #import "Reachability.h"
 #import "LogInController.h"
+#import "spinnerViewController.h"
 
 
 @interface MusicViewController (){
@@ -36,12 +37,27 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomViewColor;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic,strong) ErrorViewController *errorController;
+@property (nonatomic,strong) spinnerViewController *spinnerController;
 
 @end
 
 
 
 @implementation MusicViewController
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    NSLog(@"***** touches began in music view controller : %@",touches);
+    
+    NSLog(@"subview's intereactions rear: %hhd front: %hhd", self.view.subviews[2].clipsToBounds,self.view.subviews[3].clipsToBounds);
+    
+    NSLog(@"subview's intereactions rear: %hhd front: %hhd", self.view.subviews[3].subviews[0].subviews[0].subviews[2].clipsToBounds,self.view.subviews[3].subviews[0].subviews[0].subviews[3].clipsToBounds
+          );
+    
+    NSLog(@"subview's intereactions rear: %@ front: %@", self.view.subviews[3].subviews[0].subviews[0].subviews[2].class,self.view.subviews[3].subviews[0].subviews[0].subviews[3].class
+          );
+    
+}
+
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
@@ -55,6 +71,12 @@
         self.rearTrackController = (TrackViewController *) [segue destinationViewController];
         self.rearTrackController.isMainCard = NO;
 //        self.rearTrackController.userInteractionEnabled = NO;
+    }
+
+    if([segueName isEqualToString:@"spinnerSegue"]){
+        self.spinnerController = (spinnerViewController *) [segue destinationViewController];
+        self.spinnerController.view.hidden = NO;
+        self.spinnerController.view.userInteractionEnabled = NO;
     }
     
     if([segueName isEqualToString:@"errorSegue"]){
@@ -116,7 +138,8 @@
     
     spot = [SpotifyService sharedService];
     
-    [self.activityIndicator startAnimating];
+//    [self.activityIndicator startAnimating];
+    [self.spinnerController startSpinner];
     
     if([[DiscoverfyService sharedService]hasNetworkConnection]){
         
@@ -209,11 +232,11 @@
         
 
     // Set up Swiping
-    
+    self.mainContainer.userInteractionEnabled = YES;
+
     UIPanGestureRecognizer *gesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(wasDraggedWithGesture:)];
     [self.mainContainer addGestureRecognizer:gesture];
     
-    self.mainContainer.userInteractionEnabled = YES;
     
 }
 
@@ -224,7 +247,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            [self.activityIndicator stopAnimating];
+            [self.spinnerController stopSpinner];
             self.activityIndicator.hidden = YES;
             self.errorController.view.hidden = YES;
             
@@ -261,8 +284,10 @@
 
 -(void)wasDraggedWithGesture:(UIPanGestureRecognizer *)gesture{
     if(gesture.state == UIGestureRecognizerStateBegan){
-//        NSLog(@"Card selected!!! %@", [[[[spot partialTrackList]firstObject]spotifyTrack]name]);
-        NSLog(@"Card selected!!! %@", [NSThread currentThread]);
+
+//        NSLog(@"User interaction enabled? %@", self.mainContainer.subviews[0].subviews[0].subviews);
+        
+        NSLog(@"gesture.view: %@", gesture.view);
 
     }
     
@@ -298,6 +323,7 @@
 //        NSLog(@"image constraints: %@",self.trackController.overlayImage.constraints);
     } else {
         self.trackController.overlayImage.hidden = YES;
+//        self.trackController.overlayImage.alpha = 0;
     }
     
     CGFloat opacity = MIN(1.5 * fabsf((cardCenterX - viewCenterX) / viewCenterX),.8);
@@ -314,6 +340,7 @@
         }
         
         self.trackController.overlayImage.hidden = YES;
+//        self.trackController.overlayImage.alpha = 0;
         
         card.center = CGPointMake(viewWidth / 2, viewHeight * .45 + 48);
                 

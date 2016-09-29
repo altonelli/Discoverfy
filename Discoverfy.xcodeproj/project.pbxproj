@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9E0C429F1D94800400FD6DC2 /* AlbumImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C429E1D94800400FD6DC2 /* AlbumImageView.m */; };
+		9E0C42CB1D95E5C500FD6DC2 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C42CA1D95E5C500FD6DC2 /* CardView.m */; };
+		9E0C42D01D9CBC3000FD6DC2 /* spinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C42CF1D9CBC3000FD6DC2 /* spinnerViewController.m */; };
 		9E1248101D553E2F00F5B477 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12480F1D553E2F00F5B477 /* AppDelegate.m */; };
 		9E12481C1D553E6800F5B477 /* LogInController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1248131D553E6800F5B477 /* LogInController.m */; };
 		9E12481D1D553E6800F5B477 /* MusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1248151D553E6800F5B477 /* MusicViewController.m */; };
@@ -41,6 +44,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9E0C429D1D94800400FD6DC2 /* AlbumImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumImageView.h; sourceTree = "<group>"; };
+		9E0C429E1D94800400FD6DC2 /* AlbumImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumImageView.m; sourceTree = "<group>"; };
+		9E0C42C91D95E5C500FD6DC2 /* CardView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardView.h; sourceTree = "<group>"; };
+		9E0C42CA1D95E5C500FD6DC2 /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
+		9E0C42CE1D9CBC3000FD6DC2 /* spinnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = spinnerViewController.h; sourceTree = "<group>"; };
+		9E0C42CF1D9CBC3000FD6DC2 /* spinnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = spinnerViewController.m; sourceTree = "<group>"; };
 		9E12480E1D553E2F00F5B477 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9E12480F1D553E2F00F5B477 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9E1248111D553E6800F5B477 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
@@ -143,6 +152,12 @@
 				9E12481B1D553E6800F5B477 /* TrackViewController.m */,
 				9E203A891D72AB9100D0490C /* ErrorViewController.h */,
 				9E203A8A1D72AB9100D0490C /* ErrorViewController.m */,
+				9E0C429D1D94800400FD6DC2 /* AlbumImageView.h */,
+				9E0C429E1D94800400FD6DC2 /* AlbumImageView.m */,
+				9E0C42C91D95E5C500FD6DC2 /* CardView.h */,
+				9E0C42CA1D95E5C500FD6DC2 /* CardView.m */,
+				9E0C42CE1D9CBC3000FD6DC2 /* spinnerViewController.h */,
+				9E0C42CF1D9CBC3000FD6DC2 /* spinnerViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -255,6 +270,7 @@
 				TargetAttributes = {
 					9E135D6E1D47E18200B52C47 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 663M9C4UE5;
 					};
 				};
 			};
@@ -308,12 +324,15 @@
 				9E203A851D70D56500D0490C /* DiscoverfyService.m in Sources */,
 				9E203A881D72931700D0490C /* Reachability.m in Sources */,
 				9E1248541D5CF1A900F5B477 /* User+CoreDataProperties.m in Sources */,
+				9E0C42CB1D95E5C500FD6DC2 /* CardView.m in Sources */,
 				9E12481D1D553E6800F5B477 /* MusicViewController.m in Sources */,
 				9E12481C1D553E6800F5B477 /* LogInController.m in Sources */,
 				9E135D801D47E18200B52C47 /* Discoverfy.xcdatamodeld in Sources */,
 				9E203A8B1D72AB9100D0490C /* ErrorViewController.m in Sources */,
+				9E0C42D01D9CBC3000FD6DC2 /* spinnerViewController.m in Sources */,
 				9E135D741D47E18200B52C47 /* main.m in Sources */,
 				9E1248201D553E6800F5B477 /* TrackViewController.m in Sources */,
+				9E0C429F1D94800400FD6DC2 /* AlbumImageView.m in Sources */,
 				9E12483D1D5BC04600F5B477 /* CoreDataService.m in Sources */,
 				9E12481E1D553E6800F5B477 /* SpotifyService.m in Sources */,
 				9E1248101D553E2F00F5B477 /* AppDelegate.m in Sources */,
@@ -431,6 +450,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -450,6 +470,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",

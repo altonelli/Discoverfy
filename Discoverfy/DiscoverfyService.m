@@ -38,7 +38,7 @@
         if (error){
             NSLog(@"*** Error on user post: %@",error);
         } else {
-            NSLog(@"data: %@", [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+//            NSLog(@"data: %@", [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
         }
     }];
     
@@ -57,10 +57,10 @@
         if (error) {
             NSLog(@"*** Error on songs get: %@",error);
         } else {
-            NSLog(@"Successful data get: %@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+//            NSLog(@"Successful data get: %@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
             NSArray *tracks = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             
-            NSLog(@"Tracks data: %@", tracks);
+//            NSLog(@"Tracks data: %@", tracks);
            
             callbackBlock(tracks);
             
@@ -88,7 +88,7 @@
         if (error) {
             NSLog(@"*** Error on song post: %@",error);
         } else {
-            NSLog(@"Successful post: %@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+//            NSLog(@"Successful post: %@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
         }
     }];
     

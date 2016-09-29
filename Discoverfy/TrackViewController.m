@@ -8,13 +8,14 @@
 
 #import "TrackViewController.h"
 #import "SpotifyService.h"
+//#import "AlbumImageView.h"
 
 
 @interface TrackViewController (){
     SpotifyService *spot;
 }
 
-@property (weak, nonatomic) IBOutlet UIImageView *trackImage;
+@property (weak, nonatomic) IBOutlet AlbumImageView *trackImage;
 @property (weak, nonatomic) IBOutlet UILabel *trackTitle;
 @property (weak, nonatomic) IBOutlet UILabel *trackArtist;
 @property (weak, nonatomic) IBOutlet UILabel *trackAlbum;
@@ -29,6 +30,11 @@
 @end
 
 @implementation TrackViewController
+
+-(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+    NSLog(@"*** touched track view controller");
+}
+
 
 -(void)viewDidLoad{
     spot = [SpotifyService sharedService];
@@ -52,18 +58,24 @@
     
     self.playButton.hidden = YES;
     self.overlayImage.hidden = YES;
+
+    self.overlayImage.userInteractionEnabled = YES;
+    self.trackImage.userInteractionEnabled = YES;
+
     
     UIView *subView = self.view.subviews[0];
     
+    
+        
     CGRect cardRect = [subView bounds];
     CGFloat cardWidth = cardRect.size.width;
     CGFloat cardHeight = cardRect.size.height;
     
-    NSLog(@"card width:%f and card height: %f",cardWidth,cardHeight);
-    
-    NSLog(@"card view subviews: %@",self.view.subviews);
-    
-    NSLog(@"************************sub view constraints: %@",subView.bounds);
+//    NSLog(@"card width:%f and card height: %f",cardWidth,cardHeight);
+//    
+    NSLog(@"card view subview subviews: %@",subView.subviews);
+//
+//    NSLog(@"************************sub view constraints: %@",subView.bounds);
     
 //    NSDictionary *elementsDict = NSDictionaryOfVariableBindings(_trackImage,_overlayImage, _trackSlider,_trackTitle, _trackArtist,_trackAlbum,_playButton,_pauseButton,_restartButton,_skipButton);
 //    

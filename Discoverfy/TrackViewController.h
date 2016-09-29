@@ -9,11 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "Track.h"
+#import "AlbumImageView.h"
 
 @interface TrackViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UISlider *trackSlider;
-@property (weak, nonatomic) IBOutlet UIImageView *overlayImage;
+@property (weak, nonatomic) IBOutlet AlbumImageView *overlayImage;
 @property (nonatomic) BOOL isMainCard;
 
 -(void)updateUIWithTrack:(Track *)track;
