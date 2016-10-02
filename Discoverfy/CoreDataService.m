@@ -85,9 +85,9 @@
     if (error) {
         NSLog(@"*** Error on song save: %@", error);
     } else {
-        NSLog(@"Song saved: %@",song);
-        
-        NSLog(@"User song count now: %d", user.songs.count);
+//        NSLog(@"Song saved: %@",song);
+//        
+//        NSLog(@"User song count now: %d", user.songs.count);
     }
     
 }

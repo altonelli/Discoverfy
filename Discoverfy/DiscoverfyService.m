@@ -9,6 +9,7 @@
 #import "DiscoverfyService.h"
 #import <Spotify/Spotify.h>
 #import "Reachability.h"
+#import "DiscoverfyError.h"
 
 @implementation DiscoverfyService
 
@@ -115,6 +116,21 @@
         default:
             return NO;
             
+    }
+    
+}
+
+-(void)handleError:(NSError *)error withType:(NSString *)type{
+    
+    DiscoverfyError *discError = [[DiscoverfyError alloc]init];
+    
+    discError.error = error;
+    discError.appState = type;
+    
+    if(error.code == 1009){
+        
+        [[NSNotificationCenter defaultCenter]postNotificationName:@"NoNetworkConnectivity" object:discError];
+        
     }
     
 }

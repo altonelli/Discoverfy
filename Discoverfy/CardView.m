@@ -10,23 +10,17 @@
 
 @implementation CardView
 
--(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
-    
-    NSLog(@"Hit Test called in card view");
-    
-    if (CGRectContainsPoint(self.bounds, point)) {
-        
-        NSLog(@"IN IF");
-
-        
-        return YES;
-        
-    }
-    
-    return [super pointInside:point withEvent:event];
-
-    
-}
+//-(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
+//    
+//    if (CGRectContainsPoint(self.bounds, point)) {
+//        
+//        return YES;
+//        
+//    }
+//    
+//    return [super pointInside:point withEvent:event];
+//    
+//}
 
 /*
 // Only override drawRect: if you perform custom drawing.

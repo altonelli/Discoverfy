@@ -70,7 +70,7 @@
 
 -(void)getArtistsListWithAccessToken:(NSString *)accessToken queue:(dispatch_queue_t)queue callback:(void (^)(void))callbackBlock {
     
-    NSURL *url = [NSURL URLWithString:@"https://api.spotify.com/v1/me/top/artists?limit=20"];
+    NSURL *url = [NSURL URLWithString:@"https://api.spotify.com/v1/me/top/artists?limit=20&time_range=short_term"];
     
     NSError *error;
     NSURLRequest *artistsReq = [SPTRequest createRequestForURL:url withAccessToken:accessToken httpMethod:@"GET" values:nil valueBodyIsJSON:YES sendDataAsQueryString:YES error:&error];

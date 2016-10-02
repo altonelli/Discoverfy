@@ -17,7 +17,8 @@
 #import "Song.h"
 #import "Reachability.h"
 #import "LogInController.h"
-#import "spinnerViewController.h"
+#import "SpinnerViewController.h"
+#import "DiscoverfyError.h"
 
 
 @interface MusicViewController (){
@@ -37,26 +38,13 @@
 @property (weak, nonatomic) IBOutlet UIView *bottomViewColor;
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic,strong) ErrorViewController *errorController;
-@property (nonatomic,strong) spinnerViewController *spinnerController;
+@property (nonatomic,strong) SpinnerViewController *spinnerController;
 
 @end
 
 
 
 @implementation MusicViewController
-
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    NSLog(@"***** touches began in music view controller : %@",touches);
-    
-    NSLog(@"subview's intereactions rear: %hhd front: %hhd", self.view.subviews[2].clipsToBounds,self.view.subviews[3].clipsToBounds);
-    
-    NSLog(@"subview's intereactions rear: %hhd front: %hhd", self.view.subviews[3].subviews[0].subviews[0].subviews[2].clipsToBounds,self.view.subviews[3].subviews[0].subviews[0].subviews[3].clipsToBounds
-          );
-    
-    NSLog(@"subview's intereactions rear: %@ front: %@", self.view.subviews[3].subviews[0].subviews[0].subviews[2].class,self.view.subviews[3].subviews[0].subviews[0].subviews[3].class
-          );
-    
-}
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -74,7 +62,7 @@
     }
 
     if([segueName isEqualToString:@"spinnerSegue"]){
-        self.spinnerController = (spinnerViewController *) [segue destinationViewController];
+        self.spinnerController = (SpinnerViewController *) [segue destinationViewController];
         self.spinnerController.view.hidden = NO;
         self.spinnerController.view.userInteractionEnabled = NO;
     }
@@ -121,6 +109,11 @@
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(pauseAppWithNotification:)
                                                 name:@"ConnectivityError"
+                                              object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(pauseAppWithNotification:)
+                                                name:@"NoNetworkConnectivity"
                                               object:nil];
     
     

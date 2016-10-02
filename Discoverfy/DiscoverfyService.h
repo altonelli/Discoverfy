@@ -16,5 +16,6 @@
 -(void)fetchSongsWithUser:(NSString *)user completionHandler:(void (^)(NSArray *tracks))callbackBlock;
 -(void)postSongWithSongID:(NSString *)songID type:(NSString *)type user:(NSString *)user;
 -(BOOL)hasNetworkConnection;
+-(void)handleError:(NSError *)error;
 
 @end

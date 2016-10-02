@@ -13,6 +13,7 @@
 #import "Song.h"
 #import "AppDelegate.h"
 #import <Spotify/Spotify.h>
+#import "DiscoverfyError.h"
 
 @interface ErrorViewController ()
 
@@ -23,16 +24,37 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(displayView:)
                                                 name:@"ConnectivityError"
                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(handleNoNetworkError:)
+                                                name:@"NoNetworkConnectivity"
+                                              object:nil];
+    
+    self.view.layer.borderWidth = 1;
+    
+    self.view.layer.borderColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0].CGColor;
+    
+    //    self.view.layer.borderColor = [UIColor colorWithRed:18/255.0 green:122/255.0 blue:216/255.0 alpha:1.0].CGColor;
+    self.view.layer.cornerRadius = 2;
+    self.view.layer.masksToBounds = YES;
 //    NSLog(@"******************************************************** parent of error view controller and current ctrl: %@ | %@",self.parentViewController, self);
 }
 
 -(void)displayView:(NSNotification *)notification{
     
     self.view.hidden = NO;
+    
+}
+
+-(void)handleNoNetworkError:(NSNotification *)notification{
+    
+    self.view.hidden = NO;
+    
     
 }
 

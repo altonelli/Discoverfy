@@ -1,5 +1,5 @@
 //
-//  spinnerViewController.h
+//  SpinnerViewController.h
 //  Discoverfy
 //
 //  Created by Arthur Tonelli on 9/28/16.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface spinnerViewController : UIViewController
+@interface SpinnerViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 

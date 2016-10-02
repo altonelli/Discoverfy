@@ -31,13 +31,39 @@
 
 @implementation TrackViewController
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    NSLog(@"*** touched track view controller");
-}
-
-
 -(void)viewDidLoad{
     spot = [SpotifyService sharedService];
+    
+    UIView *subView = self.view.subviews[0];
+    
+    CGRect cardRect = [subView bounds];
+    CGFloat cardWidth = cardRect.size.width;
+    CGFloat cardHeight = cardRect.size.height;
+    
+    NSDictionary *imageElements = NSDictionaryOfVariableBindings(_trackImage);
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(==0)-[_trackImage(<=%f)]-(>=0)-|",cardWidth]
+                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                      metrics:nil
+                                                                        views:imageElements]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-(==0)-[_trackImage(<=%f)]-(==0)-|",cardWidth]
+                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                      metrics:nil
+                                                                        views:imageElements]];
+
+    
+    NSDictionary *overlayImageElements = NSDictionaryOfVariableBindings(_overlayImage);
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(==0)-[_overlayImage(<=%f)]-(>=0)-|",cardWidth]
+                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                      metrics:nil
+                                                                        views:overlayImageElements]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-(==0)-[_overlayImage(<=%f)]-(==0)-|",cardWidth]
+                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                      metrics:nil
+                                                                        views:overlayImageElements]];
+    
+    
     
     if (self.isMainCard == NO) {
         self.trackSlider.hidden = YES;
@@ -58,22 +84,33 @@
     
     self.playButton.hidden = YES;
     self.overlayImage.hidden = YES;
+    
 
     self.overlayImage.userInteractionEnabled = YES;
     self.trackImage.userInteractionEnabled = YES;
+    
+    self.overlayImage.layer.cornerRadius = 2;
+    self.overlayImage.layer.masksToBounds = YES;
 
     
-    UIView *subView = self.view.subviews[0];
+    self.trackImage.layer.cornerRadius = 2;
+    self.trackImage.layer.masksToBounds = YES;
+
+    
     
     
         
-    CGRect cardRect = [subView bounds];
-    CGFloat cardWidth = cardRect.size.width;
-    CGFloat cardHeight = cardRect.size.height;
+
     
 //    NSLog(@"card width:%f and card height: %f",cardWidth,cardHeight);
 //    
     NSLog(@"card view subview subviews: %@",subView.subviews);
+    NSLog(@"***** CARD BOUNDS: %@", NSStringFromCGRect(subView.frame));
+    NSLog(@"***** IMAGE1 BOUNDS: %@", NSStringFromCGRect(subView.subviews[2].frame));
+    NSLog(@"***** IMAGE1 HIDDEN: %hhd", subView.subviews[2].hidden);
+    NSLog(@"***** IMAGE2 BOUNDS: %@", NSStringFromCGRect(subView.subviews[3].frame));
+    NSLog(@"***** IMAGE2 HIDDEN: %hhd", subView.subviews[3].hidden);
+    
 //
 //    NSLog(@"************************sub view constraints: %@",subView.bounds);
     
