@@ -27,16 +27,17 @@
     SPTSession *session;
     NSManagedObjectContext *context;
     dispatch_queue_t spot_data_queue;
+    CGRect screenRect;
+    CGFloat screenWidth;
+    CGFloat screenHeight;
+    ErrorViewController *errorController;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *rearContainer;
-//@property (weak, nonatomic) IBOutlet UIView *mainContainer;
 @property (nonatomic,strong) TrackViewController *rearTrackController;
 @property (nonatomic,strong) TrackViewController *trackController;
-@property (weak, nonatomic) IBOutlet UINavigationBar *navbar;
 @property (weak, nonatomic) IBOutlet UIView *topViewColor;
 @property (weak, nonatomic) IBOutlet UIView *bottomViewColor;
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 @property (nonatomic,strong) ErrorViewController *errorController;
 @property (nonatomic,strong) SpinnerViewController *spinnerController;
 
@@ -45,6 +46,20 @@
 
 
 @implementation MusicViewController
+
+-(void)loadView{
+    [super loadView];
+    
+    screenRect = [[UIScreen mainScreen]bounds];
+    screenWidth = screenRect.size.width;
+    screenHeight = screenRect.size.height;
+    
+    
+    [self.view setNeedsUpdateConstraints];
+    
+    
+    
+}
 
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -60,20 +75,7 @@
         self.rearTrackController.isMainCard = NO;
 //        self.rearTrackController.userInteractionEnabled = NO;
     }
-
-    if([segueName isEqualToString:@"spinnerSegue"]){
-        self.spinnerController = (SpinnerViewController *) [segue destinationViewController];
-        self.spinnerController.view.hidden = NO;
-        self.spinnerController.view.userInteractionEnabled = NO;
-    }
     
-    if([segueName isEqualToString:@"errorSegue"]){
-        self.errorController = (ErrorViewController *) [segue destinationViewController];
-        self.errorController.view.hidden = YES;
-        self.errorController.user = self.user;
-        self.errorController.parentController = self;
-//        NSLog(@"******************************************************** parent view controller for errorCtrl and current ctrl: %@ | %@",self.errorController.parentViewController, self);
-    }
     
     if([segueName isEqualToString:@"logOutSegue"]){
         
@@ -97,7 +99,6 @@
 -(void)viewDidLoad{
     [super viewDidLoad];
     
-//    self.trackController.view.layer.shadow
     
     self.firstPlay = YES;
     
@@ -105,14 +106,9 @@
                                             selector:@selector(batchReady:)
                                                 name:@"BatchReady"
                                               object:nil];
-
-    [[NSNotificationCenter defaultCenter]addObserver:self
-                                            selector:@selector(pauseAppWithNotification:)
-                                                name:@"ConnectivityError"
-                                              object:nil];
     
     [[NSNotificationCenter defaultCenter]addObserver:self
-                                            selector:@selector(pauseAppWithNotification:)
+                                            selector:@selector(handleNoNetworkError:)
                                                 name:@"NoNetworkConnectivity"
                                               object:nil];
     
@@ -130,9 +126,15 @@
     accessToken = session.accessToken;
     
     spot = [SpotifyService sharedService];
+    self.errorController = [[ErrorViewController alloc]init];
     
-//    [self.activityIndicator startAnimating];
+    
+    self.spinnerController = [[SpinnerViewController alloc]init];
+    [self.view addSubview:self.spinnerController.view];
+    self.spinnerController.view.frame = CGRectMake(screenWidth/2 - 120, screenHeight/2 - 64, 240, 128);
     [self.spinnerController startSpinner];
+    
+    
     
     if([[DiscoverfyService sharedService]hasNetworkConnection]){
         
@@ -176,56 +178,23 @@
         
     } else {
         
-        self.errorController.view.hidden = NO;
-        self.errorController.errorState = @"initalFetch";
+//        Handle Error
         
-//        self.mainContainer.userInteractionEnabled = NO;
+        [[DiscoverfyService sharedService]handleError:NULL withState:@"initialBatch"];
         
         
         
     }
     
+
     
-    // Set up UI and Constraints
-    
-    CGRect screenRect = [[UIScreen mainScreen]bounds];
-    CGFloat screenWidth = screenRect.size.width;
-    CGFloat screenHeight = screenRect.size.height;
-    
-    NSDictionary *rearElementsDict = NSDictionaryOfVariableBindings(_rearContainer);
-    
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(==%f)-[_rearContainer(<=%f)]-(==%f)-|",(64 + screenHeight * .05),(screenHeight * .8 - 32),(screenHeight * .15 - 32)]
-                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                      metrics:nil
-                                                                        views:rearElementsDict]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-(==%f)-[_rearContainer(<=%f)]-(==%f)-|",screenWidth * .1,screenWidth * .8,screenWidth * .1]
-                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                      metrics:nil
-                                                                        views:rearElementsDict]];
-    
-    NSDictionary *frontElementsDict = NSDictionaryOfVariableBindings(_mainContainer);
-    
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(==%f)-[_mainContainer(<=%f)]-(==%f)-|",(64 + screenHeight * .05),(screenHeight * .8 - 32),(screenHeight * .15 - 32)]
-                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                      metrics:nil
-                                                                        views:frontElementsDict]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-(==%f)-[_mainContainer(<=%f)]-(==%f)-|",screenWidth * .1,screenWidth * .8,screenWidth * .1]
-                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                      metrics:nil
-                                                                        views:frontElementsDict]];
-    
-    NSDictionary *backgroundElementsDict = NSDictionaryOfVariableBindings(_navbar,_topViewColor,_bottomViewColor);
-    
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(==20)-[_navbar(==44)]-(==0)-[_topViewColor(==%f)]-(==0)-[_bottomViewColor(==%f)]-(==0)-|",(screenHeight * .5 - 32),(screenHeight * .5 - 32)]
-                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                      metrics:nil
-                                                                        views:backgroundElementsDict]];
 
     
         
 
     // Set up Swiping
     self.mainContainer.userInteractionEnabled = YES;
+
 
     UIPanGestureRecognizer *gesture = [[UIPanGestureRecognizer alloc]initWithTarget:self action:@selector(wasDraggedWithGesture:)];
     [self.mainContainer addGestureRecognizer:gesture];
@@ -241,8 +210,8 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             
             [self.spinnerController stopSpinner];
-            self.activityIndicator.hidden = YES;
-            self.errorController.view.hidden = YES;
+            [self.spinnerController.view removeFromSuperview];
+            
             
             self.mainContainer.userInteractionEnabled = YES;
 
@@ -266,23 +235,21 @@
     
 }
 
--(void)pauseAppWithNotification:(NSNotification *)notification{
+-(void)handleNoNetworkError:(NSNotification *)notification{
     
     NSLog(@"pause app with notification called");
     [spot.player pause];
     self.mainContainer.userInteractionEnabled = NO;
+    
+    self.errorController.view.frame = CGRectMake((screenWidth/2 - 120), (screenHeight/2 - 64), 240, 128);
+    
+    [self.view addSubview:self.errorController.view];
+    
 
     
 }
 
 -(void)wasDraggedWithGesture:(UIPanGestureRecognizer *)gesture{
-    if(gesture.state == UIGestureRecognizerStateBegan){
-
-//        NSLog(@"User interaction enabled? %@", self.mainContainer.subviews[0].subviews[0].subviews);
-        
-        NSLog(@"gesture.view: %@", gesture.view);
-
-    }
     
     CGPoint coords = [gesture translationInView:self.view];
     UIView *card = gesture.view;
@@ -305,18 +272,14 @@
     
     card.center = CGPointMake(cardCenterX,cardCenterY);
     
-//    NSLog(@"image constraints: %@",self.trackController.overlayImage.constraints);
     if (cardCenterX < viewCenterX * .9){
         self.trackController.overlayImage.hidden = NO;
         self.trackController.overlayImage.image = [UIImage imageNamed:@"removeSongImage.jpg"];
-//        NSLog(@"image constraints: %@",self.trackController.overlayImage.constraints);
     } else if (cardCenterX > viewCenterX * 1.1){
         self.trackController.overlayImage.hidden = NO;
         self.trackController.overlayImage.image = [UIImage imageNamed:@"addSongImage.jpg"];
-//        NSLog(@"image constraints: %@",self.trackController.overlayImage.constraints);
     } else {
         self.trackController.overlayImage.hidden = YES;
-//        self.trackController.overlayImage.alpha = 0;
     }
     
     CGFloat opacity = MIN(1.5 * fabsf((cardCenterX - viewCenterX) / viewCenterX),.8);
@@ -333,7 +296,6 @@
         }
         
         self.trackController.overlayImage.hidden = YES;
-//        self.trackController.overlayImage.alpha = 0;
         
         card.center = CGPointMake(viewWidth / 2, viewHeight * .45 + 48);
                 
@@ -357,7 +319,6 @@
             self.queuing = YES;
             
             dispatch_async(spot_data_queue, ^{
-                //            NSLog(@"fetch thread | 0 queue: %@",[NSThread currentThread]);
                 
                 [spot queueSongsWithAccessToken:accessToken user:self.user queue:spot_data_queue callback:^{
                     NSLog(@"hit song queue call back, %hhd", self.queuing);
@@ -367,12 +328,8 @@
             
         } else {
             
-//            [spot.player pause];
-//            self.mainContainer.userInteractionEnabled = NO;
-//            self.errorController.view.hidden = NO;
             [self pauseApp];
-            [[NSNotificationCenter defaultCenter]postNotificationName:@"ConnectivityError" object:nil];
-            self.errorController.errorState = @"batchError";
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"swipe"];
             
         }
             
@@ -383,13 +340,8 @@
     
     if (spot.partialTrackList.count == 3 && self.queuing != YES) {
         
-//        [spot.player pause];
-//        self.mainContainer.userInteractionEnabled = NO;
-//        self.errorController.view.hidden = NO;
-        [self pauseApp];
-        [[NSNotificationCenter defaultCenter]postNotificationName:@"ConnectivityError" object:nil];
-        self.errorController.errorState = @"batchError";
-        
+//        [self pauseApp];
+        [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
         
     } else {
         
@@ -399,9 +351,9 @@
             [self.rearTrackController updateUIWithTrack:spot.partialTrackList[2]];
             [spot.partialTrackList removeObjectAtIndex:0];
             
-        if (self.errorController.view.hidden == NO){
-            [spot.player pause];
-        }
+//        if (self.errorController.view.hidden == NO){
+//            [spot.player pause];
+//        }
         
         
     }
@@ -453,6 +405,37 @@
     
     
     [self advanceSong];
+    
+}
+
+-(void)updateViewConstraints{
+    
+    // Set up UI and Constraints
+    
+    
+    NSDictionary *rearElementsDict = NSDictionaryOfVariableBindings(_rearContainer);
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(==%f)-[_rearContainer(<=%f)]-(==%f)-|",(64 + screenHeight * .05),(screenHeight * .8 - 32),(screenHeight * .15 - 32)]
+                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                      metrics:nil
+                                                                        views:rearElementsDict]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-(==%f)-[_rearContainer(<=%f)]-(==%f)-|",screenWidth * .1,screenWidth * .8,screenWidth * .1]
+                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                      metrics:nil
+                                                                        views:rearElementsDict]];
+    
+    NSDictionary *frontElementsDict = NSDictionaryOfVariableBindings(_mainContainer);
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(==%f)-[_mainContainer(<=%f)]-(==%f)-|",(64 + screenHeight * .05),(screenHeight * .8 - 32),(screenHeight * .15 - 32)]
+                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                      metrics:nil
+                                                                        views:frontElementsDict]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-(==%f)-[_mainContainer(<=%f)]-(==%f)-|",screenWidth * .1,screenWidth * .8,screenWidth * .1]
+                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                      metrics:nil
+                                                                        views:frontElementsDict]];
+    
+    [super updateViewConstraints];
     
 }
 

@@ -14,12 +14,30 @@
 #import "AppDelegate.h"
 #import <Spotify/Spotify.h>
 #import "DiscoverfyError.h"
+#import "PopOverView.h"
 
 @interface ErrorViewController ()
+
+@property (nonatomic,weak) IBOutlet UILabel *text;
+@property (nonatomic,weak) IBOutlet UIActivityIndicatorView *spinner;
+
 
 @end
 
 @implementation ErrorViewController
+
+-(void)loadView{
+    [super loadView];
+    
+    PopOverView *view = [[PopOverView alloc] init];
+    
+    self.view = view;
+    
+    self.view.bounds = CGRectMake(0, 0, 240, 128);
+    
+    [self addElements];
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -34,26 +52,15 @@
                                             selector:@selector(handleNoNetworkError:)
                                                 name:@"NoNetworkConnectivity"
                                               object:nil];
-    
-    self.view.layer.borderWidth = 1;
-    
-    self.view.layer.borderColor = [UIColor colorWithRed:255/255.0 green:255/255.0 blue:255/255.0 alpha:1.0].CGColor;
-    
-    //    self.view.layer.borderColor = [UIColor colorWithRed:18/255.0 green:122/255.0 blue:216/255.0 alpha:1.0].CGColor;
-    self.view.layer.cornerRadius = 2;
-    self.view.layer.masksToBounds = YES;
-//    NSLog(@"******************************************************** parent of error view controller and current ctrl: %@ | %@",self.parentViewController, self);
+
 }
 
--(void)displayView:(NSNotification *)notification{
-    
-    self.view.hidden = NO;
-    
-}
 
 -(void)handleNoNetworkError:(NSNotification *)notification{
     
-    self.view.hidden = NO;
+    DiscoverfyError *error = [notification object];
+    self.discError = error;
+    
     
     
 }
@@ -70,16 +77,16 @@
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
     
-    if ([self.errorState  isEqual: @"batchError"]) {
+    if ([self.discError.appState  isEqual: @"batchError"]) {
     
             [spot queueSongsWithAccessToken:accessToken user:self.user queue:dispatch_get_main_queue() callback:^{
                 self.parentController.queuing = NO;
                 self.parentController.mainContainer.userInteractionEnabled = YES;
                 [spot.player play];
-                self.view.hidden = YES;
+                [self.view removeFromSuperview];
             }];
         
-    } else if ([self.errorState isEqualToString:@"intial"]){
+    } else if ([self.discError.appState isEqualToString:@"intialBatch"]){
         
         dispatch_group_t group = dispatch_group_create();
         
@@ -121,6 +128,34 @@
         });
         
     }
+    
+}
+
+-(void)addElements{
+    
+    UILabel *text = [[UILabel alloc]init];
+    text.text = @"An Error Occured";
+    text.textColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+    text.font = [UIFont fontWithName:@"Futura" size:20.0];
+    text.frame = CGRectMake(20.0, 20.0, 200.0, 35.0);
+    text.textAlignment = NSTextAlignmentCenter;
+    self.text = text;
+
+    
+    UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
+    [button setFrame:CGRectMake(60, 71, 120, 37)];
+    [button setTitle:@"Try Again" forState:UIControlStateNormal];
+    button.titleLabel.textColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
+    button.titleLabel.font = [UIFont fontWithName:@"Futura" size:15.0];
+    button.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [button setBackgroundColor:[UIColor colorWithRed:65/255.0 green:230/255.0 blue:218/255.0 alpha:1.0]];
+    [button addTarget:self action:@selector(refresh:) forControlEvents:UIControlEventTouchDown];
+    
+
+    
+    [self.view addSubview:self.text];
+    [self.view addSubview:button];
+    
     
 }
 

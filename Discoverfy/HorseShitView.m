@@ -1,41 +1,18 @@
 //
-//  AlbumImageView.m
+//  HorseShitView.m
 //  Discoverfy
 //
-//  Created by Arthur Tonelli on 9/22/16.
+//  Created by Arthur Tonelli on 10/4/16.
 //  Copyright © 2016 Arthur Tonelli. All rights reserved.
 //
 
-#import "AlbumImageView.h"
+#import "HorseShitView.h"
 
-@implementation AlbumImageView
-
-
-
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    NSLog(@"touches began in album view");
-    
-    
-}
-
-//-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
-//    
-////    NSLog(@"event: %@",event);
-//    
-//    UIView *hitView = [super hitTest:point withEvent:event];
-//
-////    NSLog(@"self view: %@, superview: %@",self,self.superview);
-////
-////    NSLog(@"user interaction enabled?: %hhd",self.userInteractionEnabled);
-//    
-//    if(hitView == self) return nil;
-//    return hitView;
-//    
-//}
+@implementation HorseShitView
 
 -(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
     
-    NSLog(@"hittest called on AlbumImageView");
+    NSLog(@"hittest called on HorseShitView");
     
     if ( !self.userInteractionEnabled || self.hidden || self.alpha == 0) {
         return nil;
@@ -50,16 +27,19 @@
         
         for (UIView *subview in self.subviews){
             
+            NSLog(@"subview: %@",subview);
+            
             CGPoint insideSubview = [self convertPoint:point toView:subview];
             hitSubview = [subview hitTest:insideSubview withEvent:event];
             
             if (hitSubview){
+                NSLog(@"***** Here is the hitSubView: %@",hitSubview);
                 hitView = hitSubview;
             }
         }
         
         
-        NSLog(@"AlumImageView: %@, hits?: %@ ",self.class, hitView);
+        NSLog(@"HorseShitView: %@, hits?: %@ ",self.class, hitView);
         
         return hitView;
         
@@ -70,13 +50,12 @@
     
 }
 
+
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
     
-    NSLog(@"point inside AlbumImageView called");
+    NSLog(@"point inside HorseShitView called");
     
-    CGRect bounds = self.bounds;
-    
-    if (CGRectContainsPoint(bounds, point)) {
+    if (CGRectContainsPoint(self.bounds, point)) {
         
         return YES;
         
@@ -84,7 +63,10 @@
     
     return NO;
     
+    
 }
+
+
 
 
 

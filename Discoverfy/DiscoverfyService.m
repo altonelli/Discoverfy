@@ -120,18 +120,18 @@
     
 }
 
--(void)handleError:(NSError *)error withType:(NSString *)type{
+-(void)handleError:(NSError *)error withState:(NSString *)state{
     
     DiscoverfyError *discError = [[DiscoverfyError alloc]init];
     
     discError.error = error;
-    discError.appState = type;
+    discError.appState = state;
     
-    if(error.code == 1009){
-        
+//    if(error.code == 1009){
+    
         [[NSNotificationCenter defaultCenter]postNotificationName:@"NoNetworkConnectivity" object:discError];
         
-    }
+//    }
     
 }
 
