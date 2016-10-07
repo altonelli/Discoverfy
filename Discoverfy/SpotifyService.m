@@ -151,6 +151,8 @@
         
         if(err != nil){
             NSLog(@"error of results dictionary %@",err);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+            return;
         }
         
         NSArray *tracks = [jsonDict objectForKey:@"tracks"];
@@ -171,6 +173,8 @@
         if(partialError != nil){
             NSLog(@"*** Partial Error %@",partialError);
             [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+            
+            return;
 
         }
 
@@ -202,6 +206,7 @@
         if (error != nil){
             NSLog(@"*** Error on playlist get %@",error);
             [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+            return;
         }
         playlist = [SPTPlaylistList playlistListFromData:data withResponse:response error:&error];
         
@@ -218,6 +223,7 @@
                     if (error != nil){
                         NSLog(@"*** Error on playlist snapshot create %@",error);
                         [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+                        return;
                     }
                     
                     self.discoverfyPlaylist = object;
@@ -249,6 +255,7 @@
                 if (error != nil){
                     NSLog(@"*** Error on playlist create %@",error);
                     [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+                    return;
                 } else {
                     self.discoverfyPlaylist = returnedPlaylist;
 //                    NSLog(@"Discoverfy playlist created");
@@ -306,6 +313,8 @@
         
         if (error != nil) {
             NSLog(@"*** Error on track get from %@: %@",userPlaylist.name,error);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+            return;
         }
         
         

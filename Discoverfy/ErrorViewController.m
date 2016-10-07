@@ -26,6 +26,14 @@
 
 @implementation ErrorViewController
 
+-(id)initWithDiscoverfyError:(DiscoverfyError *)discError{
+    self = [super init];
+    
+    self.discError = discError;
+    
+    return self;
+}
+
 -(void)loadView{
     [super loadView];
     
@@ -58,7 +66,12 @@
 
 -(void)handleNoNetworkError:(NSNotification *)notification{
     
-    DiscoverfyError *error = [notification object];
+    NSLog(@"NSNotification Object: %@", [notification object]);
+    
+    DiscoverfyError *error = (DiscoverfyError *)[notification object];
+
+    NSLog(@"Error Object: %@", error);
+    
     self.discError = error;
     
     
@@ -70,14 +83,17 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)refresh:(id)sender {
+    NSLog(@"Refresh button tapped with error: %@", self.discError);
     SpotifyService *spot = [SpotifyService sharedService];
     SPTSession *session = [[SPTAuth defaultInstance]session];
     NSString *accessToken = [session accessToken];
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    NSLog(@"*** made it here");
     
     if ([self.discError.appState  isEqual: @"batchError"]) {
+        
     
             [spot queueSongsWithAccessToken:accessToken user:self.user queue:dispatch_get_main_queue() callback:^{
                 self.parentController.queuing = NO;
@@ -87,7 +103,9 @@
                 [self.view removeFromSuperview];
             }];
         
-    } else if ([self.discError.appState isEqualToString:@"intialBatch"]){
+    } else if ([self.discError.appState isEqualToString:@"initialError"]){
+        
+        NSLog(@"In initalError state");
         
         [spot emptyArrays];
         
@@ -125,6 +143,8 @@
                 [spot queueSongsWithAccessToken:accessToken user:self.user queue:dispatch_get_main_queue() callback:^{
                     
                     NSLog(@"************************************** Song Queueing Complete");
+                    
+                    [[NSNotificationCenter defaultCenter]postNotificationName:@"ErrorResolved" object:nil];
                     
                 }];
             }];

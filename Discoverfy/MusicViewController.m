@@ -131,7 +131,7 @@
     accessToken = session.accessToken;
     
     spot = [SpotifyService sharedService];
-    self.errorController = [[ErrorViewController alloc]init];
+//    self.errorController = [[ErrorViewController alloc]init];
     
     
     self.spinnerController = [[SpinnerViewController alloc]init];
@@ -241,26 +241,36 @@
 }
 
 -(void)handleNoNetworkError:(NSNotification *)notification{
+    DiscoverfyError *discError = (DiscoverfyError *)[notification object];
     
+    NSLog(@"Thread for NSnotification: %@", [NSThread currentThread]);
     
-    
-    [spot.player pause];
-    self.trackController.playButton.hidden = NO;
-    self.trackController.pauseButton.hidden = YES;
-
-    self.mainContainer.userInteractionEnabled = NO;
-    self.trackController.view.userInteractionEnabled = NO;
-    
-    self.errorController.view.frame = CGRectMake((screenWidth/2 - 120), (screenHeight/2 - 64), 240, 128);
-    
-    if([self.spinnerController.view isDescendantOfView:self.view]){
+    dispatch_async(dispatch_get_main_queue(), ^{
         
-        [self.spinnerController stopSpinner];
-        [self.spinnerController.view removeFromSuperview];
+        [spot.player pause];
+        self.trackController.playButton.hidden = NO;
+        self.trackController.pauseButton.hidden = YES;
         
-    }
+//        self.mainContainer.userInteractionEnabled = NO;
+//        self.trackController.view.userInteractionEnabled = NO;
+        
+        self.errorController = [[ErrorViewController alloc]initWithDiscoverfyError:discError];
+        
+        self.errorController.view.frame = CGRectMake((screenWidth/2 - 120), (screenHeight/2 - 64), 240, 128);
+        
+        if([self.spinnerController.view isDescendantOfView:self.view]){
+            
+            [self.spinnerController stopSpinner];
+            [self.spinnerController.view removeFromSuperview];
+            
+        }
+        
+        [self.view addSubview:self.errorController.view];
+        
+    });
     
-    [self.view addSubview:self.errorController.view];
+    
+    
     
 
     
@@ -269,14 +279,22 @@
 -(void)handleErrorResolve:(NSNotification *)notification{
     
     NSLog(@"App Resolved error");
-    [spot.player play];
-    self.trackController.playButton.hidden = YES;
-    self.trackController.pauseButton.hidden = NO;
     
-    self.mainContainer.userInteractionEnabled = YES;
-    self.trackController.view.userInteractionEnabled = YES;
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [spot.player play];
+        self.trackController.playButton.hidden = YES;
+        self.trackController.pauseButton.hidden = NO;
+        
+//        self.mainContainer.userInteractionEnabled = YES;
+//        self.trackController.view.userInteractionEnabled = YES;
+        
+        [self.errorController.view removeFromSuperview];
+        
+    });
     
-    [self.errorController.view removeFromSuperview];
+    
+    
     
 }
 

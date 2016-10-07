@@ -39,6 +39,11 @@
     NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error){
             NSLog(@"*** Error on user post: %@",error);
+            
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+            return;
+            
+            
         } else {
 //            NSLog(@"data: %@", [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
         }
@@ -59,6 +64,7 @@
         if (error) {
             NSLog(@"*** Error on songs get: %@",error);
             [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+            return;
 
         } else {
 //            NSLog(@"Successful data get: %@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
@@ -94,6 +100,8 @@
             NSLog(@"*** Error on song post: %@",error);
             
             [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+            
+            return;
 
             
         } else {
@@ -136,6 +144,8 @@
     discError.appState = state;
     
 //    if(error.code == 1009){
+    
+    NSLog(@"disc error: %@", discError);
     
         [[NSNotificationCenter defaultCenter]postNotificationName:@"NoNetworkConnectivity" object:discError];
         
