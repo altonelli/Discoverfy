@@ -10,6 +10,7 @@
 #import <Spotify/Spotify.h>
 #import "Reachability.h"
 #import "DiscoverfyError.h"
+#import "Constants.h"
 
 @implementation DiscoverfyService
 
@@ -57,6 +58,8 @@
     NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
             NSLog(@"*** Error on songs get: %@",error);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+
         } else {
 //            NSLog(@"Successful data get: %@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
             NSArray *tracks = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
@@ -87,7 +90,12 @@
     
     NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
+        
             NSLog(@"*** Error on song post: %@",error);
+            
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+
+            
         } else {
 //            NSLog(@"Successful post: %@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
         }
@@ -120,7 +128,7 @@
     
 }
 
--(void)handleError:(NSError *)error withState:(NSString *)state{
+-(void)handleError:(NSError * _Nullable)error withState:(NSString *)state{
     
     DiscoverfyError *discError = [[DiscoverfyError alloc]init];
     

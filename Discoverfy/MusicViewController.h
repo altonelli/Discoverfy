@@ -12,7 +12,7 @@
 #import "User.h"
 
 
-@interface MusicViewController : UIViewController <SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate>
+@interface MusicViewController : UIViewController <AVAudioPlayerDelegate,SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate>
 
 @property (nonatomic,strong) User* user;
 @property (nonatomic) BOOL firstPlay;

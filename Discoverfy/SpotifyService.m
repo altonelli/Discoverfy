@@ -13,6 +13,7 @@
 #import "AppDelegate.h"
 #import "CoreDataService.h"
 #import "Reachability.h"
+#import "DiscoverfyService.h"
 
 @interface SpotifyService (){
     SPTPlaylistList *playlist;
@@ -79,6 +80,7 @@
         dispatch_async(queue, ^{
         if(error != nil){
             NSLog(@"*** Error on top artist get %@",error);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
             return;
         }
             
@@ -137,6 +139,8 @@
 
         if(error != nil){
             NSLog(@"*** Error on song get %@",error);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+
             return;
         }
         
@@ -166,21 +170,22 @@
 
         if(partialError != nil){
             NSLog(@"*** Partial Error %@",partialError);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+
         }
 
         
         if (![Song songExistsForUser:user trackID:partialtrack.identifier inManagedObjectContext:context]){
             
             Track *newTrack = [[Track alloc]initWithSpotifyTrack:partialtrack];
-//            NSLog(@"testing 1235");
-//            NSLog(@"player: %@", self.player);
-//            NSLog(@"partial playlist: %@", self.partialTrackList);
             
             [newTrack addToService:self withQueue:self.spot_service_queue];
             
             
         } else {
+            
 //            NSLog(@"Already have song, ignoring.");
+            
         }
     };
     
@@ -196,6 +201,7 @@
     [[SPTRequest sharedHandler]performRequest:playlistsReq callback:^(NSError *error, NSURLResponse *response, NSData *data) {
         if (error != nil){
             NSLog(@"*** Error on playlist get %@",error);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
         }
         playlist = [SPTPlaylistList playlistListFromData:data withResponse:response error:&error];
         
@@ -211,6 +217,7 @@
                 [SPTPlaylistSnapshot playlistWithURI:partialPlaylist.uri session:session callback:^(NSError *error, id object) {
                     if (error != nil){
                         NSLog(@"*** Error on playlist snapshot create %@",error);
+                        [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
                     }
                     
                     self.discoverfyPlaylist = object;
@@ -241,6 +248,7 @@
             [SPTPlaylistList createPlaylistWithName:@"Discoverfy App" publicFlag:YES session:session callback:^(NSError *error, SPTPlaylistSnapshot *returnedPlaylist) {
                 if (error != nil){
                     NSLog(@"*** Error on playlist create %@",error);
+                    [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
                 } else {
                     self.discoverfyPlaylist = returnedPlaylist;
 //                    NSLog(@"Discoverfy playlist created");

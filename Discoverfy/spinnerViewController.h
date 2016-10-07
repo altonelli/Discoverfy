@@ -10,7 +10,6 @@
 
 @interface SpinnerViewController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
 -(void)startSpinner;
 -(void)stopSpinner;

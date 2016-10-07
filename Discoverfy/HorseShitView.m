@@ -12,7 +12,7 @@
 
 -(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
     
-    NSLog(@"hittest called on HorseShitView");
+//    NSLog(@"hittest called on HorseShitView");
     
     if ( !self.userInteractionEnabled || self.hidden || self.alpha == 0) {
         return nil;
@@ -27,19 +27,19 @@
         
         for (UIView *subview in self.subviews){
             
-            NSLog(@"subview: %@",subview);
+//            NSLog(@"subview: %@",subview);
             
             CGPoint insideSubview = [self convertPoint:point toView:subview];
             hitSubview = [subview hitTest:insideSubview withEvent:event];
             
             if (hitSubview){
-                NSLog(@"***** Here is the hitSubView: %@",hitSubview);
+//                NSLog(@"***** Here is the hitSubView: %@",hitSubview);
                 hitView = hitSubview;
             }
         }
         
         
-        NSLog(@"HorseShitView: %@, hits?: %@ ",self.class, hitView);
+//        NSLog(@"HorseShitView: %@, hits?: %@ ",self.class, hitView);
         
         return hitView;
         
@@ -53,7 +53,7 @@
 
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
     
-    NSLog(@"point inside HorseShitView called");
+//    NSLog(@"point inside HorseShitView called");
     
     if (CGRectContainsPoint(self.bounds, point)) {
         

@@ -25,7 +25,7 @@
     AVURLAsset *asset = [[AVURLAsset alloc]initWithURL:self.spotifyTrack.previewURL options:nil];
     NSArray *keys = @[@"playable"];
     
-    NSLog(@"add to service thread: %@", [NSThread currentThread]);
+//    NSLog(@"add to service thread: %@", [NSThread currentThread]);
     
     [asset loadValuesAsynchronouslyForKeys:keys completionHandler:^{
         

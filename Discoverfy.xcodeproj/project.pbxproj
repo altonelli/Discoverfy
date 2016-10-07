@@ -109,6 +109,7 @@
 		9EBAE1951DA4BE25000DC995 /* ErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorView.m; sourceTree = "<group>"; };
 		9EBAE1971DA5C41C000DC995 /* PopOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopOverView.h; sourceTree = "<group>"; };
 		9EBAE1981DA5C41C000DC995 /* PopOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopOverView.m; sourceTree = "<group>"; };
+		9EBAE19A1DA6E9C8000DC995 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		9EC49FCB1D9CE1B700376990 /* DiscoverfyError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverfyError.h; sourceTree = "<group>"; };
 		9EC49FCC1D9CE1B700376990 /* DiscoverfyError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverfyError.m; sourceTree = "<group>"; };
 		9EC49FCE1DA224C400376990 /* ImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageButton.h; sourceTree = "<group>"; };
@@ -234,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				9E1248111D553E6800F5B477 /* Config.h */,
+				9EBAE19A1DA6E9C8000DC995 /* Constants.h */,
 				9E12480E1D553E2F00F5B477 /* AppDelegate.h */,
 				9E12480F1D553E2F00F5B477 /* AppDelegate.m */,
 				9E1248241D553ED900F5B477 /* Services */,

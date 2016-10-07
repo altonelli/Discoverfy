@@ -19,6 +19,7 @@
 #import "LogInController.h"
 #import "SpinnerViewController.h"
 #import "DiscoverfyError.h"
+#import "Constants.h"
 
 
 @interface MusicViewController (){
@@ -30,7 +31,6 @@
     CGRect screenRect;
     CGFloat screenWidth;
     CGFloat screenHeight;
-    ErrorViewController *errorController;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *rearContainer;
@@ -110,6 +110,11 @@
     [[NSNotificationCenter defaultCenter]addObserver:self
                                             selector:@selector(handleNoNetworkError:)
                                                 name:@"NoNetworkConnectivity"
+                                              object:nil];
+    
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(handleErrorResolve:)
+                                                name:@"ErrorResolved"
                                               object:nil];
     
     
@@ -237,15 +242,33 @@
 
 -(void)handleNoNetworkError:(NSNotification *)notification{
     
-    NSLog(@"pause app with notification called");
+    NSLog(@"pause app with notification called to spot.player: %@",spot.player);
     [spot.player pause];
+    self.trackController.playButton.hidden = NO;
+    self.trackController.pauseButton.hidden = YES;
+
     self.mainContainer.userInteractionEnabled = NO;
+    self.trackController.view.userInteractionEnabled = NO;
     
     self.errorController.view.frame = CGRectMake((screenWidth/2 - 120), (screenHeight/2 - 64), 240, 128);
     
     [self.view addSubview:self.errorController.view];
     
 
+    
+}
+
+-(void)handleErrorResolve:(NSNotification *)notification{
+    
+    NSLog(@"App Resolved error");
+    [spot.player play];
+    self.trackController.playButton.hidden = YES;
+    self.trackController.pauseButton.hidden = NO;
+    
+    self.mainContainer.userInteractionEnabled = YES;
+    self.trackController.view.userInteractionEnabled = YES;
+    
+    [self.errorController.view removeFromSuperview];
     
 }
 
@@ -311,6 +334,11 @@
 }
 
 -(void)advanceSong{
+    
+    [spot.player advanceToNextItem];
+    [self.trackController updateUIWithTrack:spot.partialTrackList[1]];
+    [self.rearTrackController updateUIWithTrack:spot.partialTrackList[2]];
+    [spot.partialTrackList removeObjectAtIndex:0];
 
     if(spot.partialTrackList.count < 10 && self.queuing != YES){
         
@@ -321,42 +349,27 @@
             dispatch_async(spot_data_queue, ^{
                 
                 [spot queueSongsWithAccessToken:accessToken user:self.user queue:spot_data_queue callback:^{
-                    NSLog(@"hit song queue call back, %hhd", self.queuing);
                     self.queuing = NO;
                 }];
             });
             
         } else {
             
-            [self pauseApp];
-            [[DiscoverfyService sharedService]handleError:NULL withState:@"swipe"];
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
             
         }
-            
+        
         
         }
-    
+
     
     
     if (spot.partialTrackList.count == 3 && self.queuing != YES) {
         
-//        [self pauseApp];
         [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
         
-    } else {
-        
-            
-            [spot.player advanceToNextItem];
-            [self.trackController updateUIWithTrack:spot.partialTrackList[1]];
-            [self.rearTrackController updateUIWithTrack:spot.partialTrackList[2]];
-            [spot.partialTrackList removeObjectAtIndex:0];
-            
-//        if (self.errorController.view.hidden == NO){
-//            [spot.player pause];
-//        }
-        
-        
     }
+    
     
     
     
@@ -365,7 +378,6 @@
 -(void)songAcceptedWithTrack:(SPTPartialTrack *)track{
     dispatch_async(spot_data_queue, ^{
 
-        NSLog(@"Accepted");
         NSMutableArray *trackArray = [[NSMutableArray alloc]init ];
         [trackArray addObject:track];
         NSArray *immutable = [NSArray arrayWithObject:(SPTPartialTrack *)track];
@@ -378,8 +390,12 @@
         [[SPTRequest sharedHandler] performRequest:req callback:^(NSError *error, NSURLResponse *response, NSData *data) {
             if(error != nil){
                 NSLog(@"*** Error in adding track %@",error);
+                [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+
+//                [[DiscoverfyService sharedService]handleError:NULL withState:@"swipeError"];
+
             }
-            NSLog(@"response from post %@",response);
+//            NSLog(@"response from post %@",response);
         }];
         
         [Song storeSongWithSongID:track.identifier ofType:@"Liked" withUser:self.user inManangedObjectContext:context];
@@ -394,8 +410,6 @@
 
 -(void)songRejectedWithTrack:(SPTPartialTrack *)track{
     dispatch_async(spot_data_queue, ^{
-        
-        NSLog(@"Rejected");
         
         [Song storeSongWithSongID:track.identifier ofType:@"Disliked" withUser:self.user inManangedObjectContext:context];
         

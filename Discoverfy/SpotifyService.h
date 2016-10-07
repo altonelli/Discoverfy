@@ -11,7 +11,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import "User.h"
 
-@interface SpotifyService : NSObject
+@interface SpotifyService : NSObject <AVAudioPlayerDelegate>
 
 @property (nonatomic,strong) NSMutableArray *artistList;
 @property (nonatomic,strong) NSMutableArray *uriList;

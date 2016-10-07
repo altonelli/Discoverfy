@@ -11,7 +11,7 @@
 @implementation ImageButton
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    NSLog(@"touches began in image button");
+//    NSLog(@"touches began in image button");
     
     
 
@@ -28,7 +28,7 @@
 //    NSLog(@"self view: %@, superview: %@",self,self.superview);
 //
 //    NSLog(@"user interaction enabled?: %hhd",self.userInteractionEnabled);
-    NSLog(@"*** super view of button %@",self.superview);
+//    NSLog(@"*** super view of button %@",self.superview);
 
     return hitView;
 

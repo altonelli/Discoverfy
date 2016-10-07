@@ -12,30 +12,9 @@
 
 
 
--(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
-    NSLog(@"touches began in album view");
-    
-    
-}
-
-//-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
-//    
-////    NSLog(@"event: %@",event);
-//    
-//    UIView *hitView = [super hitTest:point withEvent:event];
-//
-////    NSLog(@"self view: %@, superview: %@",self,self.superview);
-////
-////    NSLog(@"user interaction enabled?: %hhd",self.userInteractionEnabled);
-//    
-//    if(hitView == self) return nil;
-//    return hitView;
-//    
-//}
-
 -(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
     
-    NSLog(@"hittest called on AlbumImageView");
+//    NSLog(@"hittest called on AlbumImageView");
     
     if ( !self.userInteractionEnabled || self.hidden || self.alpha == 0) {
         return nil;
@@ -59,7 +38,7 @@
         }
         
         
-        NSLog(@"AlumImageView: %@, hits?: %@ ",self.class, hitView);
+//        NSLog(@"AlumImageView: %@, hits?: %@ ",self.class, hitView);
         
         return hitView;
         
@@ -72,7 +51,7 @@
 
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
     
-    NSLog(@"point inside AlbumImageView called");
+//    NSLog(@"point inside AlbumImageView called");
     
     CGRect bounds = self.bounds;
     

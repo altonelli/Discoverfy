@@ -12,7 +12,7 @@
 
 -(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
     
-    NSLog(@"hittest called on CardView");
+//    NSLog(@"hittest called on CardView");
     
     
     if ( !self.userInteractionEnabled || self.hidden || self.alpha == 0) {
@@ -38,7 +38,7 @@
         }
         
         
-        NSLog(@"CardView: %@, hits?: %@ ",self.class, hitView);
+//        NSLog(@"CardView: %@, hits?: %@ ",self.class, hitView);
         
         return hitView;
         
@@ -51,7 +51,7 @@
 
 -(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
     
-    NSLog(@"point inside CardView called");
+//    NSLog(@"point inside CardView called");
     
     if (CGRectContainsPoint(self.bounds, point)) {
         

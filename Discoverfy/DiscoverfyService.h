@@ -18,7 +18,7 @@
 -(BOOL)hasNetworkConnection;
 
 
--(void)handleError:(NSError *)error withState:(NSString *)state;
+-(void)handleError:(NSError * _Nullable)error withState:(NSString *)state;
 
 
 @end
