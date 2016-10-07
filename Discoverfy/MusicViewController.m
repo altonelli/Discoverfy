@@ -242,7 +242,8 @@
 
 -(void)handleNoNetworkError:(NSNotification *)notification{
     
-    NSLog(@"pause app with notification called to spot.player: %@",spot.player);
+    
+    
     [spot.player pause];
     self.trackController.playButton.hidden = NO;
     self.trackController.pauseButton.hidden = YES;
@@ -251,6 +252,13 @@
     self.trackController.view.userInteractionEnabled = NO;
     
     self.errorController.view.frame = CGRectMake((screenWidth/2 - 120), (screenHeight/2 - 64), 240, 128);
+    
+    if([self.spinnerController.view isDescendantOfView:self.view]){
+        
+        [self.spinnerController stopSpinner];
+        [self.spinnerController.view removeFromSuperview];
+        
+    }
     
     [self.view addSubview:self.errorController.view];
     
