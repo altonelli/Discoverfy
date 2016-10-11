@@ -86,7 +86,7 @@
     [self.trackSlider setThumbImage:[UIImage new] forState:UIControlStateNormal];
     
     
-    [NSTimer scheduledTimerWithTimeInterval:.1 target:self selector:@selector(updateSlider) userInfo:NULL repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:.05 target:self selector:@selector(updateSlider) userInfo:NULL repeats:YES];
     
     self.view.layer.borderWidth = 1;
     

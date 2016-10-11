@@ -164,6 +164,9 @@
                 NSString *type = [track valueForKey:@"type"];
                 [Song storeSongWithSongID:songID ofType:type withUser:self.user inManangedObjectContext:context];
             }
+            
+//            User *user = [User findUserWithUsername:self.user.name inManagedObjectContext:context];
+//            [user countAllSongsFromUser:self.user.name inManagedObjectContext:context];
             NSLog(@"************************************ Discoverfy fetch complete");
             dispatch_group_leave(group);
         }];
