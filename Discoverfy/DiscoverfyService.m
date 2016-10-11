@@ -81,6 +81,68 @@
     
 }
 
+-(void)fetchSongsWithUser:(NSString *)user offset:(int)offset limit:(int)limit addToArray:(NSMutableArray *_Nullable)array completionHandler:(void (^)(NSMutableArray *tracks))callbackBlock{
+    NSMutableArray *tracks = [[NSMutableArray alloc]init];
+    
+    if (array != NULL) {
+        [tracks arrayByAddingObjectsFromArray:array];
+    }
+    
+    
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject];
+    
+    
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://discoverfy.herokuapp.com/api/users/%@/songs?offset=%d&limit=%d",user,offset,limit]];
+    NSLog(@"url for disc api string: %@",url);
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"*** Error on songs get: %@",error);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+            return;
+            
+        } else {
+            NSLog(@"Successful data get: %@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            NSArray *jsonTracks = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"*** jsontracks froom disc service: %lu",(unsigned long)jsonTracks.count);
+            
+            //            NSLog(@"Tracks data: %@", tracks);
+            
+            [tracks addObjectsFromArray:jsonTracks];
+            
+            NSLog(@"*** tracks froom disc service: %lu",(unsigned long)tracks.count);
+            
+            if (jsonTracks.count < limit) {
+                
+                callbackBlock(tracks);
+
+            } else {
+                
+                [self fetchSongsWithUser:user offset:(offset + limit) limit:limit addToArray:array completionHandler:callbackBlock];
+                
+            }
+            
+            
+            
+        }
+    }];
+    
+    [dataTask resume];
+    
+}
+
+
+-(void)fetchAllSongsWithUser:(NSString *)user completionHandler:(void (^)(NSMutableArray *tracks))callbackBlock{
+    
+    
+    
+}
+
+
 -(void)postSongWithSongID:(NSString *)songID type:(NSString *)type user:(NSString *)user{
     
     NSString *post = [NSString stringWithFormat:@"songID=%@&type=%@&user=%@",songID,type,user];

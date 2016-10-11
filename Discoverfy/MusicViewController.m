@@ -146,7 +146,19 @@
         dispatch_group_t group = dispatch_group_create();
         
         dispatch_group_enter(group);
-        [[DiscoverfyService sharedService]fetchSongsWithUser:self.user.name completionHandler:^(NSArray *tracks) {
+//        [[DiscoverfyService sharedService]fetchSongsWithUser:self.user.name completionHandler:^(NSArray *tracks) {
+//            for (NSDictionary *track in tracks) {
+//                NSString *songID = [track valueForKey:@"songID"];
+//                NSString *type = [track valueForKey:@"type"];
+//                [Song storeSongWithSongID:songID ofType:type withUser:self.user inManangedObjectContext:context];
+//            }
+//            NSLog(@"************************************ Discoverfy fetch complete");
+//            dispatch_group_leave(group);
+//        }];
+        [[DiscoverfyService sharedService]fetchSongsWithUser:self.user.name offset:0 limit:100 addToArray:NULL completionHandler:^(NSMutableArray *tracks) {
+            
+            NSLog(@"total songs downladed: %lu",(unsigned long)tracks.count);
+            
             for (NSDictionary *track in tracks) {
                 NSString *songID = [track valueForKey:@"songID"];
                 NSString *type = [track valueForKey:@"type"];
@@ -155,6 +167,7 @@
             NSLog(@"************************************ Discoverfy fetch complete");
             dispatch_group_leave(group);
         }];
+
         
         dispatch_group_enter(group);
         [spot fetchPlaylistSongsWithAccessToken:accessToken session:session offset:0 user:self.user queue:spot_data_queue callback:^{
