@@ -42,7 +42,6 @@
         auth = [SPTAuth defaultInstance];
         
         appDelegate = [[UIApplication sharedApplication]delegate];
-        context = [appDelegate managedObjectContext];
         
         _artistList = [[NSMutableArray alloc]init];
         _uriList = [[NSMutableArray alloc]init];
@@ -52,6 +51,12 @@
         _player = [[AVQueuePlayer alloc]init];
         
         _spot_service_queue = dispatch_queue_create("com.discoverfy.addToPlayerQueue", DISPATCH_QUEUE_SERIAL);
+        _spot_core_data_queue = dispatch_queue_create("com.discoverfy.addToCoreDataQueue", DISPATCH_QUEUE_SERIAL);
+        
+        
+        dispatch_sync(self.spot_core_data_queue, ^{
+            context = [appDelegate managedObjectContext];
+        });
 
         self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
 
@@ -332,8 +337,12 @@
             
             
             if (trackID){
-                
-                Song *song = [Song storeSongWithSongID:trackID ofType:@"Spotify" withUser:user inManangedObjectContext:context];
+//                NSLog(@"about to add a spotify song to cored data, %@", context);
+                dispatch_async(self.spot_core_data_queue, ^{
+//                    NSLog(@"core data thread from adding to spotify song to core data: %@, %@",[NSThread currentThread],context);
+                    Song *song = [Song storeSongWithSongID:trackID ofType:@"Spotify" withUser:user inManangedObjectContext:context];
+                    
+                });
                 
             }
             

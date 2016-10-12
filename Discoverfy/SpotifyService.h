@@ -18,6 +18,7 @@
 @property (nonatomic,strong) NSMutableArray *partialTrackList;
 
 @property (atomic, strong) dispatch_queue_t spot_service_queue;
+@property (atomic, strong) dispatch_queue_t spot_core_data_queue;
 
 @property (nonatomic,strong) SPTPlaylistSnapshot *discoverfyPlaylist;
 

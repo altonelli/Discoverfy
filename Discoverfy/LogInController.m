@@ -89,15 +89,15 @@
 
 -(void)openLoginPage{
     
-    self.authViewController = [SPTAuthViewController authenticationViewController];
-    self.authViewController.delegate = self;
-    self.authViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    self.authViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-    
-    self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
-    self.definesPresentationContext = YES;
-    
-    [self presentViewController:self.authViewController animated:NO completion:nil];
+//    self.authViewController = [SPTAuthViewController authenticationViewController];
+//    self.authViewController.delegate = self;
+//    self.authViewController.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    self.authViewController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+//    
+//    self.modalPresentationStyle = UIModalPresentationOverCurrentContext;
+//    self.definesPresentationContext = YES;
+//    
+//    [self presentViewController:self.authViewController animated:NO completion:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{

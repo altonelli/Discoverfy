@@ -85,7 +85,7 @@
     NSMutableArray *tracks = [[NSMutableArray alloc]init];
     
     if (array != NULL) {
-        [tracks arrayByAddingObjectsFromArray:array];
+        [tracks addObjectsFromArray:array];
     }
     
     
@@ -110,7 +110,7 @@
             NSArray *jsonTracks = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
             NSLog(@"*** jsontracks froom disc service: %lu",(unsigned long)jsonTracks.count);
             
-            //            NSLog(@"Tracks data: %@", tracks);
+//                        NSLog(@"Tracks data: %@", tracks);
             
             [tracks addObjectsFromArray:jsonTracks];
             
@@ -122,7 +122,7 @@
 
             } else {
                 
-                [self fetchSongsWithUser:user offset:(offset + limit) limit:limit addToArray:array completionHandler:callbackBlock];
+                [self fetchSongsWithUser:user offset:(offset + limit) limit:limit addToArray:tracks completionHandler:callbackBlock];
                 
             }
             

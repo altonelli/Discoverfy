@@ -121,16 +121,25 @@
     
     
     // Set up context
+    spot = [SpotifyService sharedService];
+
     spot_data_queue = dispatch_queue_create("com.discoverfy.songsQueue", DISPATCH_QUEUE_CONCURRENT);
     
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    context = [appDelegate managedObjectContext];
+    
+    
+    dispatch_async(spot.spot_core_data_queue, ^{
+    
+        context = [appDelegate managedObjectContext];
+        
+    });
+    
+    
     
     session = [SPTAuth defaultInstance].session;
     accessToken = session.accessToken;
     
-    spot = [SpotifyService sharedService];
 //    self.errorController = [[ErrorViewController alloc]init];
     
     
@@ -155,15 +164,20 @@
 //            NSLog(@"************************************ Discoverfy fetch complete");
 //            dispatch_group_leave(group);
 //        }];
+        NSLog(@"**********HERE**************");
         [[DiscoverfyService sharedService]fetchSongsWithUser:self.user.name offset:0 limit:100 addToArray:NULL completionHandler:^(NSMutableArray *tracks) {
             
             NSLog(@"total songs downladed: %lu",(unsigned long)tracks.count);
             
-            for (NSDictionary *track in tracks) {
-                NSString *songID = [track valueForKey:@"songID"];
-                NSString *type = [track valueForKey:@"type"];
-                [Song storeSongWithSongID:songID ofType:type withUser:self.user inManangedObjectContext:context];
-            }
+            dispatch_async(spot.spot_core_data_queue, ^{
+                for (NSDictionary *track in tracks) {
+                    NSString *songID = [track valueForKey:@"songID"];
+                    NSString *type = [track valueForKey:@"type"];
+                    [Song storeSongWithSongID:songID ofType:type withUser:self.user inManangedObjectContext:context];
+                }
+                
+            });
+            
             
 //            User *user = [User findUserWithUsername:self.user.name inManagedObjectContext:context];
 //            [user countAllSongsFromUser:self.user.name inManagedObjectContext:context];
@@ -360,6 +374,7 @@
                 [self songAcceptedWithTrack:track.spotifyTrack];
         }
         
+        
         self.trackController.overlayImage.hidden = YES;
         
         card.center = CGPointMake(viewWidth / 2, viewHeight * .45 + 48);
@@ -419,7 +434,7 @@
 
 -(void)songAcceptedWithTrack:(SPTPartialTrack *)track{
     dispatch_async(spot_data_queue, ^{
-
+        
         NSMutableArray *trackArray = [[NSMutableArray alloc]init ];
         [trackArray addObject:track];
         NSArray *immutable = [NSArray arrayWithObject:(SPTPartialTrack *)track];
@@ -439,26 +454,29 @@
             }
 //            NSLog(@"response from post %@",response);
         }];
-        
-        [Song storeSongWithSongID:track.identifier ofType:@"Liked" withUser:self.user inManangedObjectContext:context];
+        dispatch_async(spot.spot_core_data_queue, ^{
+            
+            [Song storeSongWithSongID:track.identifier ofType:@"Liked" withUser:self.user inManangedObjectContext:context];
+            
+        });
         
         [[DiscoverfyService sharedService] postSongWithSongID:track.identifier type:@"Liked" user:self.user.name];
         
     });
+    
     
     [self advanceSong];
     
 }
 
 -(void)songRejectedWithTrack:(SPTPartialTrack *)track{
-    dispatch_async(spot_data_queue, ^{
+    dispatch_async(spot.spot_core_data_queue, ^{
         
         [Song storeSongWithSongID:track.identifier ofType:@"Disliked" withUser:self.user inManangedObjectContext:context];
         
         [[DiscoverfyService sharedService] postSongWithSongID:track.identifier type:@"Disliked" user:self.user.name];
         
     });
-    
     
     [self advanceSong];
     
