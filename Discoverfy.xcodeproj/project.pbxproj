@@ -46,6 +46,8 @@
 		9EBAE1991DA5C41C000DC995 /* PopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAE1981DA5C41C000DC995 /* PopOverView.m */; };
 		9EC49FCD1D9CE1B700376990 /* DiscoverfyError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC49FCC1D9CE1B700376990 /* DiscoverfyError.m */; };
 		9EC49FD01DA224C400376990 /* ImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC49FCF1DA224C400376990 /* ImageButton.m */; };
+		9EEFB3EC1DAF346D00E8C4FF /* AutoHeightFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EEFB3EB1DAF346D00E8C4FF /* AutoHeightFont.m */; };
+		9EEFB3EF1DAF40B500E8C4FF /* UIFont+AutoHeightFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EEFB3EE1DAF40B500E8C4FF /* UIFont+AutoHeightFont.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -114,6 +116,10 @@
 		9EC49FCC1D9CE1B700376990 /* DiscoverfyError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverfyError.m; sourceTree = "<group>"; };
 		9EC49FCE1DA224C400376990 /* ImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageButton.h; sourceTree = "<group>"; };
 		9EC49FCF1DA224C400376990 /* ImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageButton.m; sourceTree = "<group>"; };
+		9EEFB3EA1DAF346D00E8C4FF /* AutoHeightFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoHeightFont.h; sourceTree = "<group>"; };
+		9EEFB3EB1DAF346D00E8C4FF /* AutoHeightFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoHeightFont.m; sourceTree = "<group>"; };
+		9EEFB3ED1DAF40B500E8C4FF /* UIFont+AutoHeightFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+AutoHeightFont.h"; sourceTree = "<group>"; };
+		9EEFB3EE1DAF40B500E8C4FF /* UIFont+AutoHeightFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+AutoHeightFont.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +173,10 @@
 				9EBAE1951DA4BE25000DC995 /* ErrorView.m */,
 				9EBAE1971DA5C41C000DC995 /* PopOverView.h */,
 				9EBAE1981DA5C41C000DC995 /* PopOverView.m */,
+				9EEFB3EA1DAF346D00E8C4FF /* AutoHeightFont.h */,
+				9EEFB3EB1DAF346D00E8C4FF /* AutoHeightFont.m */,
+				9EEFB3ED1DAF40B500E8C4FF /* UIFont+AutoHeightFont.h */,
+				9EEFB3EE1DAF40B500E8C4FF /* UIFont+AutoHeightFont.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -363,12 +373,14 @@
 				9E0C42D01D9CBC3000FD6DC2 /* SpinnerViewController.m in Sources */,
 				9EC49FCD1D9CE1B700376990 /* DiscoverfyError.m in Sources */,
 				9E135D741D47E18200B52C47 /* main.m in Sources */,
+				9EEFB3EC1DAF346D00E8C4FF /* AutoHeightFont.m in Sources */,
 				9E1248201D553E6800F5B477 /* TrackViewController.m in Sources */,
 				9E0C429F1D94800400FD6DC2 /* AlbumImageView.m in Sources */,
 				9E12483D1D5BC04600F5B477 /* CoreDataService.m in Sources */,
 				9E12481E1D553E6800F5B477 /* SpotifyService.m in Sources */,
 				9E1248101D553E2F00F5B477 /* AppDelegate.m in Sources */,
 				9E12481F1D553E6800F5B477 /* Track.m in Sources */,
+				9EEFB3EF1DAF40B500E8C4FF /* UIFont+AutoHeightFont.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

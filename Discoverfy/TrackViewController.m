@@ -10,6 +10,8 @@
 #import "SpotifyService.h"
 //#import "AlbumImageView.h"
 #import "ImageButton.h"
+#import "UIFont+AutoHeightFont.h"
+#import "AutoHeightFont.h"
 
 
 @interface TrackViewController (){
@@ -54,9 +56,12 @@
     CGFloat cardWidth = cardRect.size.width;
     CGFloat cardHeight = cardRect.size.height;
     
-    NSDictionary *imageElements = NSDictionaryOfVariableBindings(_trackImage);
+    CGFloat titleHeight = cardHeight - cardWidth - 80;
+    CGFloat titleSpace = titleHeight * .05;
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(==0)-[_trackImage(<=%f)]-(>=0)-|",(cardWidth)]
+    NSDictionary *imageElements = NSDictionaryOfVariableBindings(_trackImage,_trackTitle,_trackArtist,_trackAlbum);
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(==0)-[_trackImage(<=%f)]-(>=%f)-[_trackTitle(==%f)]-(>=%f)-[_trackArtist(==%f)]-(>=%f)-[_trackAlbum(==%f)]-(>=80)-|",(cardWidth),titleSpace,(titleHeight * .35),titleSpace,(titleHeight * .30),titleSpace,(titleHeight * .30)]
                                                                       options:NSLayoutFormatDirectionLeadingToTrailing
                                                                       metrics:nil
                                                                         views:imageElements]];
@@ -64,6 +69,15 @@
                                                                       options:NSLayoutFormatDirectionLeadingToTrailing
                                                                       metrics:nil
                                                                         views:imageElements]];
+    
+    UIFont *titleAutoFont = [UIFont autoHeightFontWithName:self.trackTitle.font.fontName forUILabelSize:self.trackTitle.frame.size withMinSize:0];
+    self.trackTitle.font = titleAutoFont;
+    
+    UIFont *artistAutoFont = [UIFont autoHeightFontWithName:self.trackArtist.font.fontName forUILabelSize:self.trackArtist.frame.size withMinSize:0];
+    self.trackArtist.font = artistAutoFont;
+    
+    UIFont *albumAutoFont = [UIFont autoHeightFontWithName:self.trackAlbum.font.fontName forUILabelSize:self.trackAlbum.frame.size withMinSize:0];
+    self.trackAlbum.font = albumAutoFont;
 
     
     NSDictionary *overlayImageElements = NSDictionaryOfVariableBindings(_overlayImage);
