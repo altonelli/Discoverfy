@@ -102,6 +102,7 @@
 #pragma mark - Core Data stack
 
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize privateContext = _privateContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
@@ -159,11 +160,27 @@
     if (!coordinator) {
         return nil;
     }
-//    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
-    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+//    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
 
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     return _managedObjectContext;
+}
+
+- (NSManagedObjectContext *)privateContext {
+    // Returns the private managed object context for the application with parent context of managedObjectContext (which is already bound to the persistent store coordinator for the application.)
+    if (_privateContext != nil) {
+        return _privateContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (!coordinator) {
+        return nil;
+    }
+    _privateContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    
+    [_privateContext setParentContext:[self managedObjectContext]];
+    return _privateContext;
 }
 
 #pragma mark - Core Data Saving support

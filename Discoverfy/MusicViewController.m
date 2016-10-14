@@ -27,6 +27,7 @@
     NSString *accessToken;
     SPTSession *session;
     NSManagedObjectContext *context;
+    NSManagedObjectContext *privateContext;
     dispatch_queue_t spot_data_queue;
     CGRect screenRect;
     CGFloat screenWidth;
@@ -128,10 +129,11 @@
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     
+    context = [appDelegate managedObjectContext];
     
     dispatch_async(spot.spot_core_data_queue, ^{
     
-        context = [appDelegate managedObjectContext];
+        privateContext = [appDelegate privateContext];
         
     });
     
@@ -170,11 +172,15 @@
             NSLog(@"total songs downladed: %lu",(unsigned long)tracks.count);
             
             dispatch_async(spot.spot_core_data_queue, ^{
-                for (NSDictionary *track in tracks) {
-                    NSString *songID = [track valueForKey:@"songID"];
-                    NSString *type = [track valueForKey:@"type"];
-                    [Song storeSongWithSongID:songID ofType:type withUser:self.user inManangedObjectContext:context];
-                }
+                [privateContext performBlock:^{
+                    
+                    for (NSDictionary *track in tracks) {
+                        NSString *songID = [track valueForKey:@"songID"];
+                        NSString *type = [track valueForKey:@"type"];
+                        [Song storeSongWithSongID:songID ofType:type withUser:self.user inManangedObjectContext:privateContext];
+                    }
+                
+                }];
                 
             });
             
@@ -456,7 +462,12 @@
         }];
         dispatch_async(spot.spot_core_data_queue, ^{
             
-            [Song storeSongWithSongID:track.identifier ofType:@"Liked" withUser:self.user inManangedObjectContext:context];
+            [privateContext performBlock:^{
+                
+                [Song storeSongWithSongID:track.identifier ofType:@"Liked" withUser:self.user inManangedObjectContext:privateContext];
+
+            }];
+            
             
         });
         
@@ -472,7 +483,12 @@
 -(void)songRejectedWithTrack:(SPTPartialTrack *)track{
     dispatch_async(spot.spot_core_data_queue, ^{
         
-        [Song storeSongWithSongID:track.identifier ofType:@"Disliked" withUser:self.user inManangedObjectContext:context];
+        [privateContext performBlock:^{
+            
+            [Song storeSongWithSongID:track.identifier ofType:@"Disliked" withUser:self.user inManangedObjectContext:privateContext];
+            
+        }];
+        
         
         [[DiscoverfyService sharedService] postSongWithSongID:track.identifier type:@"Disliked" user:self.user.name];
         

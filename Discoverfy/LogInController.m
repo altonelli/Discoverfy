@@ -12,6 +12,7 @@
 #import "User.h"
 #import "User+CoreDataProperties.h"
 #import <Spotify/Spotify.h>
+#import "SpotifyService.h"
 #import "DiscoverfyService.h"
 
 @interface LogInController () <SPTAuthViewDelegate>
@@ -29,13 +30,25 @@
     NSString *username = [[[SPTAuth defaultInstance]session]canonicalUsername];
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
-
-    mainView.user = [User findUserWithUsername:username inManagedObjectContext:context];
-    for (NSManagedObject *song in mainView.user.songs){
-        [context deleteObject:song];
-    }
-    [context save:nil];
-    NSLog(@"Successfully deleted songs from user. Count now: %u",mainView.user.songs.count);
+    
+    dispatch_sync([[SpotifyService sharedService]spot_core_data_queue], ^{
+        
+        NSManagedObjectContext *privateContext = [appDelegate privateContext];
+        [privateContext performBlock:^{
+            
+            mainView.user = [User findUserWithUsername:username inManagedObjectContext:privateContext];
+            for (NSManagedObject *song in mainView.user.songs){
+                [context deleteObject:song];
+            }
+            [context save:nil];
+            NSLog(@"Successfully deleted songs from user. Count now: %u",mainView.user.songs.count);
+            
+        }];
+        
+    });
+    
+    
+    
 
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
