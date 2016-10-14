@@ -86,9 +86,14 @@
         
         [[SPTAuthViewController authenticationViewController]clearCookies:nil];
         
-        [[SPTAuth defaultInstance]setSession:nil];
+        SPTAuth *auth = [SPTAuth defaultInstance];
+        
+        [auth setSession:nil];
         
         [spot emptyArrays];
+        
+        [[NSUserDefaults standardUserDefaults] removeObjectForKey:[auth sessionUserDefaultsKey]];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
         LogInController *logInCtrl = [segue destinationViewController];
         

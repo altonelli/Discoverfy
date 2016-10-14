@@ -38,9 +38,9 @@
             
             mainView.user = [User findUserWithUsername:username inManagedObjectContext:privateContext];
             for (NSManagedObject *song in mainView.user.songs){
-                [context deleteObject:song];
+                [privateContext deleteObject:song];
             }
-            [context save:nil];
+            [privateContext save:nil];
             NSLog(@"Successfully deleted songs from user. Count now: %u",mainView.user.songs.count);
             
         }];
@@ -65,7 +65,6 @@
     
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(sessionUpdateNotification:) name:@"sessionUpdated" object:nil];
     self.firstLoad = YES;
-    
 }
 
 -(void)sessionUpdateNotification:(NSNotification *)notification {
@@ -114,7 +113,22 @@
 }
 
 -(void)viewWillAppear:(BOOL)animated{
+
     SPTAuth *auth = [SPTAuth defaultInstance];
+    SPTSession *oldSession;
+    
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:[auth sessionUserDefaultsKey]] != nil) {
+        NSData *defaultsData = [[NSUserDefaults standardUserDefaults]objectForKey:[auth sessionUserDefaultsKey]];
+        oldSession = [NSKeyedUnarchiver unarchiveObjectWithData:defaultsData];
+        [auth setSession:oldSession];
+    }
+    
+//    if (oldSession != nil && [oldSession isValid] && self.firstLoad){
+//        auth.session = oldSession;
+//        [self showPlayer];
+//        return;
+//    }
+    
     
     if(auth.session == nil){
         return;

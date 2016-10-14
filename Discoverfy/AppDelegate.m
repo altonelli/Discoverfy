@@ -29,6 +29,7 @@
     [auth setClientID:@kClientId];
     [auth setRedirectURL:[NSURL URLWithString:@kCallbackURL]];
     [auth setRequestedScopes:@[SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPrivateScope,SPTAuthPlaylistModifyPublicScope, @"user-top-read"]];
+    [auth setSessionUserDefaultsKey:@"userDefaultsKey"];
     
 //    NSURL *loginURL = [auth loginURL];
 //    
@@ -51,10 +52,10 @@
         
         auth.session = session;
         
-        
-        
-        
-        
+        NSData *sessionData = [NSKeyedArchiver archivedDataWithRootObject:session];
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setObject:sessionData forKey:[auth sessionUserDefaultsKey]];
+        [defaults synchronize];
         
         
         [[NSNotificationCenter defaultCenter]postNotificationName:@"sessionUpdated" object:self];
