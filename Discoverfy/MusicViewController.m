@@ -402,6 +402,7 @@
 }
 
 -(void)advanceSong{
+    NSLog(@"Thread of advance song: %@", [NSThread currentThread]);
     
     [spot.player advanceToNextItem];
     [self.trackController updateUIWithTrack:spot.partialTrackList[1]];
