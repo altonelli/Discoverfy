@@ -153,7 +153,6 @@
     self.spinnerController = [[SpinnerViewController alloc]init];
     [self.view addSubview:self.spinnerController.view];
     self.spinnerController.view.frame = CGRectMake(screenWidth/2 - 120, screenHeight/2 - 64, 240, 128);
-    [self.spinnerController startSpinner];
     
     
     
@@ -255,7 +254,6 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            [self.spinnerController stopSpinner];
             [self.spinnerController.view removeFromSuperview];
             
             
@@ -301,7 +299,6 @@
         
         if([self.spinnerController.view isDescendantOfView:self.view]){
             
-            [self.spinnerController stopSpinner];
             [self.spinnerController.view removeFromSuperview];
             
         }

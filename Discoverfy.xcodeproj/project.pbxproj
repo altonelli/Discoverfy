@@ -41,6 +41,9 @@
 		9E203A8B1D72AB9100D0490C /* ErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E203A8A1D72AB9100D0490C /* ErrorViewController.m */; };
 		9E2283D21D6B7AA7004C4AD7 /* addSongImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E2283D11D6B7AA7004C4AD7 /* addSongImage.jpg */; };
 		9E2283D41D6B7C3E004C4AD7 /* removeSongImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */; };
+		9E3EAAF01DB524C200F4B264 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9E3EAAEF1DB524C200F4B264 /* loading.gif */; };
+		9E3EAAF61DB5275E00F4B264 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3EAAF51DB5275E00F4B264 /* UIImage+animatedGIF.m */; };
+		9E3EAAF81DB527E000F4B264 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E3EAAF71DB527E000F4B264 /* ImageIO.framework */; };
 		9E4100451DA4AFBA00B9FAB9 /* HorseShitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4100441DA4AFBA00B9FAB9 /* HorseShitView.m */; };
 		9EBAE1961DA4BE25000DC995 /* ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAE1951DA4BE25000DC995 /* ErrorView.m */; };
 		9EBAE1991DA5C41C000DC995 /* PopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAE1981DA5C41C000DC995 /* PopOverView.m */; };
@@ -105,6 +108,10 @@
 		9E203A8A1D72AB9100D0490C /* ErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorViewController.m; sourceTree = "<group>"; };
 		9E2283D11D6B7AA7004C4AD7 /* addSongImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addSongImage.jpg; sourceTree = "<group>"; };
 		9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = removeSongImage.jpg; sourceTree = "<group>"; };
+		9E3EAAEF1DB524C200F4B264 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
+		9E3EAAF41DB5275E00F4B264 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
+		9E3EAAF51DB5275E00F4B264 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
+		9E3EAAF71DB527E000F4B264 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		9E4100431DA4AFBA00B9FAB9 /* HorseShitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorseShitView.h; sourceTree = "<group>"; };
 		9E4100441DA4AFBA00B9FAB9 /* HorseShitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorseShitView.m; sourceTree = "<group>"; };
 		9EBAE1941DA4BE25000DC995 /* ErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorView.h; sourceTree = "<group>"; };
@@ -127,6 +134,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E3EAAF81DB527E000F4B264 /* ImageIO.framework in Frameworks */,
 				9E12485B1D5D1F4500F5B477 /* CoreData.framework in Frameworks */,
 				9E12482B1D5540A400F5B477 /* SystemConfiguration.framework in Frameworks */,
 				9E1248261D553F6D00F5B477 /* AVFoundation.framework in Frameworks */,
@@ -177,6 +185,8 @@
 				9EEFB3EB1DAF346D00E8C4FF /* AutoHeightFont.m */,
 				9EEFB3ED1DAF40B500E8C4FF /* UIFont+AutoHeightFont.h */,
 				9EEFB3EE1DAF40B500E8C4FF /* UIFont+AutoHeightFont.m */,
+				9E3EAAF41DB5275E00F4B264 /* UIImage+animatedGIF.h */,
+				9E3EAAF51DB5275E00F4B264 /* UIImage+animatedGIF.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -216,6 +226,7 @@
 		9E1248291D553FF000F5B477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9E3EAAF71DB527E000F4B264 /* ImageIO.framework */,
 				9E12485A1D5D1F4500F5B477 /* CoreData.framework */,
 				9E12482A1D5540A400F5B477 /* SystemConfiguration.framework */,
 				9E1248251D553F6D00F5B477 /* AVFoundation.framework */,
@@ -263,6 +274,7 @@
 		9E135D721D47E18200B52C47 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9E3EAAEF1DB524C200F4B264 /* loading.gif */,
 				9E203A771D6D00C600D0490C /* playButtonImage.png */,
 				9E203A781D6D00C600D0490C /* skipButtonImage.png */,
 				9E203A791D6D00C600D0490C /* repeatButtonImage.png */,
@@ -343,6 +355,7 @@
 				9E203A7B1D6D00C600D0490C /* playButtonImage.png in Resources */,
 				9E135D7D1D47E18200B52C47 /* Main.storyboard in Resources */,
 				9E2283D41D6B7C3E004C4AD7 /* removeSongImage.jpg in Resources */,
+				9E3EAAF01DB524C200F4B264 /* loading.gif in Resources */,
 				9E2283D21D6B7AA7004C4AD7 /* addSongImage.jpg in Resources */,
 				9E203A801D6E653800D0490C /* demoAlbumArt.png in Resources */,
 			);
@@ -377,6 +390,7 @@
 				9E1248201D553E6800F5B477 /* TrackViewController.m in Sources */,
 				9E0C429F1D94800400FD6DC2 /* AlbumImageView.m in Sources */,
 				9E12483D1D5BC04600F5B477 /* CoreDataService.m in Sources */,
+				9E3EAAF61DB5275E00F4B264 /* UIImage+animatedGIF.m in Sources */,
 				9E12481E1D553E6800F5B477 /* SpotifyService.m in Sources */,
 				9E1248101D553E2F00F5B477 /* AppDelegate.m in Sources */,
 				9E12481F1D553E6800F5B477 /* Track.m in Sources */,

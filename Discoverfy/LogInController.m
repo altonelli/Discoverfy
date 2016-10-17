@@ -121,6 +121,8 @@
         NSData *defaultsData = [[NSUserDefaults standardUserDefaults]objectForKey:[auth sessionUserDefaultsKey]];
         oldSession = [NSKeyedUnarchiver unarchiveObjectWithData:defaultsData];
         [auth setSession:oldSession];
+        NSLog(@"auth token refresh: %@", [auth tokenRefreshURL]);
+        NSLog(@"auth token swap: %@", [auth tokenSwapURL]);
     }
     
 //    if (oldSession != nil && [oldSession isValid] && self.firstLoad){
@@ -138,6 +140,7 @@
         [self showPlayer];
         return;
     }
+    
     
     if(auth.hasTokenRefreshService){
         [self renewTokenAndShowPlayer];
@@ -163,6 +166,7 @@
 - (IBAction)logInButtonPressed:(id)sender {
     [self openLoginPage];
     NSURL *loginURL = [[SPTAuth defaultInstance] loginURL];
+//    NSURL *newLogInURL = [NSURL log];
     
     [[UIApplication sharedApplication] performSelector:@selector(openURL:) withObject:loginURL afterDelay:0.5];
     

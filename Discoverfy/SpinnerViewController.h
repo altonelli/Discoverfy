@@ -11,8 +11,5 @@
 @interface SpinnerViewController : UIViewController
 
 
--(void)startSpinner;
--(void)stopSpinner;
-
 
 @end

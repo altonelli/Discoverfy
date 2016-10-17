@@ -8,12 +8,13 @@
 
 #import "SpinnerViewController.h"
 #import "PopOverView.h"
+#import "UIImage+animatedGIF.h"
 
 @interface SpinnerViewController ()
 
 @property (nonatomic,weak) IBOutlet UILabel *topText;
 @property (nonatomic,weak) IBOutlet UILabel *bottomText;
-@property (nonatomic,weak) IBOutlet UIActivityIndicatorView *spinner;
+@property (nonatomic,weak) IBOutlet UIImageView *gif;
 
 
 @end
@@ -34,19 +35,6 @@
     
 }
 
--(void)startSpinner{
-    
-//    self.view.hidden = NO;
-    [self.spinner startAnimating];
-    
-}
-
--(void)stopSpinner{
-    
-//    self.view.hidden = YES;
-    [self.spinner stopAnimating];
-    
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -80,17 +68,23 @@
     bottom.frame = CGRectMake(20.0, 88.0, 200.0, 35.0);
     bottom.textAlignment = NSTextAlignmentCenter;
     self.bottomText = bottom;
+
     
-    UIActivityIndicatorView *spinner = [[UIActivityIndicatorView alloc]initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    spinner.frame = CGRectMake((240/2.0 - 37/2.0), (128/2.0 - 37/2.0), 37.0, 37.0);
-    spinner.alpha = 1.0;
-    self.spinner = spinner;
+    NSURL *imgPath = [[NSBundle mainBundle]URLForResource:@"loading" withExtension:@"gif"];
+    NSString *pathString = [imgPath absoluteString];
+    NSData *imgData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:pathString]];
+    NSLog(@"imgData: %@", imgData);
+    UIImage *img = [UIImage animatedImageWithAnimatedGIFData:imgData];
+    UIImageView *gif = [[UIImageView alloc]initWithImage:img];
+    gif.frame = CGRectMake((240/2.0 - 60/2.0), (128/2.0 - 60/2.0), 60.0, 60.0);
+    self.gif = gif;
+
     
     [self.view addSubview:self.topText];
     [self.view addSubview:self.bottomText];
-    [self.view addSubview:self.spinner];
-    
+    [self.view addSubview:self.gif];
 }
+
 
 -(void)updateViewConstraints{
     
@@ -101,10 +95,10 @@
                                                             attribute:NSLayoutAttributeCenterY
                                                            multiplier:1.0
                                                              constant:0];
-    NSLayoutConstraint *ySpinner = [NSLayoutConstraint constraintWithItem:self.view
+    NSLayoutConstraint *yGif = [NSLayoutConstraint constraintWithItem:self.view
                                                                 attribute:NSLayoutAttributeCenterY
                                                                 relatedBy:NSLayoutRelationEqual
-                                                                   toItem:self.spinner
+                                                                   toItem:self.gif
                                                                 attribute:NSLayoutAttributeCenterY
                                                                multiplier:1.0
                                                                  constant:0];
@@ -117,13 +111,13 @@
                                                                 constant:0];
     
     
-    NSArray *constraints = [[NSArray alloc]initWithObjects:yTop,ySpinner,yBottom, nil];
+    NSArray *constraints = [[NSArray alloc]initWithObjects:yTop,yGif,yBottom, nil];
     
     [self.view addConstraints:constraints];
     
-    NSDictionary *elementsDict = NSDictionaryOfVariableBindings(_topText,_spinner,_bottomText);
+    NSDictionary *elementsDict = NSDictionaryOfVariableBindings(_topText,_gif,_bottomText);
     
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(==5)-[_topText(==35)]-(==5)-[_spinner(==37)]-(==5)-[_bottomText(==35)]-(==7)-|"]
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(==5)-[_topText(==35)]-(==-4)-[_gif(==60)]-(==-4)-[_bottomText(==35)]-(==7)-|"]
                                                                       options:NSLayoutFormatDirectionLeadingToTrailing
                                                                       metrics:nil
                                                                         views:elementsDict]];
