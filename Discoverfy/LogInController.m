@@ -118,19 +118,13 @@
     SPTSession *oldSession;
     
     if ([[NSUserDefaults standardUserDefaults]objectForKey:[auth sessionUserDefaultsKey]] != nil) {
+        
         NSData *defaultsData = [[NSUserDefaults standardUserDefaults]objectForKey:[auth sessionUserDefaultsKey]];
         oldSession = [NSKeyedUnarchiver unarchiveObjectWithData:defaultsData];
         [auth setSession:oldSession];
-        NSLog(@"auth token refresh: %@", [auth tokenRefreshURL]);
-        NSLog(@"auth token swap: %@", [auth tokenSwapURL]);
+
     }
-    
-//    if (oldSession != nil && [oldSession isValid] && self.firstLoad){
-//        auth.session = oldSession;
-//        [self showPlayer];
-//        return;
-//    }
-    
+
     
     if(auth.session == nil){
         return;
@@ -163,12 +157,16 @@
     }];
 }
 
+
 - (IBAction)logInButtonPressed:(id)sender {
     [self openLoginPage];
-    NSURL *loginURL = [[SPTAuth defaultInstance] loginURL];
-//    NSURL *newLogInURL = [NSURL log];
+    SPTAuth *auth = [SPTAuth defaultInstance];
+//    NSURL *loginURL = [auth loginURL];
+//    NSLog(@"login URL: %@",loginURL);
+    NSURL *newLogInURL = [SPTAuth loginURLForClientId:auth.clientID withRedirectURL:auth.redirectURL scopes:auth.requestedScopes responseType:@"code"];
     
-    [[UIApplication sharedApplication] performSelector:@selector(openURL:) withObject:loginURL afterDelay:0.5];
+//    [[UIApplication sharedApplication] performSelector:@selector(openURL:) withObject:loginURL afterDelay:0.5];
+    [[UIApplication sharedApplication] performSelector:@selector(openURL:) withObject:newLogInURL afterDelay:0.5];
     
     
 }

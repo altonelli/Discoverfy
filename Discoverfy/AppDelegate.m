@@ -40,6 +40,8 @@
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
     SPTAuth *auth = [SPTAuth defaultInstance];
+    [auth setTokenSwapURL:[NSURL URLWithString:@"https://discoverfy.herokuapp.com/swap"]];
+    [auth setTokenRefreshURL:[NSURL URLWithString:@"https://discoverfy.herokuapp.com/refresh"]];
     
     SPTAuthCallback authCallback = ^(NSError *error, SPTSession *session){
         
@@ -61,10 +63,13 @@
         [[NSNotificationCenter defaultCenter]postNotificationName:@"sessionUpdated" object:self];
         
     };
-    
-    NSLog(@"auth url trying to open: %@", url);
+
+
     
     if([auth canHandleURL:url]) {
+        
+        NSLog(@"can handle url");
+        
         [auth handleAuthCallbackWithTriggeredAuthURL:url callback:authCallback];
         
         return YES;
