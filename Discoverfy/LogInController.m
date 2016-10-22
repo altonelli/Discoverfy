@@ -117,14 +117,28 @@
     SPTAuth *auth = [SPTAuth defaultInstance];
     SPTSession *oldSession;
     
-    if ([[NSUserDefaults standardUserDefaults]objectForKey:[auth sessionUserDefaultsKey]] != nil) {
+    if ([[NSUserDefaults standardUserDefaults]objectForKey:auth.sessionUserDefaultsKey] != nil) {
         
-        NSData *defaultsData = [[NSUserDefaults standardUserDefaults]objectForKey:[auth sessionUserDefaultsKey]];
+        NSData *defaultsData = [[NSUserDefaults standardUserDefaults]objectForKey:auth.sessionUserDefaultsKey];
         oldSession = [NSKeyedUnarchiver unarchiveObjectWithData:defaultsData];
         [auth setSession:oldSession];
+        
+        NSLog(@"here is your tokenRefreshService from defaults: %@",auth.tokenRefreshURL);
+        
 
     }
+    
+//    temp for testing
+    
+//    if(auth.hasTokenRefreshService){
+//        NSLog(@"attempting to get new token");
+//        NSLog(@"session before: %@", auth.session.accessToken);
+//        NSLog(@"encrypted token before: %@", auth.session.encryptedRefreshToken);
+//        [self renewTokenAndShowPlayer];
+//        return;
+//    }
 
+//    end temp code
     
     if(auth.session == nil){
         return;
@@ -147,6 +161,20 @@
     
     [auth renewSession:auth.session callback:^(NSError *error, SPTSession *session) {
         auth.session = session;
+        
+        NSLog(@"got new token");
+        NSLog(@"session after: %@", auth.session.accessToken);
+        NSLog(@"encrypted token after: %@", auth.session.encryptedRefreshToken);
+        
+        NSData *sessionData = [NSKeyedArchiver archivedDataWithRootObject:auth.session];
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        
+        if ([defaults objectForKey:auth.sessionUserDefaultsKey] != nil) {
+            [defaults removeObjectForKey:auth.sessionUserDefaultsKey];
+        }
+        
+        [defaults setObject:sessionData forKey:auth.sessionUserDefaultsKey];
+        [defaults synchronize];
         
         if(error){
             NSLog(@"*** Error renewing session: %@",error);

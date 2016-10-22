@@ -25,6 +25,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     
     SPTAuth *auth = [SPTAuth defaultInstance];
+    [auth setTokenSwapURL:[NSURL URLWithString:@"https://discoverfy.herokuapp.com/swap"]];
+    [auth setTokenRefreshURL:[NSURL URLWithString:@"https://discoverfy.herokuapp.com/refresh"]];
     
     [auth setClientID:@kClientId];
     [auth setRedirectURL:[NSURL URLWithString:@kCallbackURL]];
@@ -40,8 +42,6 @@
 
 -(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation{
     SPTAuth *auth = [SPTAuth defaultInstance];
-    [auth setTokenSwapURL:[NSURL URLWithString:@"https://discoverfy.herokuapp.com/swap"]];
-    [auth setTokenRefreshURL:[NSURL URLWithString:@"https://discoverfy.herokuapp.com/refresh"]];
     
     SPTAuthCallback authCallback = ^(NSError *error, SPTSession *session){
         
@@ -54,9 +54,14 @@
         
         auth.session = session;
         
-        NSData *sessionData = [NSKeyedArchiver archivedDataWithRootObject:session];
+        NSData *sessionData = [NSKeyedArchiver archivedDataWithRootObject:auth.session];
         NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
-        [defaults setObject:sessionData forKey:[auth sessionUserDefaultsKey]];
+        
+        if ([defaults objectForKey:auth.sessionUserDefaultsKey] != nil) {
+            [defaults removeObjectForKey:auth.sessionUserDefaultsKey];
+        }
+        
+        [defaults setObject:sessionData forKey:auth.sessionUserDefaultsKey];
         [defaults synchronize];
         
         
