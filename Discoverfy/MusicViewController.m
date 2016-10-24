@@ -210,14 +210,21 @@
             
             NSLog(@"******************************** fetching Artists");
             
-            [spot getArtistsListWithAccessToken:accessToken queue:spot_data_queue callback:^{
-                
-                [spot queueSongsWithAccessToken:accessToken user:self.user queue:spot_data_queue callback:^{
-                    
-                    NSLog(@"************************************** Song Queueing Complete");
-                    
-                }];
+            
+            [spot queueInitialSongsUsingTracksWithAccessToken:accessToken user:self.user callback:^{
+                NSLog(@"********************* Song Queueing via track complete");
             }];
+            
+            
+            
+//            [spot getArtistsListWithAccessToken:accessToken queue:spot_data_queue callback:^{
+//                
+//                [spot queueSongsWithAccessToken:accessToken user:self.user queue:spot_data_queue callback:^{
+//                    
+//                    NSLog(@"************************************** Song Queueing Complete");
+//                    
+//                }];
+//            }];
             
         });
         
@@ -414,9 +421,13 @@
             
             dispatch_async(spot_data_queue, ^{
                 
-                [spot queueSongsWithAccessToken:accessToken user:self.user queue:spot_data_queue callback:^{
+                [spot queueBatchSongsUsingTracksWithAccessToken:accessToken user:self.user callback:^{
                     self.queuing = NO;
                 }];
+                
+//                [spot queueSongsWithAccessToken:accessToken user:self.user queue:spot_data_queue callback:^{
+//                    self.queuing = NO;
+//                }];
             });
             
         } else {

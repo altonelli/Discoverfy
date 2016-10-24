@@ -44,6 +44,8 @@
         
         appDelegate = [[UIApplication sharedApplication]delegate];
         
+        _topTrackList = [[NSArray alloc]init];
+        
         _artistList = [[NSMutableArray alloc]init];
         _uriList = [[NSMutableArray alloc]init];
         _partialTrackList = [[NSMutableArray alloc]init];
@@ -111,6 +113,7 @@
 }
 
 -(void)queueSongsWithAccessToken:(NSString *)accessToken user:(User*)user queue:(dispatch_queue_t)queue callback:(nullable void (^)(void))callbackBlock{
+
 
         [self getArtistsListWithAccessToken:accessToken queue:queue callback:^{
                 
@@ -364,6 +367,145 @@
         
     }];
 }
+
+-(void)queueInitialSongsUsingTracksWithAccessToken:(NSString *)accessToken user:(User*)user callback:(void(^)(void))callbackBlock{
+    
+    [self fetchTopTracksWithAccessToken:accessToken callback:^(NSArray *trackIDs) {
+        
+        [self queueBatchSongsUsingTracksWithAccessToken:accessToken user:user callback:^{
+            
+            if (callbackBlock != nil) {
+                return callbackBlock();
+            }
+            
+        }];
+        
+    }];
+    
+}
+
+-(void)queueBatchSongsUsingTracksWithAccessToken:(NSString *)accessToken user:(User*)user callback:(void(^)(void))callbackBlock{
+    
+    [self fetchRecommendedSongsFromTracks:self.topTrackList accessToken:accessToken callback:^(NSArray *resultTracks) {
+        
+        [self convertTracksWithTracks:resultTracks user:user];
+        
+        if (callbackBlock != nil) {
+            return callbackBlock();
+        }
+        
+    }];
+    
+}
+
+
+-(NSArray *)getFiveRandomFromArray:(NSArray*)array{
+    
+    NSMutableArray *mutableArray = [[NSMutableArray alloc]init];
+    
+    int arrayCount = self.topTrackList.count;
+    
+    for (int i = 0; i < 5; i++){
+        int num = arc4random_uniform(arrayCount);
+        [mutableArray addObject:array[num]];
+    }
+    
+    
+    NSArray *smallArray = [NSArray arrayWithArray:mutableArray];
+    
+    return smallArray;
+}
+
+-(void)fetchTopTracksWithAccessToken:(NSString *)accessToken callback:(void (^)(NSArray *trackIDs))callbackBlock {
+    
+    NSURL *url = [NSURL URLWithString:@"https://api.spotify.com/v1/me/top/tracks?limit=20&time_range=short_term"];
+    
+    NSError *error;
+    NSURLRequest *artistsReq = [SPTRequest createRequestForURL:url withAccessToken:accessToken httpMethod:@"GET" values:nil valueBodyIsJSON:YES sendDataAsQueryString:YES error:&error];
+    
+    [[SPTRequest sharedHandler]performRequest:artistsReq callback:^(NSError *error, NSURLResponse *response, NSData *data) {
+
+            if(error != nil){
+                NSLog(@"*** Error on top track get %@",error);
+                [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+                return;
+            }
+            
+            NSError *err;
+            NSDictionary *trackDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+            
+            NSArray *items = [trackDictionary valueForKey:@"items"];
+        
+            NSMutableArray *tempIDArray = [[NSMutableArray alloc]init];
+        
+        if (!self.topTrackList){
+            self.topTrackList = [[NSArray alloc]init];
+        }
+        
+            for(NSObject *track in items){
+                NSString *id = [track valueForKey:@"id"];
+                [tempIDArray addObject:id];
+            }
+        
+        self.topTrackList = [NSArray arrayWithArray:tempIDArray];
+        NSLog(@"topTrackList count: %lu", (unsigned long)[self.topTrackList count]);
+            
+            callbackBlock(self.topTrackList);
+        
+        return;
+        
+    }];
+    
+}
+
+
+-(void)fetchRecommendedSongsFromTracks:(NSArray *)tracks accessToken:(NSString *)accessToken callback:(void(^)(NSArray *resultTracks))callbackBlock{
+
+    
+    NSMutableString *urlString = [NSMutableString stringWithFormat:@"https://api.spotify.com/v1/recommendations?seed_tracks="];
+    
+    NSArray *fiveRandom = [self getFiveRandomFromArray:tracks];
+    
+    for (NSString *artistID in fiveRandom){
+        [urlString appendString:[NSString stringWithFormat:@"%@,",artistID]];
+    }
+    
+    [urlString deleteCharactersInRange:NSMakeRange([urlString length]-1, 1)];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSError *error;
+    NSURLRequest *songReq = [SPTRequest createRequestForURL:url withAccessToken:accessToken httpMethod:@"GET" values:nil valueBodyIsJSON:YES sendDataAsQueryString:YES error:&error];
+    
+    [[SPTRequest sharedHandler]performRequest:songReq callback:^(NSError *error, NSURLResponse *response, NSData *data) {
+            
+            if(error != nil){
+                NSLog(@"*** Error on song get %@",error);
+                [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+                
+                return;
+            }
+            
+            NSError *err;
+            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+            
+            
+            
+            if(err != nil){
+                NSLog(@"error of results dictionary %@",err);
+                [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+                return;
+            }
+            
+            NSArray *recommendedTracks = [jsonDict objectForKey:@"tracks"];
+            
+            callbackBlock(recommendedTracks);
+        
+        return;
+    }];
+    
+}
+
 
 -(void)emptyArrays{
     

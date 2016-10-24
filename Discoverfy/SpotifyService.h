@@ -14,6 +14,8 @@
 @interface SpotifyService : NSObject <AVAudioPlayerDelegate>
 
 @property (nonatomic,strong) NSMutableArray *artistList;
+@property (nonatomic,strong) NSArray *topTrackList;
+
 @property (nonatomic,strong) NSMutableArray *uriList;
 @property (nonatomic,strong) NSMutableArray *partialTrackList;
 
@@ -40,5 +42,22 @@
 -(NSMutableArray *)getRandomArtists;
 
 -(void)emptyArrays;
+
+
+/*
+This is for the initial batch get and includes getting top songs and storing them in the service.
+ 
+*/
+-(void)queueInitialSongsUsingTracksWithAccessToken:(NSString *)accessToken user:(User*)user callback:(void(^)(void))callbackBlock;
+
+/*
+ This is for each batch get and includes getting top songs
+ 
+ */
+-(void)queueBatchSongsUsingTracksWithAccessToken:(NSString *)accessToken user:(User*)user callback:(void(^)(void))callbackBlock;
+
+
+
+
 
 @end
