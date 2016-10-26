@@ -15,7 +15,7 @@
 
 @property (nonatomic,strong) DiscoverfyError *discError;
 @property (nonatomic,strong) User *user;
-@property (nonatomic,strong) MusicViewController *parentController;
+@property (nonatomic,weak) MusicViewController *parentController;
 
 -(id)initWithDiscoverfyError:(DiscoverfyError *)discError;
 

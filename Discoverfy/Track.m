@@ -31,7 +31,9 @@
         
         dispatch_async(spot.spot_service_queue, ^{
             
-            self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
+//            self.playerItem = [AVPlayerItem playerItemWithAsset:asset];
+            self.playerItem = [DiscoverfyItem playerItemWithAsset:asset];
+
             
             if([spot.player canInsertItem:self.playerItem afterItem:nil]){
 //                NSLog(@"queued song: %@ on thread: %@", self.spotifyTrack.name, [NSThread currentThread]);
@@ -64,6 +66,10 @@
         
         
     }];
+}
+
+-(void)dealloc{
+    NSLog(@"DEALLOC %@",self.spotifyTrack.name);
 }
 
 @end

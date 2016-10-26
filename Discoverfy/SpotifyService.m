@@ -14,6 +14,7 @@
 #import "CoreDataService.h"
 #import "Reachability.h"
 #import "DiscoverfyService.h"
+#import "DiscoverfyItem.h"
 
 @interface SpotifyService (){
     SPTPlaylistList *playlist;
@@ -76,7 +77,9 @@
 }
 
 -(void)trackDidFinish:(NSNotification *)notification{
-    AVPlayerItem *item = [notification object];
+//    AVPlayerItem *item = [notification object];
+    
+    DiscoverfyItem *item = [notification object];
     [item seekToTime:kCMTimeZero];
 }
 

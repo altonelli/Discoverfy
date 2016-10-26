@@ -41,6 +41,7 @@
 		9E203A8B1D72AB9100D0490C /* ErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E203A8A1D72AB9100D0490C /* ErrorViewController.m */; };
 		9E2283D21D6B7AA7004C4AD7 /* addSongImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E2283D11D6B7AA7004C4AD7 /* addSongImage.jpg */; };
 		9E2283D41D6B7C3E004C4AD7 /* removeSongImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */; };
+		9E25ABE81DC06BD500828B2B /* DiscoverfyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E25ABE71DC06BD500828B2B /* DiscoverfyItem.m */; };
 		9E3EAAF01DB524C200F4B264 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9E3EAAEF1DB524C200F4B264 /* loading.gif */; };
 		9E3EAAF61DB5275E00F4B264 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3EAAF51DB5275E00F4B264 /* UIImage+animatedGIF.m */; };
 		9E3EAAF81DB527E000F4B264 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E3EAAF71DB527E000F4B264 /* ImageIO.framework */; };
@@ -108,6 +109,8 @@
 		9E203A8A1D72AB9100D0490C /* ErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorViewController.m; sourceTree = "<group>"; };
 		9E2283D11D6B7AA7004C4AD7 /* addSongImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addSongImage.jpg; sourceTree = "<group>"; };
 		9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = removeSongImage.jpg; sourceTree = "<group>"; };
+		9E25ABE61DC06BD500828B2B /* DiscoverfyItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverfyItem.h; sourceTree = "<group>"; };
+		9E25ABE71DC06BD500828B2B /* DiscoverfyItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverfyItem.m; sourceTree = "<group>"; };
 		9E3EAAEF1DB524C200F4B264 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		9E3EAAF41DB5275E00F4B264 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
 		9E3EAAF51DB5275E00F4B264 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
@@ -160,6 +163,8 @@
 				9E1248191D553E6800F5B477 /* Track.m */,
 				9EC49FCB1D9CE1B700376990 /* DiscoverfyError.h */,
 				9EC49FCC1D9CE1B700376990 /* DiscoverfyError.m */,
+				9E25ABE61DC06BD500828B2B /* DiscoverfyItem.h */,
+				9E25ABE71DC06BD500828B2B /* DiscoverfyItem.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -388,6 +393,7 @@
 				9E135D741D47E18200B52C47 /* main.m in Sources */,
 				9EEFB3EC1DAF346D00E8C4FF /* AutoHeightFont.m in Sources */,
 				9E1248201D553E6800F5B477 /* TrackViewController.m in Sources */,
+				9E25ABE81DC06BD500828B2B /* DiscoverfyItem.m in Sources */,
 				9E0C429F1D94800400FD6DC2 /* AlbumImageView.m in Sources */,
 				9E12483D1D5BC04600F5B477 /* CoreDataService.m in Sources */,
 				9E3EAAF61DB5275E00F4B264 /* UIImage+animatedGIF.m in Sources */,

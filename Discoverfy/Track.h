@@ -10,11 +10,14 @@
 #import <Spotify/Spotify.h>
 #import <AVFoundation/AVFoundation.h>
 #import "SpotifyService.h"
+#import "DiscoverfyItem.h"
 
 @interface Track : NSObject
 
 @property (nonatomic, strong) SPTPartialTrack *spotifyTrack;
-@property (nonatomic, strong) AVPlayerItem *playerItem;
+//@property (nonatomic, strong) AVPlayerItem *playerItem;
+@property (nonatomic, strong) DiscoverfyItem *playerItem;
+
 
 -(id)initWithSpotifyTrack:(SPTPartialTrack *)track;
 -(void)addToService:(SpotifyService *)spot withQueue:(dispatch_queue_t)queue;

@@ -18,6 +18,8 @@
 
 +(User *)findUserWithUsername:(NSString *)username inManagedObjectContext:(NSManagedObjectContext *)context{
 //    NSLog(@"in function");
+    
+    NSLog(@"username being used: %@",username);
     User *user = nil;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
@@ -29,14 +31,16 @@
     if(!matches || error || matches.count > 1){
         NSLog(@"*** Error on user fetch: %@",error);
     } else if (matches.count) {
+        NSLog(@"matched users: %lu",(unsigned long)matches.count);
         user = [matches firstObject];
     } else {
+        NSLog(@"crap creating a new user");
         NSEntityDescription *entityDesc = [NSEntityDescription entityForName:@"User" inManagedObjectContext:context];
         user = [[User alloc] initWithEntity:entityDesc insertIntoManagedObjectContext:context];
         user.name = username;
     }
     
-    NSLog(@"Here is your user: %@", user);
+    NSLog(@"Here is your user: %@, with %u songs", user, user.songs.count);
     
     return user;
 }

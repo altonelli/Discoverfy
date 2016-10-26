@@ -92,6 +92,8 @@
         
         [spot emptyArrays];
         
+        [self.user removeAllSongsFromUser:self.user.name inManagedObjectContext:context];
+        
         [[NSUserDefaults standardUserDefaults] removeObjectForKey:[auth sessionUserDefaultsKey]];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -212,6 +214,12 @@
             
             
             [spot queueInitialSongsUsingTracksWithAccessToken:accessToken user:self.user callback:^{
+                
+                [privateContext performBlock:^{
+                    NSLog(@"time to count user songs");
+                    [self.user countAllSongsFromUser:self.user.name inManagedObjectContext:privateContext];
+                }];
+                
                 NSLog(@"********************* Song Queueing via track complete");
             }];
             
