@@ -512,11 +512,18 @@
 
 -(void)emptyArrays{
     
-    [self.player removeAllItems];
-    [self.artistList removeAllObjects];
-    [self.uriList removeAllObjects];
-    [self.partialTrackList removeAllObjects];
-    self.discoverfyPlaylist = nil;
+    for (DiscoverfyItem*item in self.player.items){
+        [item.asset cancelLoading];
+        [self.player removeItem:item];
+    }
+    
+        [self.player removeAllItems];
+    
+        [self.artistList removeAllObjects];
+        [self.uriList removeAllObjects];
+        [self.partialTrackList removeAllObjects];
+        self.discoverfyPlaylist = nil;
+
     
 }
 

@@ -16,7 +16,7 @@
 
 @property (nonatomic, strong) SPTPartialTrack *spotifyTrack;
 //@property (nonatomic, strong) AVPlayerItem *playerItem;
-@property (nonatomic, strong) DiscoverfyItem *playerItem;
+@property (atomic, weak) DiscoverfyItem *playerItem;
 
 
 -(id)initWithSpotifyTrack:(SPTPartialTrack *)track;

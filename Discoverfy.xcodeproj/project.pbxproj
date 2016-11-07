@@ -10,6 +10,7 @@
 		9E0C429F1D94800400FD6DC2 /* AlbumImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C429E1D94800400FD6DC2 /* AlbumImageView.m */; };
 		9E0C42CB1D95E5C500FD6DC2 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C42CA1D95E5C500FD6DC2 /* CardView.m */; };
 		9E0C42D01D9CBC3000FD6DC2 /* SpinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C42CF1D9CBC3000FD6DC2 /* SpinnerViewController.m */; };
+		9E1151CC1DD04D5500B7A7EB /* newLoading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9E1151CB1DD04D5500B7A7EB /* newLoading.gif */; };
 		9E1248101D553E2F00F5B477 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12480F1D553E2F00F5B477 /* AppDelegate.m */; };
 		9E12481C1D553E6800F5B477 /* LogInController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1248131D553E6800F5B477 /* LogInController.m */; };
 		9E12481D1D553E6800F5B477 /* MusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1248151D553E6800F5B477 /* MusicViewController.m */; };
@@ -61,6 +62,7 @@
 		9E0C42CA1D95E5C500FD6DC2 /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
 		9E0C42CE1D9CBC3000FD6DC2 /* SpinnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinnerViewController.h; sourceTree = "<group>"; };
 		9E0C42CF1D9CBC3000FD6DC2 /* SpinnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinnerViewController.m; sourceTree = "<group>"; };
+		9E1151CB1DD04D5500B7A7EB /* newLoading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = newLoading.gif; sourceTree = "<group>"; };
 		9E12480E1D553E2F00F5B477 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9E12480F1D553E2F00F5B477 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9E1248111D553E6800F5B477 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
@@ -279,6 +281,7 @@
 		9E135D721D47E18200B52C47 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9E1151CB1DD04D5500B7A7EB /* newLoading.gif */,
 				9E3EAAEF1DB524C200F4B264 /* loading.gif */,
 				9E203A771D6D00C600D0490C /* playButtonImage.png */,
 				9E203A781D6D00C600D0490C /* skipButtonImage.png */,
@@ -355,6 +358,7 @@
 				9E135D851D47E18200B52C47 /* LaunchScreen.storyboard in Resources */,
 				9E203A821D6E661100D0490C /* demoAlbumArt2.png in Resources */,
 				9E203A7E1D6D00C600D0490C /* pauseButtonImage.png in Resources */,
+				9E1151CC1DD04D5500B7A7EB /* newLoading.gif in Resources */,
 				9E203A7D1D6D00C600D0490C /* repeatButtonImage.png in Resources */,
 				9E135D821D47E18200B52C47 /* Assets.xcassets in Resources */,
 				9E203A7B1D6D00C600D0490C /* playButtonImage.png in Resources */,

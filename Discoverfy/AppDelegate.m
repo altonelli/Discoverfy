@@ -111,7 +111,10 @@
     
     [spot emptyArrays];
     
+    
     [self saveContext];
+    
+    NSLog(@"GOOD BYE");
 }
 
 #pragma mark - Core Data stack

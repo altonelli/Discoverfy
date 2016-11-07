@@ -70,7 +70,7 @@
     self.bottomText = bottom;
 
     
-    NSURL *imgPath = [[NSBundle mainBundle]URLForResource:@"loading" withExtension:@"gif"];
+    NSURL *imgPath = [[NSBundle mainBundle]URLForResource:@"newLoading" withExtension:@"gif"];
     NSString *pathString = [imgPath absoluteString];
     NSData *imgData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:pathString]];
     NSLog(@"imgData: %@", imgData);
