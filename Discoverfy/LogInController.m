@@ -14,10 +14,12 @@
 #import <Spotify/Spotify.h>
 #import "SpotifyService.h"
 #import "DiscoverfyService.h"
+#import "UIImage+animatedGIF.h"
 
 @interface LogInController () <SPTAuthViewDelegate>
 
 @property (atomic, readwrite) SPTAuthViewController *authViewController;
+@property (nonatomic, strong) UIImageView *logoView;
 //@property (atomic, readwrite) BOOL firstLoad;
 
 @end
@@ -81,7 +83,22 @@
     [self.view.layer insertSublayer:gradient atIndex:0];
     
     
+    // Add Logo to center of Screen
     
+    CGFloat screenWidth = self.view.bounds.size.width;
+    CGFloat screenHeight = self.view.bounds.size.height;
+    
+    CGFloat logoX = screenWidth / 2 - 100;
+    CGFloat logoY = screenHeight / 2 - 100;
+    
+    CGRect logoFrame = CGRectMake(logoX, logoY, 200, 200);
+
+    
+    UIImage *logo = [UIImage imageNamed:@"FinalLogo.png"];
+    self.logoView = [[UIImageView alloc]initWithFrame:logoFrame];
+    self.logoView.image = logo;
+    
+    [self.view addSubview:self.logoView];
     
 }
 
@@ -136,6 +153,14 @@
     SPTSession *oldSession;
     
     if ([[NSUserDefaults standardUserDefaults]objectForKey:auth.sessionUserDefaultsKey] != nil) {
+
+        // add gif view to show working
+        
+        NSURL *gifPath = [[NSBundle mainBundle]URLForResource:@"newLoading" withExtension:@"gif"];
+        NSData *gifData = [[NSData alloc] initWithContentsOfURL:gifPath];
+        
+        self.logoView.image = [UIImage animatedImageWithAnimatedGIFData:gifData];
+        
         
         NSData *defaultsData = [[NSUserDefaults standardUserDefaults]objectForKey:auth.sessionUserDefaultsKey];
         oldSession = [NSKeyedUnarchiver unarchiveObjectWithData:defaultsData];
@@ -146,17 +171,6 @@
 
     }
     
-//    temp for testing
-    
-//    if(auth.hasTokenRefreshService){
-//        NSLog(@"attempting to get new token");
-//        NSLog(@"session before: %@", auth.session.accessToken);
-//        NSLog(@"encrypted token before: %@", auth.session.encryptedRefreshToken);
-//        [self renewTokenAndShowPlayer];
-//        return;
-//    }
-
-//    end temp code
     
     if(auth.session == nil){
         return;

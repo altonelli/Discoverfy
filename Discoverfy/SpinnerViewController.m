@@ -73,7 +73,7 @@
     NSURL *imgPath = [[NSBundle mainBundle]URLForResource:@"newLoading" withExtension:@"gif"];
     NSString *pathString = [imgPath absoluteString];
     NSData *imgData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:pathString]];
-    NSLog(@"imgData: %@", imgData);
+//    NSLog(@"imgData: %@", imgData);
     UIImage *img = [UIImage animatedImageWithAnimatedGIFData:imgData];
     UIImageView *gif = [[UIImageView alloc]initWithImage:img];
     gif.frame = CGRectMake((240/2.0 - 60/2.0), (128/2.0 - 60/2.0), 60.0, 60.0);

@@ -13,6 +13,7 @@
 		9E1151CC1DD04D5500B7A7EB /* newLoading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9E1151CB1DD04D5500B7A7EB /* newLoading.gif */; };
 		9E1151F51DD166E100B7A7EB /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1151F41DD166E100B7A7EB /* LaunchViewController.m */; };
 		9E1151F71DD167F900B7A7EB /* FinalLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E1151F61DD167F900B7A7EB /* FinalLogo.png */; };
+		9E1151F91DD174CC00B7A7EB /* DiscoverfyBackgroundGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E1151F81DD174CC00B7A7EB /* DiscoverfyBackgroundGradient.png */; };
 		9E1248101D553E2F00F5B477 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12480F1D553E2F00F5B477 /* AppDelegate.m */; };
 		9E12481C1D553E6800F5B477 /* LogInController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1248131D553E6800F5B477 /* LogInController.m */; };
 		9E12481D1D553E6800F5B477 /* MusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1248151D553E6800F5B477 /* MusicViewController.m */; };
@@ -67,6 +68,7 @@
 		9E1151F31DD166E100B7A7EB /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
 		9E1151F41DD166E100B7A7EB /* LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
 		9E1151F61DD167F900B7A7EB /* FinalLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FinalLogo.png; sourceTree = "<group>"; };
+		9E1151F81DD174CC00B7A7EB /* DiscoverfyBackgroundGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiscoverfyBackgroundGradient.png; sourceTree = "<group>"; };
 		9E12480E1D553E2F00F5B477 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9E12480F1D553E2F00F5B477 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9E1248111D553E6800F5B477 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
@@ -294,6 +296,7 @@
 				9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */,
 				9E2283D11D6B7AA7004C4AD7 /* addSongImage.jpg */,
 				9E203A7F1D6E653800D0490C /* demoAlbumArt.png */,
+				9E1151F81DD174CC00B7A7EB /* DiscoverfyBackgroundGradient.png */,
 				9E203A811D6E661100D0490C /* demoAlbumArt2.png */,
 				9E1151F61DD167F900B7A7EB /* FinalLogo.png */,
 				9E135D731D47E18200B52C47 /* main.m */,
@@ -365,6 +368,7 @@
 				9E203A7E1D6D00C600D0490C /* pauseButtonImage.png in Resources */,
 				9E1151CC1DD04D5500B7A7EB /* newLoading.gif in Resources */,
 				9E203A7D1D6D00C600D0490C /* repeatButtonImage.png in Resources */,
+				9E1151F91DD174CC00B7A7EB /* DiscoverfyBackgroundGradient.png in Resources */,
 				9E135D821D47E18200B52C47 /* Assets.xcassets in Resources */,
 				9E203A7B1D6D00C600D0490C /* playButtonImage.png in Resources */,
 				9E135D7D1D47E18200B52C47 /* Main.storyboard in Resources */,
