@@ -22,6 +22,8 @@
 @implementation AppDelegate
 
 
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     
     SPTAuth *auth = [SPTAuth defaultInstance];

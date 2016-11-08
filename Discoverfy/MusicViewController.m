@@ -260,6 +260,24 @@
     [self.mainContainer addGestureRecognizer:gesture];
     
     
+    
+    
+    
+    // Set up background gradient colors
+    
+    UIColor* skyBlue = [UIColor colorWithRed:71.0/255.0 green:181.0/255.0 blue:255.0/255.0 alpha:1.0];
+    UIColor* teal = [UIColor colorWithRed:54.0/255.0 green:236.0/255.0 blue:244.0/255.0 alpha:1.0];
+    
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = self.view.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)skyBlue.CGColor, (id)teal.CGColor, nil];
+    
+    gradient.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0], [NSNumber numberWithFloat:1.0], nil];
+    
+    
+    [self.view.layer insertSublayer:gradient atIndex:0];
+    
+    
 }
 
 -(void)batchReady:(NSNotification *)notification {

@@ -11,6 +11,8 @@
 		9E0C42CB1D95E5C500FD6DC2 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C42CA1D95E5C500FD6DC2 /* CardView.m */; };
 		9E0C42D01D9CBC3000FD6DC2 /* SpinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C42CF1D9CBC3000FD6DC2 /* SpinnerViewController.m */; };
 		9E1151CC1DD04D5500B7A7EB /* newLoading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9E1151CB1DD04D5500B7A7EB /* newLoading.gif */; };
+		9E1151F51DD166E100B7A7EB /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1151F41DD166E100B7A7EB /* LaunchViewController.m */; };
+		9E1151F71DD167F900B7A7EB /* FinalLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E1151F61DD167F900B7A7EB /* FinalLogo.png */; };
 		9E1248101D553E2F00F5B477 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12480F1D553E2F00F5B477 /* AppDelegate.m */; };
 		9E12481C1D553E6800F5B477 /* LogInController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1248131D553E6800F5B477 /* LogInController.m */; };
 		9E12481D1D553E6800F5B477 /* MusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1248151D553E6800F5B477 /* MusicViewController.m */; };
@@ -43,7 +45,6 @@
 		9E2283D21D6B7AA7004C4AD7 /* addSongImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E2283D11D6B7AA7004C4AD7 /* addSongImage.jpg */; };
 		9E2283D41D6B7C3E004C4AD7 /* removeSongImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */; };
 		9E25ABE81DC06BD500828B2B /* DiscoverfyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E25ABE71DC06BD500828B2B /* DiscoverfyItem.m */; };
-		9E3EAAF01DB524C200F4B264 /* loading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9E3EAAEF1DB524C200F4B264 /* loading.gif */; };
 		9E3EAAF61DB5275E00F4B264 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3EAAF51DB5275E00F4B264 /* UIImage+animatedGIF.m */; };
 		9E3EAAF81DB527E000F4B264 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E3EAAF71DB527E000F4B264 /* ImageIO.framework */; };
 		9E4100451DA4AFBA00B9FAB9 /* HorseShitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4100441DA4AFBA00B9FAB9 /* HorseShitView.m */; };
@@ -63,6 +64,9 @@
 		9E0C42CE1D9CBC3000FD6DC2 /* SpinnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinnerViewController.h; sourceTree = "<group>"; };
 		9E0C42CF1D9CBC3000FD6DC2 /* SpinnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinnerViewController.m; sourceTree = "<group>"; };
 		9E1151CB1DD04D5500B7A7EB /* newLoading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = newLoading.gif; sourceTree = "<group>"; };
+		9E1151F31DD166E100B7A7EB /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
+		9E1151F41DD166E100B7A7EB /* LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
+		9E1151F61DD167F900B7A7EB /* FinalLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FinalLogo.png; sourceTree = "<group>"; };
 		9E12480E1D553E2F00F5B477 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9E12480F1D553E2F00F5B477 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9E1248111D553E6800F5B477 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
@@ -113,7 +117,6 @@
 		9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = removeSongImage.jpg; sourceTree = "<group>"; };
 		9E25ABE61DC06BD500828B2B /* DiscoverfyItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverfyItem.h; sourceTree = "<group>"; };
 		9E25ABE71DC06BD500828B2B /* DiscoverfyItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverfyItem.m; sourceTree = "<group>"; };
-		9E3EAAEF1DB524C200F4B264 /* loading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = loading.gif; sourceTree = "<group>"; };
 		9E3EAAF41DB5275E00F4B264 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
 		9E3EAAF51DB5275E00F4B264 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
 		9E3EAAF71DB527E000F4B264 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -211,6 +214,8 @@
 				9E203A8A1D72AB9100D0490C /* ErrorViewController.m */,
 				9E0C42CE1D9CBC3000FD6DC2 /* SpinnerViewController.h */,
 				9E0C42CF1D9CBC3000FD6DC2 /* SpinnerViewController.m */,
+				9E1151F31DD166E100B7A7EB /* LaunchViewController.h */,
+				9E1151F41DD166E100B7A7EB /* LaunchViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -282,7 +287,6 @@
 			isa = PBXGroup;
 			children = (
 				9E1151CB1DD04D5500B7A7EB /* newLoading.gif */,
-				9E3EAAEF1DB524C200F4B264 /* loading.gif */,
 				9E203A771D6D00C600D0490C /* playButtonImage.png */,
 				9E203A781D6D00C600D0490C /* skipButtonImage.png */,
 				9E203A791D6D00C600D0490C /* repeatButtonImage.png */,
@@ -291,6 +295,7 @@
 				9E2283D11D6B7AA7004C4AD7 /* addSongImage.jpg */,
 				9E203A7F1D6E653800D0490C /* demoAlbumArt.png */,
 				9E203A811D6E661100D0490C /* demoAlbumArt2.png */,
+				9E1151F61DD167F900B7A7EB /* FinalLogo.png */,
 				9E135D731D47E18200B52C47 /* main.m */,
 			);
 			name = "Supporting Files";
@@ -364,8 +369,8 @@
 				9E203A7B1D6D00C600D0490C /* playButtonImage.png in Resources */,
 				9E135D7D1D47E18200B52C47 /* Main.storyboard in Resources */,
 				9E2283D41D6B7C3E004C4AD7 /* removeSongImage.jpg in Resources */,
-				9E3EAAF01DB524C200F4B264 /* loading.gif in Resources */,
 				9E2283D21D6B7AA7004C4AD7 /* addSongImage.jpg in Resources */,
+				9E1151F71DD167F900B7A7EB /* FinalLogo.png in Resources */,
 				9E203A801D6E653800D0490C /* demoAlbumArt.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -377,6 +382,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E1151F51DD166E100B7A7EB /* LaunchViewController.m in Sources */,
 				9E1248551D5CF1A900F5B477 /* Song.m in Sources */,
 				9E1248561D5CF1A900F5B477 /* Song+CoreDataProperties.m in Sources */,
 				9E1248591D5CF1A900F5B477 /* User.m in Sources */,
