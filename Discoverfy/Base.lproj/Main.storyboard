@@ -138,7 +138,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" red="0.21176470588235294" green="0.90617595996732037" blue="0.87038271037581694" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.090616702410130701" green="0.71710260927287583" blue="0.98105979370915031" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="FRz-jt-vQ2" firstAttribute="top" secondItem="j0I-os-L1j" secondAttribute="top" constant="20" id="Bxn-IJ-dmW"/>
                                     <constraint firstAttribute="bottom" secondItem="gRM-UJ-Rn4" secondAttribute="bottom" constant="8" id="SNZ-EN-8Kc"/>
@@ -226,7 +226,7 @@
                                     <constraint firstAttribute="height" constant="45" id="jDU-sd-P3F"/>
                                     <constraint firstAttribute="width" constant="45" id="qvj-qx-AUi"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="repeatButtonImage.png">
+                                <state key="normal" backgroundImage="discResetBottonSm.png">
                                     <color key="titleColor" red="0.04087131443" green="0.3752355624" blue="0.82564102559999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -239,16 +239,16 @@
                                     <constraint firstAttribute="height" constant="45" id="bB1-hC-Uxq"/>
                                     <constraint firstAttribute="width" constant="45" id="bz6-MQ-5Vn"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="skipButtonImage.png">
+                                <state key="normal" backgroundImage="discCancelButtonSm.png">
                                     <color key="titleColor" red="0.039215686274509803" green="0.37647058823529411" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="skipButtonPressed:" destination="GOS-dM-o4T" eventType="touchUpInside" id="xjz-JX-0cs"/>
                                 </connections>
                             </button>
-                            <slider opaque="NO" contentMode="scaleToFill" semanticContentAttribute="playback" misplaced="YES" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="c4O-Sb-mDT">
+                            <slider opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" semanticContentAttribute="playback" misplaced="YES" preservesSuperviewLayoutMargins="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="30" translatesAutoresizingMaskIntoConstraints="NO" id="c4O-Sb-mDT">
                                 <frame key="frameInset" minX="-2" minY="328" width="347" height="31"/>
-                                <color key="tintColor" red="0.04087131443" green="0.3752355624" blue="0.82564102559999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="tintColor" red="0.2784313725" green="0.70980392160000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
                                 </accessibility>
@@ -262,7 +262,7 @@
                                     <constraint firstAttribute="width" constant="70" id="5VA-d9-MQJ"/>
                                     <constraint firstAttribute="height" constant="70" id="Z4r-vY-T5j"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="pauseButtonImage.png">
+                                <state key="normal" backgroundImage="discPauseBottonSm.png">
                                     <color key="titleColor" red="0.04087131443" green="0.3752355624" blue="0.82564102559999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -293,7 +293,7 @@
                                     <constraint firstAttribute="width" constant="70" id="S77-cj-aXa"/>
                                     <constraint firstAttribute="height" constant="70" id="sTc-AB-uVT"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="playButtonImage.png">
+                                <state key="normal" backgroundImage="discPlayButtonSm.png">
                                     <color key="titleColor" red="0.04087131443" green="0.3752355624" blue="0.82564102559999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -639,6 +639,10 @@
     <resources>
         <image name="addSongImage.jpg" width="800" height="800"/>
         <image name="demoAlbumArt2.png" width="999" height="999"/>
+        <image name="discCancelButtonSm.png" width="200" height="200"/>
+        <image name="discPauseBottonSm.png" width="200" height="200"/>
+        <image name="discPlayButtonSm.png" width="200" height="200"/>
+        <image name="discResetBottonSm.png" width="200" height="200"/>
         <image name="pauseButtonImage.png" width="640" height="640"/>
         <image name="playButtonImage.png" width="640" height="640"/>
         <image name="repeatButtonImage.png" width="640" height="640"/>

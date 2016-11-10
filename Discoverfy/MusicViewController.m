@@ -267,12 +267,24 @@
     
     UIColor* skyBlue = [UIColor colorWithRed:71.0/255.0 green:181.0/255.0 blue:255.0/255.0 alpha:1.0];
     UIColor* teal = [UIColor colorWithRed:54.0/255.0 green:236.0/255.0 blue:244.0/255.0 alpha:1.0];
+    UIColor* purpleColor = [UIColor colorWithRed:148.0/255.0 green:44.0/255.0 blue:203/255.0 alpha:1.0];
+    UIColor* blueColor = [UIColor colorWithRed:63.0/255.0 green:98.0/255.0 blue:240.0/255.0 alpha:1.0];
+    UIColor* midBlueColor = [UIColor colorWithRed:65.0/255.0 green:184.0/255.0 blue:240.0/255.0 alpha:1.0];
+
+    UIColor* greyColor = [UIColor colorWithRed:128.0/255.0 green:128.0/255.0 blue:128.0/255.0 alpha:1.0];
+    UIColor* whiteColor = [UIColor colorWithRed:255.0/255.0 green:255.0/255.0 blue:255.0/255.0 alpha:1.0];
+    
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.view.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)skyBlue.CGColor, (id)teal.CGColor, nil];
+    gradient.colors = [NSArray arrayWithObjects:(id)blueColor.CGColor,(id)midBlueColor.CGColor, (id)teal.CGColor, nil];
     
-    gradient.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0], [NSNumber numberWithFloat:1.0], nil];
+//    CAGradientLayer *gradient = [CAGradientLayer layer];
+//    gradient.frame = self.view.bounds;
+//    gradient.colors = [NSArray arrayWithObjects:(id)whiteColor.CGColor, (id)whiteColor.CGColor, nil];
+    
+    
+    gradient.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0],[NSNumber numberWithFloat:0.7], [NSNumber numberWithFloat:1.0], nil];
     
     
     [self.view.layer insertSublayer:gradient atIndex:0];

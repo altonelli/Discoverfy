@@ -98,6 +98,8 @@
     }
     
     [self.trackSlider setThumbImage:[UIImage new] forState:UIControlStateNormal];
+    self.trackSlider.minimumTrackTintColor = [UIColor colorWithRed:0 green:0 blue:1 alpha:1];
+    self.trackSlider.maximumTrackTintColor = [UIColor colorWithRed:1 green:1 blue:1 alpha:1];
     
     
     [NSTimer scheduledTimerWithTimeInterval:.05 target:self selector:@selector(updateSlider) userInfo:NULL repeats:YES];
@@ -180,6 +182,29 @@
 //        [spot.player seekToTime:kCMTimeZero];
 //    }
     self.trackSlider.value = CMTimeGetSeconds(spot.player.currentTime);
+    
+    UIColor *purpleColor = [UIColor colorWithRed:145.0/255.0 green:46.0/255.0 blue:205.0/255.0 alpha:1.0];
+    UIColor *darkBlueColor = [UIColor colorWithRed:63.0/255.0 green:56.0/255.0 blue:220.0/255.0 alpha:1.0];
+    UIColor *lightBlueColor = [UIColor colorWithRed:65.0/255.0 green:99.0/255.0 blue:251.0/255.0 alpha:1.0];
+    
+    UIView *view = [self.trackSlider.subviews objectAtIndex:1];
+//    UIImage
+    
+    
+    CAGradientLayer *gradientLine = [CAGradientLayer layer];
+    CGRect trackFrame = self.trackSlider.frame;
+    gradientLine.frame = trackFrame;
+    
+    gradientLine.colors = [NSArray arrayWithObjects:(id)lightBlueColor.CGColor, (id)darkBlueColor.CGColor, (id)purpleColor.CGColor, nil];
+    
+    gradientLine.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0],[NSNumber numberWithFloat:0.5],[NSNumber numberWithFloat:1.0], nil];
+    
+    
+    for (UIView *subView in self.trackSlider.subviews){
+        NSLog(@"here is your track gradient layer: %@",subView.subviews);
+    }
+    
+    [self.trackSlider.layer insertSublayer:gradientLine atIndex:0];
 }
 
 - (IBAction)restartButtonPressed:(id)sender {
