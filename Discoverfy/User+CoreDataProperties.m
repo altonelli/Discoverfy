@@ -40,7 +40,7 @@
         user.name = username;
     }
     
-    NSLog(@"Here is your user: %@, with %u songs", user, user.songs.count);
+    NSLog(@"Here is your user: %@, with %u songs", user.name, user.songs.count);
     
     return user;
 }

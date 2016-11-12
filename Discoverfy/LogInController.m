@@ -16,7 +16,9 @@
 #import "DiscoverfyService.h"
 #import "UIImage+animatedGIF.h"
 
-@interface LogInController () <SPTAuthViewDelegate>
+@interface LogInController () <SPTAuthViewDelegate> {
+    User *user;
+}
 
 @property (atomic, readwrite) SPTAuthViewController *authViewController;
 @property (nonatomic, strong) UIImageView *logoView;
@@ -28,38 +30,13 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    MusicViewController *mainView = [segue destinationViewController];
-    NSString *username = [[[SPTAuth defaultInstance]session]canonicalUsername];
-    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    NSManagedObjectContext *context = [appDelegate managedObjectContext];
-    
-    dispatch_sync([[SpotifyService sharedService]spot_core_data_queue], ^{
+    if ([[segue identifier]isEqualToString:@"ShowPlayer"]){
         
-        NSManagedObjectContext *privateContext = [appDelegate privateContext];
-        [privateContext performBlock:^{
-            
-            mainView.user = [User findUserWithUsername:username inManagedObjectContext:privateContext];
-            for (NSManagedObject *song in mainView.user.songs){
-                [privateContext deleteObject:song];
-            }
-            [privateContext save:nil];
-            NSLog(@"Successfully deleted songs from user. Count now: %u",mainView.user.songs.count);
-            
-        }];
+        MusicViewController *mainView = (MusicViewController *)[segue destinationViewController];
+        mainView.user = user;
         
-    });
+    }
     
-    
-    
-
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        
-        [[DiscoverfyService sharedService]createUser:username];
-        
-    });
-    
-    NSLog(@"testUser: %@", mainView.user );
 }
 
 - (void)viewDidLoad {
@@ -116,7 +93,56 @@
 
 -(void)showPlayer {
     self.firstLoad = NO;
-    [self performSegueWithIdentifier:@"ShowPlayer" sender:nil];
+    [self prepUserForSegueWithCompletionBlock:^{
+        
+        NSLog(@"woooo back to showplayer!");
+        [self performSegueWithIdentifier:@"ShowPlayer" sender:nil];
+        
+    }];
+}
+
+-(void)prepUserForSegueWithCompletionBlock:(void(^)(void))completionBlock {
+    
+    NSString *username = [[[SPTAuth defaultInstance]session]canonicalUsername];
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    
+    dispatch_group_t group = dispatch_group_create();
+    
+    dispatch_group_enter(group);
+    dispatch_sync([[SpotifyService sharedService]spot_core_data_queue], ^{
+        
+        NSManagedObjectContext *privateContext = [appDelegate privateContext];
+        [privateContext performBlock:^{
+            
+            user = [User findUserWithUsername:username inManagedObjectContext:privateContext];
+            for (NSManagedObject *song in user.songs){
+                [privateContext deleteObject:song];
+            }
+
+            [privateContext save:nil];
+            
+            dispatch_group_leave(group);
+        }];
+        
+    });
+    
+    
+    
+    
+    dispatch_group_enter(group);
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        
+        [[DiscoverfyService sharedService]createUser:username];
+        dispatch_group_leave(group);
+
+        
+    });
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        NSLog(@"woooo leaving group!");
+        completionBlock();
+        return;
+    });
 }
 
 -(void)authenticationViewController:(SPTAuthViewController *)authenticationViewController didFailToLogin:(NSError *)error{

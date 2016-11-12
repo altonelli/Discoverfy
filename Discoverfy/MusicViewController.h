@@ -14,7 +14,7 @@
 
 @interface MusicViewController : UIViewController <AVAudioPlayerDelegate,SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate>
 
-@property (nonatomic,strong) User* user;
+@property (nonatomic,strong) User * user;
 @property (nonatomic) BOOL firstPlay;
 @property (nonatomic) BOOL queuing;
 

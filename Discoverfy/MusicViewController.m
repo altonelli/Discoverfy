@@ -173,6 +173,8 @@
 //            dispatch_group_leave(group);
 //        }];
         NSLog(@"**********HERE**************");
+        NSLog(@"here is your username: %@", self.user.name);
+        
         [[DiscoverfyService sharedService]fetchSongsWithUser:self.user.name offset:0 limit:100 addToArray:NULL completionHandler:^(NSMutableArray *tracks) {
             
             NSLog(@"total songs downladed: %lu",(unsigned long)tracks.count);

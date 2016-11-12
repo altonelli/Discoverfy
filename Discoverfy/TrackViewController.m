@@ -187,24 +187,45 @@
     UIColor *darkBlueColor = [UIColor colorWithRed:63.0/255.0 green:56.0/255.0 blue:220.0/255.0 alpha:1.0];
     UIColor *lightBlueColor = [UIColor colorWithRed:65.0/255.0 green:99.0/255.0 blue:251.0/255.0 alpha:1.0];
     
-    UIView *view = [self.trackSlider.subviews objectAtIndex:1];
-//    UIImage
+    UIColor *redColor = [UIColor colorWithRed:255.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
+    UIColor *greenColor = [UIColor colorWithRed:0.0/255.0 green:255.0/255.0 blue:0.0/255.0 alpha:1.0];
+    UIColor *blueColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:255.0/255.0 alpha:1.0];
     
     
+    
+    
+    
+    UIView *view = [self.trackSlider.subviews objectAtIndex:0];
+    
+    UIImageView *min_trackImageView = (UIImageView*)[self.trackSlider.subviews objectAtIndex:1];
+        
     CAGradientLayer *gradientLine = [CAGradientLayer layer];
-    CGRect trackFrame = self.trackSlider.frame;
+    CGRect trackFrame = min_trackImageView.frame;
+    trackFrame.size.width = self.trackSlider.frame.size.width;
+    trackFrame.origin.x = 0;
+    trackFrame.origin.y = 0;
+    
     gradientLine.frame = trackFrame;
     
-    gradientLine.colors = [NSArray arrayWithObjects:(id)lightBlueColor.CGColor, (id)darkBlueColor.CGColor, (id)purpleColor.CGColor, nil];
+    gradientLine.colors = [NSArray arrayWithObjects:
+                           (id)lightBlueColor.CGColor,
+                           (id)darkBlueColor.CGColor,
+                           (id)purpleColor.CGColor,
+                           nil];
     
-    gradientLine.locations = [NSArray arrayWithObjects:[NSNumber numberWithFloat:0.0],[NSNumber numberWithFloat:0.5],[NSNumber numberWithFloat:1.0], nil];
+    gradientLine.startPoint = CGPointMake(0.0, 0.5);
+    gradientLine.endPoint = CGPointMake(1.0, 0.5);
     
     
-    for (UIView *subView in self.trackSlider.subviews){
-        NSLog(@"here is your track gradient layer: %@",subView.subviews);
-    }
+    gradientLine.locations = [NSArray arrayWithObjects:
+                              [NSNumber numberWithFloat:0.0],
+                              [NSNumber numberWithFloat:0.5],
+                              [NSNumber numberWithFloat:1.0],
+                              nil];
     
-    [self.trackSlider.layer insertSublayer:gradientLine atIndex:0];
+    
+    
+    [min_trackImageView.layer insertSublayer:gradientLine atIndex:0];
 }
 
 - (IBAction)restartButtonPressed:(id)sender {
