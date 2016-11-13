@@ -37,14 +37,9 @@
 
 
 -(void)viewDidAppear:(BOOL)animated{
-//    UIView *subView = self.view.subviews[0];
-//    
-//    NSLog(@"card view subview subviews: %@",subView.subviews);
-//    NSLog(@"***** CARD BOUNDS: %@", NSStringFromCGRect(subView.bounds));
-//    NSLog(@"***** IMAGE1 BOUNDS: %@", NSStringFromCGRect(subView.subviews[2].frame));
-//    NSLog(@"***** IMAGE1 HIDDEN: %hhd", subView.subviews[2].hidden);
-//    NSLog(@"***** IMAGE2 BOUNDS: %@", NSStringFromCGRect(subView.subviews[3].frame));
-//    NSLog(@"***** IMAGE2 HIDDEN: %hhd", subView.subviews[3].hidden);
+    
+    [self prepareSlider];
+
 }
 
 -(void)viewDidLoad{
@@ -120,7 +115,6 @@
     
     [self.view.layer insertSublayer:gradient atIndex:0];
     
-    
 
 //    self.view.layer.borderColor = [UIColor colorWithRed:18/255.0 green:122/255.0 blue:216/255.0 alpha:1.0].CGColor;
     self.view.layer.cornerRadius = 2;
@@ -139,10 +133,13 @@
     
     self.trackImage.layer.cornerRadius = 2;
     self.trackImage.layer.masksToBounds = YES;
+    
+    
 
 }
 
 -(void)updateUIWithTrack:(Track *)track{
+    
     self.overlayImage.hidden = YES;
     
     self.trackTitle.text = track.spotifyTrack.name;
@@ -153,6 +150,7 @@
     
 
     [spot.player play];
+
 
 }
 
@@ -177,33 +175,26 @@
     self.pauseButton.hidden = YES;
 }
 
--(void)updateSlider{
-//    if (CMTimeGetSeconds(spot.player.currentTime) == 10){
-//        [spot.player seekToTime:kCMTimeZero];
-//    }
-    self.trackSlider.value = CMTimeGetSeconds(spot.player.currentTime);
-    
+-(void)prepareSlider {
     UIColor *purpleColor = [UIColor colorWithRed:145.0/255.0 green:46.0/255.0 blue:205.0/255.0 alpha:1.0];
     UIColor *darkBlueColor = [UIColor colorWithRed:63.0/255.0 green:56.0/255.0 blue:220.0/255.0 alpha:1.0];
     UIColor *lightBlueColor = [UIColor colorWithRed:65.0/255.0 green:99.0/255.0 blue:251.0/255.0 alpha:1.0];
     
-    UIColor *redColor = [UIColor colorWithRed:255.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
-    UIColor *greenColor = [UIColor colorWithRed:0.0/255.0 green:255.0/255.0 blue:0.0/255.0 alpha:1.0];
-    UIColor *blueColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:255.0/255.0 alpha:1.0];
-    
-    
-    
-    
-    
-    UIView *view = [self.trackSlider.subviews objectAtIndex:0];
-    
+    NSLog(@"cool");
     UIImageView *min_trackImageView = (UIImageView*)[self.trackSlider.subviews objectAtIndex:1];
-        
+    NSLog(@"min_trackImageView: %@",min_trackImageView);
+    
     CAGradientLayer *gradientLine = [CAGradientLayer layer];
+    
     CGRect trackFrame = min_trackImageView.frame;
     trackFrame.size.width = self.trackSlider.frame.size.width;
-    trackFrame.origin.x = 0;
+    
+    CGFloat currentSpot = (self.trackSlider.value / 30) * self.trackSlider.frame.size.width;
+    CGFloat offset = - (self.trackSlider.frame.size.width - currentSpot);
+    
+    trackFrame.origin.x = offset;
     trackFrame.origin.y = 0;
+    NSLog(@"trackFrame origin: %f", trackFrame.origin.x);
     
     gradientLine.frame = trackFrame;
     
@@ -219,13 +210,93 @@
     
     gradientLine.locations = [NSArray arrayWithObjects:
                               [NSNumber numberWithFloat:0.0],
-                              [NSNumber numberWithFloat:0.5],
-                              [NSNumber numberWithFloat:1.0],
+                              [NSNumber numberWithFloat:0.85],
+                              [NSNumber numberWithFloat:0.95],
                               nil];
     
     
-    
     [min_trackImageView.layer insertSublayer:gradientLine atIndex:0];
+    
+    
+}
+
+-(void)updateSlider{
+//    if (CMTimeGetSeconds(spot.player.currentTime) == 10){
+//        [spot.player seekToTime:kCMTimeZero];
+//    }
+    self.trackSlider.value = CMTimeGetSeconds(spot.player.currentTime);
+
+    UIView *view = [self.trackSlider.subviews objectAtIndex:0];
+    
+    UIImageView *min_trackImageView = (UIImageView*)[self.trackSlider.subviews objectAtIndex:1];
+    
+    CAGradientLayer *gradientLayer = (CAGradientLayer*)[min_trackImageView.layer.sublayers objectAtIndex:0];
+    
+    CGFloat currentSpot = (self.trackSlider.value / 30) * self.trackSlider.frame.size.width;
+    CGFloat offset = - (self.trackSlider.frame.size.width - currentSpot);
+    
+    CGRect trackFrame = gradientLayer.frame;
+    trackFrame.size.width = gradientLayer.frame.size.width;
+    trackFrame.origin.x = offset;
+    trackFrame.origin.y = 0;
+    
+    
+    gradientLayer.frame = trackFrame;
+    
+
+    
+//    UIColor *purpleColor = [UIColor colorWithRed:145.0/255.0 green:46.0/255.0 blue:205.0/255.0 alpha:1.0];
+//    UIColor *darkBlueColor = [UIColor colorWithRed:63.0/255.0 green:56.0/255.0 blue:220.0/255.0 alpha:1.0];
+//    UIColor *lightBlueColor = [UIColor colorWithRed:65.0/255.0 green:99.0/255.0 blue:251.0/255.0 alpha:1.0];
+//    
+//    UIView *view = [self.trackSlider.subviews objectAtIndex:0];
+//    
+//    UIImageView *min_trackImageView = (UIImageView*)[self.trackSlider.subviews objectAtIndex:1];
+//        
+//    CAGradientLayer *gradientLine = [CAGradientLayer layer];
+//    
+//    CGRect trackFrame = min_trackImageView.frame;
+//    trackFrame.size.width = self.trackSlider.frame.size.width;
+//
+//    CGFloat currentSpot = (self.trackSlider.value / 30) * self.trackSlider.frame.size.width;
+//    CGFloat offset = - (self.trackSlider.frame.size.width - currentSpot);
+//    
+//    trackFrame.origin.x = offset;
+//    trackFrame.origin.y = 0;
+//    NSLog(@"trackFrame origin: %f", trackFrame.origin.x);
+//    
+//    gradientLine.frame = trackFrame;
+//    
+//    gradientLine.colors = [NSArray arrayWithObjects:
+//                           (id)lightBlueColor.CGColor,
+//                           (id)darkBlueColor.CGColor,
+//                           (id)purpleColor.CGColor,
+//                           nil];
+//    
+//    gradientLine.startPoint = CGPointMake(0.0, 0.5);
+//    gradientLine.endPoint = CGPointMake(1.0, 0.5);
+//    
+//    
+//    gradientLine.locations = [NSArray arrayWithObjects:
+//                              [NSNumber numberWithFloat:0.0],
+//                              [NSNumber numberWithFloat:0.85],
+//                              [NSNumber numberWithFloat:0.95],
+//                              nil];
+//    
+//    [min_trackImageView.layer insertSublayer:gradientLine atIndex:0];
+
+    
+    
+//    if (min_trackImageView.layer.sublayers[0] != nil){
+//        
+//        [min_trackImageView.layer replaceSublayer:min_trackImageView.layer.sublayers[0] with:gradientLine];
+//        
+//    } else {
+//        
+//        [min_trackImageView.layer insertSublayer:gradientLine atIndex:0];
+//        
+//    }
+    
 }
 
 - (IBAction)restartButtonPressed:(id)sender {
