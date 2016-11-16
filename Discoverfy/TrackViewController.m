@@ -156,12 +156,16 @@
 
 - (IBAction)skipButtonPressed:(id)sender {
     
-    [self updateUIWithTrack:spot.partialTrackList[1]];
-    [spot.player advanceToNextItem];
+//    [self updateUIWithTrack:spot.partialTrackList[1]];
+//    [spot.player advanceToNextItem];
+//    
+//    [spot.partialTrackList removeObjectAtIndex:0];
     
-    [spot.partialTrackList removeObjectAtIndex:0];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"SongSkipped" object:nil];
+
 
 }
+
 
 - (IBAction)playButtonPressed:(id)sender {
     [spot.player play];
@@ -221,9 +225,7 @@
 }
 
 -(void)updateSlider{
-//    if (CMTimeGetSeconds(spot.player.currentTime) == 10){
-//        [spot.player seekToTime:kCMTimeZero];
-//    }
+
     self.trackSlider.value = CMTimeGetSeconds(spot.player.currentTime);
 
     UIView *view = [self.trackSlider.subviews objectAtIndex:0];
@@ -242,60 +244,6 @@
     
     
     gradientLayer.frame = trackFrame;
-    
-
-    
-//    UIColor *purpleColor = [UIColor colorWithRed:145.0/255.0 green:46.0/255.0 blue:205.0/255.0 alpha:1.0];
-//    UIColor *darkBlueColor = [UIColor colorWithRed:63.0/255.0 green:56.0/255.0 blue:220.0/255.0 alpha:1.0];
-//    UIColor *lightBlueColor = [UIColor colorWithRed:65.0/255.0 green:99.0/255.0 blue:251.0/255.0 alpha:1.0];
-//    
-//    UIView *view = [self.trackSlider.subviews objectAtIndex:0];
-//    
-//    UIImageView *min_trackImageView = (UIImageView*)[self.trackSlider.subviews objectAtIndex:1];
-//        
-//    CAGradientLayer *gradientLine = [CAGradientLayer layer];
-//    
-//    CGRect trackFrame = min_trackImageView.frame;
-//    trackFrame.size.width = self.trackSlider.frame.size.width;
-//
-//    CGFloat currentSpot = (self.trackSlider.value / 30) * self.trackSlider.frame.size.width;
-//    CGFloat offset = - (self.trackSlider.frame.size.width - currentSpot);
-//    
-//    trackFrame.origin.x = offset;
-//    trackFrame.origin.y = 0;
-//    NSLog(@"trackFrame origin: %f", trackFrame.origin.x);
-//    
-//    gradientLine.frame = trackFrame;
-//    
-//    gradientLine.colors = [NSArray arrayWithObjects:
-//                           (id)lightBlueColor.CGColor,
-//                           (id)darkBlueColor.CGColor,
-//                           (id)purpleColor.CGColor,
-//                           nil];
-//    
-//    gradientLine.startPoint = CGPointMake(0.0, 0.5);
-//    gradientLine.endPoint = CGPointMake(1.0, 0.5);
-//    
-//    
-//    gradientLine.locations = [NSArray arrayWithObjects:
-//                              [NSNumber numberWithFloat:0.0],
-//                              [NSNumber numberWithFloat:0.85],
-//                              [NSNumber numberWithFloat:0.95],
-//                              nil];
-//    
-//    [min_trackImageView.layer insertSublayer:gradientLine atIndex:0];
-
-    
-    
-//    if (min_trackImageView.layer.sublayers[0] != nil){
-//        
-//        [min_trackImageView.layer replaceSublayer:min_trackImageView.layer.sublayers[0] with:gradientLine];
-//        
-//    } else {
-//        
-//        [min_trackImageView.layer insertSublayer:gradientLine atIndex:0];
-//        
-//    }
     
 }
 

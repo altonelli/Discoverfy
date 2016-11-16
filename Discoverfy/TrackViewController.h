@@ -18,7 +18,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *pauseButton;
 
 
-@property (weak, nonatomic) IBOutlet AlbumImageView *overlayImage;
+@property (weak, nonatomic) IBOutlet UIImageView *overlayImage;
 @property (nonatomic) BOOL isMainCard;
 
 -(void)updateUIWithTrack:(Track *)track;

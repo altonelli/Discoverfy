@@ -124,6 +124,10 @@
                                             selector:@selector(handleErrorResolve:)
                                                 name:@"ErrorResolved"
                                               object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self
+                                            selector:@selector(handleSongSkipped:)
+                                                name:@"SongSkipped"
+                                              object:nil];
     
     
     
@@ -318,6 +322,144 @@
     }
 }
 
+-(void)handleSongSkipped:(NSNotification *)notification{
+    [self moveCardLeft];
+    
+//    [self centerCard];
+//    
+//    [self advanceSong];
+}
+
+-(void)moveCardLeft {
+
+//    UIView *cardContainer = self.trackController.view.superview;
+//    UIView *mainView = self.view;
+//    
+//    NSLog(@"cardContainer: %@ | mainView: %@", cardContainer, mainView);
+    UIView *card = self.trackController.view;
+    UIImageView *overlayImage = self.trackController.overlayImage;
+    overlayImage.hidden = NO;
+    overlayImage.alpha = 0.0;
+    overlayImage.image = [UIImage imageNamed:@"removeSongImage.jpg"];
+    
+    CGRect initialCardFrame = card.frame;
+    NSLog(@"card frame: %@", NSStringFromCGRect(initialCardFrame));
+    CGPoint initialCardCenter = card.center;
+    
+    [UIView transitionWithView:card
+                      duration:0.3
+                       options:UIViewAnimationOptionBeginFromCurrentState
+                    animations:^{
+                        CGFloat finalWidth = initialCardFrame.size.width * .9;
+                        CGFloat finalHeight = initialCardFrame.size.height * .9;
+                        
+                        
+//                        CGFloat finalX = - (self.view.frame.size.width * .15) - card.frame.size.width;
+//                        CGFloat finalX = (self.view.frame.size.width * .15);
+//
+//                        CGFloat finalY = initialCardFrame.origin.y;
+                        
+                        CGFloat finalX = -100;
+                        
+                        CGFloat finalY = initialCardCenter.y;
+                        
+                        CGRect finalRect = CGRectMake(finalX, finalY, finalWidth, finalHeight);
+                        
+                        NSLog(@"move to left: %@", NSStringFromCGRect(finalRect));
+                        
+                        
+                        
+                        CGFloat scale = log10f(- pow((3 * ((0 - self.view.center.x) / self.view.frame.size.width)),4.0) + 10);
+                        CGAffineTransform rotation = CGAffineTransformMakeRotation(-0.25);
+                        CGAffineTransform stretch = CGAffineTransformScale(rotation, scale, scale);
+                        
+                        card.transform = stretch;
+                        card.center = CGPointMake(finalX, finalY);
+                        overlayImage.alpha = 1.0;
+//                        card.frame = finalRect;
+                    }
+                    completion:^(BOOL finished) {
+                        
+                        overlayImage.alpha = 0.0;
+                        overlayImage.hidden = YES;
+
+                        CGAffineTransform rotationReset = CGAffineTransformMakeRotation(0);
+                        
+                        CGAffineTransform stretchReset = CGAffineTransformScale(rotationReset, 1, 1);
+                        
+                        card.transform = stretchReset;
+                        card.frame = initialCardFrame;
+                        
+                        [self advanceSong];
+                    }];
+    
+//    [UIView animateWithDuration:0.5
+//                          delay:0.0
+//                        options:UIViewAnimationOptionLayoutSubviews
+//                     animations:^{
+//                         CGFloat finalWidth = initialCardFrame.size.width * .8;
+//                         CGFloat finalHeight = initialCardFrame.size.height * .8;
+//                         
+//                         
+//                         CGFloat finalX = self.view.frame.size.width * .15;
+//                         CGFloat finalY = initialCardFrame.origin.y;
+//                         
+//                         CGRect finalRect = CGRectMake(finalX, finalY, finalWidth, finalHeight);
+//                         
+//                         NSLog(@"move to left: %@", NSStringFromCGRect(finalRect));
+//
+//                         
+//
+//                          CGFloat scale = log10f(- pow((3 * ((finalX - self.view.center.x) / self.view.frame.size.width)),4.0) + 10);
+//                          CGAffineTransform rotation = CGAffineTransformMakeRotation(finalX / 400);
+//                          CGAffineTransform stretch = CGAffineTransformScale(rotation, scale, scale);
+//
+//                         card.transform = stretch;
+//                         card.frame = finalRect;
+//                         
+//                         
+//                     }
+//                     completion:^(BOOL finished) {
+//                         
+//                         CGAffineTransform rotationReset = CGAffineTransformMakeRotation(0);
+//                         
+//                         CGAffineTransform stretchReset = CGAffineTransformScale(rotationReset, 1, 1);
+//                         
+//                         card.transform = stretchReset;
+//                         card.frame = initialCardFrame;
+//                         
+//                         [self advanceSong];
+//                         
+//                     }];
+}
+
+-(void)centerCard {
+    
+    [UIView animateWithDuration:0.0 animations:^{
+        
+        CGFloat finalWidth = [UIScreen mainScreen].bounds.size.width * .8;
+        CGFloat finalHeight = [UIScreen mainScreen].bounds.size.height * .8 - 48;
+        
+        //        CGFloat finalX = ([UIScreen mainScreen].bounds.size.width / 2) - (finalWidth / 2);
+        //        CGFloat finalY = ([UIScreen mainScreen].bounds.size.height * .45 + 48) - (finalHeight / 2);
+        //
+        CGFloat finalX = 0;
+        CGFloat finalY = 0;
+        
+        CGRect finalRect = CGRectMake(finalX,finalY,finalWidth,finalHeight);
+        NSLog(@"screen size: %@", NSStringFromCGSize([UIScreen mainScreen].bounds.size));
+        NSLog(@"second move origin: %@", NSStringFromCGPoint(self.view.frame.origin));
+        self.view.frame = finalRect;
+        NSLog(@"final move origin: %@", NSStringFromCGPoint(self.view.frame.origin));
+        
+    } completion:^(BOOL finished) {
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"SongSkipped" object:nil];
+        
+    }];
+    
+}
+
 -(void)pauseApp{
     
 //    NSLog(@"pause app called");
@@ -393,7 +535,7 @@
     
     int viewCenterX = viewWidth * .5;
     
-    CGFloat cardCenterX = CGRectGetWidth(self.view.bounds) / 2 +coords.x;
+    CGFloat cardCenterX = CGRectGetWidth(self.view.bounds) / 2 + coords.x;
     CGFloat cardCenterY = CGRectGetHeight(self.view.bounds) / 2 + coords.y;
     
     CGFloat scale = log10f(- pow((3 * ((cardCenterX - viewCenterX) / viewWidth)),4.0) + 10);
@@ -433,6 +575,8 @@
         self.trackController.overlayImage.hidden = YES;
         
         card.center = CGPointMake(viewWidth / 2, viewHeight * .45 + 48);
+        
+        NSLog(@"dragged move center: %@", NSStringFromCGPoint(card.center));
                 
         rotation = CGAffineTransformMakeRotation(0);
         
