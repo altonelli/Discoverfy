@@ -292,7 +292,7 @@
         } else {
 //            NSLog(@"Below limit and item was previously found; name: %@",self.discoverfyPlaylist.name);
             dispatch_async(queue, ^{
-
+                
             callbackBlock();
                 
             });
@@ -348,10 +348,10 @@
             
             
             if (trackID){
-//                NSLog(@"about to add a spotify song to cored data, %@", context);
                 dispatch_async(self.spot_core_data_queue, ^{
-//                    NSLog(@"core data thread from adding to spotify song to core data: %@, %@",[NSThread currentThread],context);
+                    
                     [privateContext performBlock:^{
+                        NSLog(@"adding playlist track to core data: %@", trackID);
                         
                         Song *song = [Song storeSongWithSongID:trackID ofType:@"Spotify" withUser:user inManangedObjectContext:privateContext];
                         
@@ -509,6 +509,74 @@
     
 }
 
+-(void)fetchAllSavedSongsWithAccessToken:(NSString *)accessToken user:(User*)user callback:(void(^)(void))callbackBlock{
+    
+    int offset = 0;
+    int limit = 50;
+    
+    __block __weak void(^weak_recursion)(int returnCount, int offset, int limit);
+    void(^recursion)(int returnCount, int offset, int limit);
+    weak_recursion = recursion = ^(int returnCount, int offset, int limit) {
+        
+        if (returnCount < limit) {
+            callbackBlock();
+            return;
+        } else {
+            offset = offset + 50;
+
+            [self fetchSavedSongsWithAccessToken:accessToken offset:offset limit:limit user:user callback:weak_recursion];
+        }
+        
+    };
+                                                                               
+    [self fetchSavedSongsWithAccessToken:accessToken offset:offset limit:limit user:user callback:weak_recursion];
+    
+}
+
+
+
+-(void)fetchSavedSongsWithAccessToken:(NSString *)accessToken offset:(int)offset limit:(int)limit user:(User *)user callback:(void (^)(int returnCount, int offset, int limit))callbackBlock{
+    
+    NSError *error;
+    
+    NSURLRequest *request = [SPTYourMusic createRequestForCurrentUsersSavedTracksWithAccessToken:accessToken error:&error];
+    
+    [[SPTRequest sharedHandler] performRequest:request callback:^(NSError *error, NSURLResponse *response, NSData *data) {
+        if (error != nil) {
+            NSLog(@"*** Error in saved song fetch: %@", error);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+            return;
+        }
+        
+        NSError *jsonError;
+        NSDictionary *trackDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+        
+        if (jsonError != nil) {
+            NSLog(@"*** Error in saved song serialization: %@", jsonError);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+            return;
+        }
+        
+        NSArray *items = [trackDictionary objectForKey:@"items"];
+        
+        for (NSObject*track in items) {
+            NSString *id = [track valueForKey:@"id"];
+            dispatch_async(self.spot_core_data_queue, ^{
+    
+                [privateContext performBlock:^{
+                    Song *newSong = [Song storeSongWithSongID:id ofType:@"Spotify" withUser:user inManangedObjectContext:privateContext];
+                }];
+                
+            });
+        }
+        
+        int returnCount = items.count;
+        
+        return callbackBlock(returnCount, offset, limit);
+        
+    }];
+    
+}
 
 -(void)emptyArrays{
     

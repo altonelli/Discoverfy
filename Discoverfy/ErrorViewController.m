@@ -145,6 +145,7 @@
                     NSLog(@"************************************** Song Queueing Complete");
                     
                     [[NSNotificationCenter defaultCenter]postNotificationName:@"ErrorResolved" object:nil];
+                    [self.view removeFromSuperview];
                     
                 }];
             }];

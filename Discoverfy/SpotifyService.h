@@ -58,6 +58,10 @@ This is for the initial batch get and includes getting top songs and storing the
 
 
 
+-(void)fetchAllSavedSongsWithAccessToken:(NSString *)accessToken user:(User*)user callback:(void(^)(void))callbackBlock;
+
+
+
 
 
 @end

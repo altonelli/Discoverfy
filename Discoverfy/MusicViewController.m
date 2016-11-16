@@ -199,7 +199,24 @@
             
 //            User *user = [User findUserWithUsername:self.user.name inManagedObjectContext:context];
 //            [user countAllSongsFromUser:self.user.name inManagedObjectContext:context];
-            NSLog(@"************************************ Discoverfy fetch complete");
+            dispatch_async(spot.spot_core_data_queue, ^{
+                [privateContext performBlock:^{
+                    
+                    NSNumber *discCount = [self.user countAllSongsFromUser:self.user.name inManagedObjectContext:privateContext];
+                    NSLog(@"************************************ Discoverfy fetch complete: %@", discCount);
+                }];
+            });
+            dispatch_group_leave(group);
+        }];
+        
+        dispatch_group_enter(group);
+        [spot fetchAllSavedSongsWithAccessToken:accessToken user:self.user callback:^{
+            dispatch_async(spot.spot_core_data_queue, ^{
+                [privateContext performBlock:^{
+                    NSNumber *savedCount = [self.user countAllSongsFromUser:self.user.name inManagedObjectContext:privateContext];
+                    NSLog(@"************************* Saved Songs fetch Complete: %@", savedCount);
+                }];
+            });
             dispatch_group_leave(group);
         }];
 
@@ -208,7 +225,12 @@
         [spot fetchPlaylistSongsWithAccessToken:accessToken session:session offset:0 user:self.user queue:spot_data_queue callback:^{
             
             // Retreived Songs from Spotify Users Playlists. Next retrieve favorite artists.
-            NSLog(@"******************************** Spotify fetch complete");
+            dispatch_async(spot.spot_core_data_queue, ^{
+                [privateContext performBlock:^{
+                    NSNumber * spotCount = [self.user countAllSongsFromUser:self.user.name inManagedObjectContext:privateContext];
+                    NSLog(@"******************************** Spotify fetch complete: %@", spotCount);
+                }];
+            });
             dispatch_group_leave(group);
             
         }];
@@ -222,8 +244,8 @@
             [spot queueInitialSongsUsingTracksWithAccessToken:accessToken user:self.user callback:^{
                 
                 [privateContext performBlock:^{
-                    NSLog(@"time to count user songs");
-                    [self.user countAllSongsFromUser:self.user.name inManagedObjectContext:privateContext];
+                    NSNumber * totalCount = [self.user countAllSongsFromUser:self.user.name inManagedObjectContext:privateContext];
+                    NSLog(@"total inital fetch complete: %@", totalCount);
                 }];
                 
                 NSLog(@"********************* Song Queueing via track complete");
@@ -336,7 +358,7 @@
 //    UIView *mainView = self.view;
 //    
 //    NSLog(@"cardContainer: %@ | mainView: %@", cardContainer, mainView);
-    UIView *card = self.trackController.view;
+    UIView *card = self.trackController.view.superview;
     UIImageView *overlayImage = self.trackController.overlayImage;
     overlayImage.hidden = NO;
     overlayImage.alpha = 0.0;
@@ -516,7 +538,7 @@
 //        self.mainContainer.userInteractionEnabled = YES;
 //        self.trackController.view.userInteractionEnabled = YES;
         
-        [self.errorController.view removeFromSuperview];
+//        [self.errorController.view removeFromSuperview];
         
     });
     

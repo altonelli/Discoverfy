@@ -12,6 +12,7 @@
 #import "ImageButton.h"
 #import "UIFont+AutoHeightFont.h"
 #import "AutoHeightFont.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface TrackViewController (){
@@ -40,6 +41,22 @@
     
     [self prepareSlider];
 
+    // Set up Shadow
+    
+        NSLog(@"track controller view: %@", NSStringFromCGRect(self.view.frame));
+        NSLog(@"track controller superview: %@", NSStringFromCGRect(self.view.superview.frame));
+        self.view.superview.bounds = self.view.bounds;
+        self.view.superview.clipsToBounds = NO;
+        self.view.superview.layer.masksToBounds = NO;
+        self.view.superview.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.view.superview.layer.shadowOffset = CGSizeMake(0,3);
+        self.view.superview.layer.shadowOpacity = 0.5;
+        self.view.superview.layer.shadowRadius = 7.0f;
+        self.view.superview.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.bounds].CGPath;
+        
+}
+
+-(void)viewWillAppear:(BOOL)animated{
 }
 
 -(void)viewDidLoad{
@@ -116,11 +133,10 @@
     [self.view.layer insertSublayer:gradient atIndex:0];
     
 
-//    self.view.layer.borderColor = [UIColor colorWithRed:18/255.0 green:122/255.0 blue:216/255.0 alpha:1.0].CGColor;
     self.view.layer.cornerRadius = 2;
-    self.view.layer.masksToBounds = YES;
     
     self.view.clipsToBounds = YES;
+    self.view.layer.masksToBounds = YES;
     
     self.playButton.hidden = YES;
     self.overlayImage.hidden = YES;

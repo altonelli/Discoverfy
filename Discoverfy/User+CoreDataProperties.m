@@ -65,7 +65,7 @@
     
 }
 
--(void)countAllSongsFromUser:(NSString *)username inManagedObjectContext:(NSManagedObjectContext *)context{
+-(NSNumber *)countAllSongsFromUser:(NSString *)username inManagedObjectContext:(NSManagedObjectContext *)context{
     User *user = nil;
     
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
@@ -75,10 +75,13 @@
     
     if(!matches || error || matches.count > 1){
         NSLog(@"*** Error on use fetch: %@",error);
+        return [NSNumber numberWithInteger:0];
     } else {
         user = [matches firstObject];
+        NSNumber *count = [NSNumber numberWithUnsignedInteger:user.songs.count];
     
-        NSLog(@"Count for user is now: %u",user.songs.count);
+        NSLog(@"Count for user is now: %@",count);
+        return count;
     }
     
 }
