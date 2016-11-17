@@ -38,11 +38,9 @@
     [super loadView];
     
     PopOverView *view = [[PopOverView alloc] init];
-    
+
     self.view = view;
-    
-    self.view.bounds = CGRectMake(0, 0, 240, 128);
-    
+        
     [self addElements];
     
 }
@@ -162,13 +160,13 @@
     text.text = @"An Error Occured";
     text.textColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     text.font = [UIFont fontWithName:@"Futura" size:20.0];
-    text.frame = CGRectMake(20.0, 20.0, 200.0, 35.0);
+    text.frame = CGRectMake(10.0, 20.0, 200.0, 35.0);
     text.textAlignment = NSTextAlignmentCenter;
     self.text = text;
 
     
     UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
-    [button setFrame:CGRectMake(60, 71, 120, 37)];
+    [button setFrame:CGRectMake(50, 71, 120, 37)];
     [button setTitle:@"Try Again" forState:UIControlStateNormal];
     button.titleLabel.textColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     button.titleLabel.font = [UIFont fontWithName:@"Futura" size:15.0];
@@ -178,8 +176,8 @@
     
 
     
-    [self.view addSubview:self.text];
-    [self.view addSubview:button];
+    [self.view.subviews[0] addSubview:self.text];
+    [self.view.subviews[0] addSubview:button];
     
     
 }

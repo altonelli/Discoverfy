@@ -111,12 +111,17 @@
     // Saves changes in the application's managed object context before the application terminates.
     SpotifyService* spot = [SpotifyService sharedService];
     
-    [spot emptyArrays];
+    dispatch_queue_t backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+    dispatch_async(backgroundQueue, ^{
+        
+        [spot emptyArrays];
+        
+        
+        [self saveContext];
+        
+        NSLog(@"GOOD BYE");
+    });
     
-    
-    [self saveContext];
-    
-    NSLog(@"GOOD BYE");
 }
 
 #pragma mark - Core Data stack

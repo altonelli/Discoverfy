@@ -28,10 +28,10 @@
     PopOverView *view = [[PopOverView alloc]init];
     
     self.view = view;
-    
     [self placeSubviews];
+
     
-    [self.view needsUpdateConstraints];
+//    [self.view needsUpdateConstraints];
     
 }
 
@@ -42,7 +42,6 @@
 
     
     
-    
     // Do any additional setup after loading the view.
     
 
@@ -51,13 +50,14 @@
     
 }
 
+
 -(void)placeSubviews{
     
     UILabel *top = [[UILabel alloc]init];
     top.text = @"Hold On";
     top.textColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     top.font = [UIFont fontWithName:@"Futura" size:20.0];
-    top.frame = CGRectMake(20.0, 5.0, 200.0, 35.0);
+    top.frame = CGRectMake(10.0, 5.0, 200.0, 35.0);
     top.textAlignment = NSTextAlignmentCenter;
     self.topText = top;
     
@@ -65,7 +65,7 @@
     bottom.text = @"Currating Songs";
     bottom.textColor = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:1.0];
     bottom.font = [UIFont fontWithName:@"Futura" size:20.0];
-    bottom.frame = CGRectMake(20.0, 88.0, 200.0, 35.0);
+    bottom.frame = CGRectMake(10.0, 88.0, 200.0, 35.0);
     bottom.textAlignment = NSTextAlignmentCenter;
     self.bottomText = bottom;
 
@@ -73,16 +73,16 @@
     NSURL *imgPath = [[NSBundle mainBundle]URLForResource:@"newLoading" withExtension:@"gif"];
     NSString *pathString = [imgPath absoluteString];
     NSData *imgData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:pathString]];
-//    NSLog(@"imgData: %@", imgData);
+
     UIImage *img = [UIImage animatedImageWithAnimatedGIFData:imgData];
     UIImageView *gif = [[UIImageView alloc]initWithImage:img];
-    gif.frame = CGRectMake((240/2.0 - 60/2.0), (128/2.0 - 60/2.0), 60.0, 60.0);
+    gif.frame = CGRectMake((220/2.0 - 60/2.0), (128/2.0 - 60/2.0), 60.0, 60.0);
     self.gif = gif;
 
     
-    [self.view addSubview:self.topText];
-    [self.view addSubview:self.bottomText];
-    [self.view addSubview:self.gif];
+    [self.view.subviews[0] addSubview:self.topText];
+    [self.view.subviews[0] addSubview:self.bottomText];
+    [self.view.subviews[0] addSubview:self.gif];
 }
 
 

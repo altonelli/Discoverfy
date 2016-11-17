@@ -158,7 +158,7 @@
     
     self.spinnerController = [[SpinnerViewController alloc]init];
     [self.view addSubview:self.spinnerController.view];
-    self.spinnerController.view.frame = CGRectMake(screenWidth/2 - 120, screenHeight/2 - 64, 240, 128);
+//    self.spinnerController.view.frame = CGRectMake(screenWidth/2 - 110, screenHeight/2 - 64, 220, 128);
     
     
     
