@@ -36,7 +36,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *rearContainer;
 @property (nonatomic,strong) TrackViewController *rearTrackController;
-@property (nonatomic,strong) TrackViewController *trackController;
+//@property (nonatomic,strong) TrackViewController *trackController;
 @property (weak, nonatomic) IBOutlet UIView *topViewColor;
 @property (weak, nonatomic) IBOutlet UIView *bottomViewColor;
 @property (nonatomic,strong) ErrorViewController *errorController;

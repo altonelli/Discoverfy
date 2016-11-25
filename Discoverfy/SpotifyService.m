@@ -582,7 +582,7 @@
     
     for (DiscoverfyItem*item in self.player.items){
         [item.asset cancelLoading];
-        [self.player removeItem:item];
+        [self.player advanceToNextItem];
     }
     
         [self.player removeAllItems];

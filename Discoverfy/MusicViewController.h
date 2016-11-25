@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Spotify/Spotify.h>
 #import <AVFoundation/AVFoundation.h>
+#import "TrackViewController.h"
 #import "User.h"
 
 
@@ -18,6 +19,7 @@
 @property (nonatomic) BOOL firstPlay;
 @property (nonatomic) BOOL queuing;
 
+@property (nonatomic,strong) TrackViewController *trackController;
 @property (weak, nonatomic) IBOutlet UIView *mainContainer;
 
 
