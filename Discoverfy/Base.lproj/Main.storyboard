@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3wl-uQ-S4x">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3wl-uQ-S4x">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -223,10 +223,11 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6p1-Bv-DSi">
                                 <frame key="frameInset" minX="225" minY="431" width="45" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="jDU-sd-P3F"/>
-                                    <constraint firstAttribute="width" constant="45" id="qvj-qx-AUi"/>
+                                    <constraint firstAttribute="width" secondItem="6p1-Bv-DSi" secondAttribute="height" multiplier="1:1.15" id="5Px-6O-0U8"/>
+                                    <constraint firstAttribute="height" constant="40" id="jDU-sd-P3F"/>
+                                    <constraint firstAttribute="width" constant="40" id="qvj-qx-AUi"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="discResetBottonSm.png">
+                                <state key="normal" backgroundImage="thinResetButtonFlatSm.png">
                                     <color key="titleColor" red="0.04087131443" green="0.3752355624" blue="0.82564102559999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -236,10 +237,10 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qft-gm-9kW">
                                 <frame key="frameInset" minX="72" minY="431" width="45" height="45"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="45" id="bB1-hC-Uxq"/>
-                                    <constraint firstAttribute="width" constant="45" id="bz6-MQ-5Vn"/>
+                                    <constraint firstAttribute="height" constant="40" id="bB1-hC-Uxq"/>
+                                    <constraint firstAttribute="width" constant="40" id="bz6-MQ-5Vn"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="discCancelButtonSm.png">
+                                <state key="normal" backgroundImage="thinCancelButtonFlatSm.png">
                                     <color key="titleColor" red="0.039215686274509803" green="0.37647058823529411" blue="0.82352941176470584" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -259,10 +260,10 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SdZ-mq-gHj">
                                 <frame key="frameInset" minX="136" minY="419" width="70" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="5VA-d9-MQJ"/>
-                                    <constraint firstAttribute="height" constant="70" id="Z4r-vY-T5j"/>
+                                    <constraint firstAttribute="width" constant="60" id="5VA-d9-MQJ"/>
+                                    <constraint firstAttribute="height" constant="60" id="Z4r-vY-T5j"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="discPauseBottonSm.png">
+                                <state key="normal" backgroundImage="thinPauseButtonFlatSm.png">
                                     <color key="titleColor" red="0.04087131443" green="0.3752355624" blue="0.82564102559999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -290,10 +291,10 @@
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Rr-3x-7ue">
                                 <frame key="frameInset" minX="136" minY="419" width="70" height="70"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="70" id="S77-cj-aXa"/>
-                                    <constraint firstAttribute="height" constant="70" id="sTc-AB-uVT"/>
+                                    <constraint firstAttribute="width" constant="60" id="S77-cj-aXa"/>
+                                    <constraint firstAttribute="height" constant="60" id="sTc-AB-uVT"/>
                                 </constraints>
-                                <state key="normal" backgroundImage="discPlayButtonSm.png">
+                                <state key="normal" backgroundImage="thinPlayButtonFlatSm.png">
                                     <color key="titleColor" red="0.04087131443" green="0.3752355624" blue="0.82564102559999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -314,13 +315,13 @@
                             <constraint firstAttribute="trailingMargin" secondItem="ykL-bo-RGi" secondAttribute="trailing" constant="-19" id="Jry-gU-TNe"/>
                             <constraint firstItem="c36-RZ-5wt" firstAttribute="leading" secondItem="rDZ-Sf-25d" secondAttribute="leadingMargin" constant="8" id="Ktj-rg-xTt"/>
                             <constraint firstItem="WLa-ti-psX" firstAttribute="centerX" secondItem="rDZ-Sf-25d" secondAttribute="centerX" id="LDz-eg-Bwc"/>
-                            <constraint firstItem="jad-WX-G2B" firstAttribute="top" secondItem="SdZ-mq-gHj" secondAttribute="bottom" constant="10" id="MFQ-eP-HrP"/>
                             <constraint firstItem="HVU-Jt-KtN" firstAttribute="leading" secondItem="rDZ-Sf-25d" secondAttribute="leadingMargin" constant="-20" id="MKd-NQ-VbP"/>
                             <constraint firstItem="0iw-5b-72Y" firstAttribute="top" secondItem="WLa-ti-psX" secondAttribute="bottom" constant="-6" id="Mbm-6L-G7G"/>
                             <constraint firstItem="6p1-Bv-DSi" firstAttribute="centerY" secondItem="4Rr-3x-7ue" secondAttribute="centerY" id="NHo-XF-t4t"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WLa-ti-psX" secondAttribute="trailing" constant="8" id="Tve-9L-kYZ"/>
                             <constraint firstAttribute="trailingMargin" secondItem="c36-RZ-5wt" secondAttribute="trailing" constant="8" id="Yeg-HN-c6h"/>
                             <constraint firstItem="WLa-ti-psX" firstAttribute="top" secondItem="c36-RZ-5wt" secondAttribute="bottom" constant="-4" id="aAT-9n-wk4"/>
+                            <constraint firstItem="SdZ-mq-gHj" firstAttribute="centerY" secondItem="4Rr-3x-7ue" secondAttribute="centerY" id="axT-wA-wfh"/>
                             <constraint firstItem="c4O-Sb-mDT" firstAttribute="top" secondItem="ykL-bo-RGi" secondAttribute="bottom" constant="-15" id="f5s-id-fE3"/>
                             <constraint firstAttribute="trailingMargin" secondItem="c4O-Sb-mDT" secondAttribute="trailing" id="jCl-nk-TjV"/>
                             <constraint firstItem="ykL-bo-RGi" firstAttribute="leading" secondItem="rDZ-Sf-25d" secondAttribute="leadingMargin" constant="-20" id="jim-Gh-eL1"/>
@@ -552,8 +553,8 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ie8-rK-kWi">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="bf5-zO-Gan"/>
-                                    <constraint firstAttribute="width" constant="70" id="mAV-Fv-A2O"/>
+                                    <constraint firstAttribute="height" constant="60" id="bf5-zO-Gan"/>
+                                    <constraint firstAttribute="width" constant="60" id="mAV-Fv-A2O"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="pauseButtonImage.png">
                                     <color key="titleColor" red="0.04087131443" green="0.3752355624" blue="0.82564102559999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -580,8 +581,8 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18I-4E-ziR">
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="70" id="qbh-8D-U11"/>
-                                    <constraint firstAttribute="width" constant="70" id="sN0-eJ-i9q"/>
+                                    <constraint firstAttribute="height" constant="60" id="qbh-8D-U11"/>
+                                    <constraint firstAttribute="width" constant="60" id="sN0-eJ-i9q"/>
                                 </constraints>
                                 <state key="normal" backgroundImage="playButtonImage.png">
                                     <color key="titleColor" red="0.04087131443" green="0.3752355624" blue="0.82564102559999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -639,14 +640,14 @@
     <resources>
         <image name="addSongImage.jpg" width="800" height="800"/>
         <image name="demoAlbumArt2.png" width="999" height="999"/>
-        <image name="discCancelButtonSm.png" width="200" height="200"/>
-        <image name="discPauseBottonSm.png" width="200" height="200"/>
-        <image name="discPlayButtonSm.png" width="200" height="200"/>
-        <image name="discResetBottonSm.png" width="200" height="200"/>
         <image name="pauseButtonImage.png" width="640" height="640"/>
         <image name="playButtonImage.png" width="640" height="640"/>
         <image name="repeatButtonImage.png" width="640" height="640"/>
         <image name="skipButtonImage.png" width="640" height="640"/>
+        <image name="thinCancelButtonFlatSm.png" width="200" height="200"/>
+        <image name="thinPauseButtonFlatSm.png" width="200" height="200"/>
+        <image name="thinPlayButtonFlatSm.png" width="200" height="200"/>
+        <image name="thinResetButtonFlatSm.png" width="174" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="P7t-Q1-UgA"/>

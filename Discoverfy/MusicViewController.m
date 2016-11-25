@@ -335,8 +335,8 @@
 
             
             
-            [self.trackController updateUIWithTrack:spot.partialTrackList[0]];
-            [self.rearTrackController updateUIWithTrack:spot.partialTrackList[1]];
+            [self.trackController updateUIWithTrack:spot.partialTrackList[0] andPrepareTrack:spot.partialTrackList[1]];
+            [self.rearTrackController updateUIWithTrack:spot.partialTrackList[1] andPrepareTrack:spot.partialTrackList[2]];
             
         });
         
@@ -615,8 +615,8 @@
     NSLog(@"Thread of advance song: %@", [NSThread currentThread]);
     
     [spot.player advanceToNextItem];
-    [self.trackController updateUIWithTrack:spot.partialTrackList[1]];
-    [self.rearTrackController updateUIWithTrack:spot.partialTrackList[2]];
+    [self.trackController updateUIWithTrack:spot.partialTrackList[1] andPrepareTrack:spot.partialTrackList[2]];
+    [self.rearTrackController updateUIWithTrack:spot.partialTrackList[2] andPrepareTrack:spot.partialTrackList[3]];
     [spot.partialTrackList removeObjectAtIndex:0];
 
     if(spot.partialTrackList.count < 10 && self.queuing != YES){

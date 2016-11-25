@@ -111,7 +111,7 @@
     // Saves changes in the application's managed object context before the application terminates.
     SpotifyService* spot = [SpotifyService sharedService];
     
-    dispatch_queue_t backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0);
+    dispatch_queue_t backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
     dispatch_async(backgroundQueue, ^{
         
         [spot emptyArrays];

@@ -53,6 +53,11 @@
 		9E3EAAF61DB5275E00F4B264 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3EAAF51DB5275E00F4B264 /* UIImage+animatedGIF.m */; };
 		9E3EAAF81DB527E000F4B264 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E3EAAF71DB527E000F4B264 /* ImageIO.framework */; };
 		9E4100451DA4AFBA00B9FAB9 /* HorseShitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4100441DA4AFBA00B9FAB9 /* HorseShitView.m */; };
+		9E80F74F1DE8F70A00D25D9F /* thinResetButtonFlatSm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E80F74B1DE8F70A00D25D9F /* thinResetButtonFlatSm.png */; };
+		9E80F7501DE8F70A00D25D9F /* thinPlayButtonFlatSm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E80F74C1DE8F70A00D25D9F /* thinPlayButtonFlatSm.png */; };
+		9E80F7511DE8F70A00D25D9F /* thinPauseButtonFlatSm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E80F74D1DE8F70A00D25D9F /* thinPauseButtonFlatSm.png */; };
+		9E80F7521DE8F70A00D25D9F /* thinCancelButtonFlatSm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E80F74E1DE8F70A00D25D9F /* thinCancelButtonFlatSm.png */; };
+		9EADBCD81DDE606500600BB6 /* discPauseButtonSm1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EADBCD71DDE606500600BB6 /* discPauseButtonSm1.png */; };
 		9EBAE1961DA4BE25000DC995 /* ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAE1951DA4BE25000DC995 /* ErrorView.m */; };
 		9EBAE1991DA5C41C000DC995 /* PopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAE1981DA5C41C000DC995 /* PopOverView.m */; };
 		9EC49FCD1D9CE1B700376990 /* DiscoverfyError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC49FCC1D9CE1B700376990 /* DiscoverfyError.m */; };
@@ -132,6 +137,11 @@
 		9E3EAAF71DB527E000F4B264 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		9E4100431DA4AFBA00B9FAB9 /* HorseShitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorseShitView.h; sourceTree = "<group>"; };
 		9E4100441DA4AFBA00B9FAB9 /* HorseShitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorseShitView.m; sourceTree = "<group>"; };
+		9E80F74B1DE8F70A00D25D9F /* thinResetButtonFlatSm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thinResetButtonFlatSm.png; sourceTree = "<group>"; };
+		9E80F74C1DE8F70A00D25D9F /* thinPlayButtonFlatSm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thinPlayButtonFlatSm.png; sourceTree = "<group>"; };
+		9E80F74D1DE8F70A00D25D9F /* thinPauseButtonFlatSm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thinPauseButtonFlatSm.png; sourceTree = "<group>"; };
+		9E80F74E1DE8F70A00D25D9F /* thinCancelButtonFlatSm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thinCancelButtonFlatSm.png; sourceTree = "<group>"; };
+		9EADBCD71DDE606500600BB6 /* discPauseButtonSm1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discPauseButtonSm1.png; sourceTree = "<group>"; };
 		9EBAE1941DA4BE25000DC995 /* ErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorView.h; sourceTree = "<group>"; };
 		9EBAE1951DA4BE25000DC995 /* ErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorView.m; sourceTree = "<group>"; };
 		9EBAE1971DA5C41C000DC995 /* PopOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopOverView.h; sourceTree = "<group>"; };
@@ -296,6 +306,10 @@
 		9E135D721D47E18200B52C47 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9E80F74B1DE8F70A00D25D9F /* thinResetButtonFlatSm.png */,
+				9E80F74C1DE8F70A00D25D9F /* thinPlayButtonFlatSm.png */,
+				9E80F74D1DE8F70A00D25D9F /* thinPauseButtonFlatSm.png */,
+				9E80F74E1DE8F70A00D25D9F /* thinCancelButtonFlatSm.png */,
 				9E1151FA1DD3D3F800B7A7EB /* discResetBottonSm.png */,
 				9E1151FB1DD3D3F800B7A7EB /* discPlayButtonSm.png */,
 				9E1151FC1DD3D3F800B7A7EB /* discPauseBottonSm.png */,
@@ -308,6 +322,7 @@
 				9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */,
 				9E2283D11D6B7AA7004C4AD7 /* addSongImage.jpg */,
 				9E203A7F1D6E653800D0490C /* demoAlbumArt.png */,
+				9EADBCD71DDE606500600BB6 /* discPauseButtonSm1.png */,
 				9E1151F81DD174CC00B7A7EB /* DiscoverfyBackgroundGradient.png */,
 				9E203A811D6E661100D0490C /* demoAlbumArt2.png */,
 				9E1151F61DD167F900B7A7EB /* FinalLogo.png */,
@@ -375,6 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E203A7C1D6D00C600D0490C /* skipButtonImage.png in Resources */,
+				9E80F74F1DE8F70A00D25D9F /* thinResetButtonFlatSm.png in Resources */,
 				9E135D851D47E18200B52C47 /* LaunchScreen.storyboard in Resources */,
 				9E203A821D6E661100D0490C /* demoAlbumArt2.png in Resources */,
 				9E203A7E1D6D00C600D0490C /* pauseButtonImage.png in Resources */,
@@ -383,10 +399,14 @@
 				9E203A7D1D6D00C600D0490C /* repeatButtonImage.png in Resources */,
 				9E1151F91DD174CC00B7A7EB /* DiscoverfyBackgroundGradient.png in Resources */,
 				9E1152001DD3D3F800B7A7EB /* discPauseBottonSm.png in Resources */,
+				9E80F7521DE8F70A00D25D9F /* thinCancelButtonFlatSm.png in Resources */,
 				9E1151FE1DD3D3F800B7A7EB /* discResetBottonSm.png in Resources */,
 				9E135D821D47E18200B52C47 /* Assets.xcassets in Resources */,
 				9E203A7B1D6D00C600D0490C /* playButtonImage.png in Resources */,
+				9EADBCD81DDE606500600BB6 /* discPauseButtonSm1.png in Resources */,
+				9E80F7511DE8F70A00D25D9F /* thinPauseButtonFlatSm.png in Resources */,
 				9E135D7D1D47E18200B52C47 /* Main.storyboard in Resources */,
+				9E80F7501DE8F70A00D25D9F /* thinPlayButtonFlatSm.png in Resources */,
 				9E2283D41D6B7C3E004C4AD7 /* removeSongImage.jpg in Resources */,
 				9E1151FF1DD3D3F800B7A7EB /* discPlayButtonSm.png in Resources */,
 				9E2283D21D6B7AA7004C4AD7 /* addSongImage.jpg in Resources */,

@@ -11,7 +11,7 @@
 @implementation DiscoverfyItem
 
 -(void)dealloc{
-    NSLog(@"DEALLOC PLAYER ITEM: %@",self.asset);
+    NSLog(@"DEALLOC PLAYER ITEM: %@", self.asset);
 }
 
 @end

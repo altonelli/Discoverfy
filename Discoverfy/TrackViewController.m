@@ -17,6 +17,7 @@
 
 @interface TrackViewController (){
     SpotifyService *spot;
+    NSData *demoImageData;
 }
 
 @property (weak, nonatomic) IBOutlet AlbumImageView *trackImage;
@@ -31,6 +32,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *skipButton;
 @property (weak, nonatomic) IBOutlet ImageButton *overlayButton;
 
+@property (nonatomic, strong) NSData *currentImageData;
+@property (nonatomic, strong) NSData *nextImageData;
+
+
 
 @end
 
@@ -38,72 +43,47 @@
 
 
 -(void)viewDidAppear:(BOOL)animated{
+    [self.view setNeedsUpdateConstraints];
+
     
     [self prepareSlider];
 
     // Set up Shadow
     
-        NSLog(@"track controller view: %@", NSStringFromCGRect(self.view.frame));
-        NSLog(@"track controller superview: %@", NSStringFromCGRect(self.view.superview.frame));
         self.view.superview.bounds = self.view.bounds;
         self.view.superview.clipsToBounds = NO;
         self.view.superview.layer.masksToBounds = NO;
         self.view.superview.layer.shadowColor = [UIColor blackColor].CGColor;
-        self.view.superview.layer.shadowOffset = CGSizeMake(0,3);
-        self.view.superview.layer.shadowOpacity = 0.5;
+        self.view.superview.layer.shadowOffset = CGSizeMake(0,0);
+        self.view.superview.layer.shadowOpacity = 0.3;
         self.view.superview.layer.shadowRadius = 7.0f;
         self.view.superview.layer.shadowPath = [UIBezierPath bezierPathWithRect:self.view.bounds].CGPath;
         
 }
 
--(void)viewWillAppear:(BOOL)animated{
-}
-
 -(void)viewDidLoad{
     spot = [SpotifyService sharedService];
     
-    UIView *subView = self.view.subviews[0];
+    NSString *path = [[NSBundle mainBundle]pathForResource:@"demoAlbumArt2" ofType:@"png"];
     
-    CGRect cardRect = [subView bounds];
-    CGFloat cardWidth = cardRect.size.width;
-    CGFloat cardHeight = cardRect.size.height;
+    demoImageData = [NSData dataWithContentsOfURL:[NSURL fileURLWithPath:path]];
     
-    CGFloat titleHeight = cardHeight - cardWidth - 80;
-    CGFloat titleSpace = titleHeight * .05;
-    
-    NSDictionary *imageElements = NSDictionaryOfVariableBindings(_trackImage,_trackTitle,_trackArtist,_trackAlbum);
-    
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(==0)-[_trackImage(<=%f)]-(>=%f)-[_trackTitle(==%f)]-(>=%f)-[_trackArtist(==%f)]-(>=%f)-[_trackAlbum(==%f)]-(>=80)-|",(cardWidth),titleSpace,(titleHeight * .35),titleSpace,(titleHeight * .30),titleSpace,(titleHeight * .30)]
-                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                      metrics:nil
-                                                                        views:imageElements]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-(==0)-[_trackImage(<=%f)]-(==0)-|",(cardWidth)]
-                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                      metrics:nil
-                                                                        views:imageElements]];
-    
-    UIFont *titleAutoFont = [UIFont autoHeightFontWithName:self.trackTitle.font.fontName forUILabelSize:self.trackTitle.frame.size withMinSize:0];
-    self.trackTitle.font = titleAutoFont;
-    
-    UIFont *artistAutoFont = [UIFont autoHeightFontWithName:self.trackArtist.font.fontName forUILabelSize:self.trackArtist.frame.size withMinSize:0];
-    self.trackArtist.font = artistAutoFont;
-    
-    UIFont *albumAutoFont = [UIFont autoHeightFontWithName:self.trackAlbum.font.fontName forUILabelSize:self.trackAlbum.frame.size withMinSize:0];
-    self.trackAlbum.font = albumAutoFont;
+    self.currentImageData = demoImageData;
+    self.nextImageData = demoImageData;
 
     
-    NSDictionary *overlayImageElements = NSDictionaryOfVariableBindings(_overlayImage);
-    
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(==0)-[_overlayImage(<=%f)]-(>=0)-|",(cardWidth)]
-                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                      metrics:nil
-                                                                        views:overlayImageElements]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-(==0)-[_overlayImage(<=%f)]-(==0)-|",(cardWidth)]
-                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                      metrics:nil
-                                                                        views:overlayImageElements]];
-    
-    
+//    UIFont *titleAutoFont = [UIFont autoHeightFontWithName:self.trackTitle.font.fontName forUILabelSize:self.trackTitle.frame.size withMinSize:0];
+//    self.trackTitle.font = titleAutoFont;
+////    self.trackTitle.font = titleAutoFont;
+//    
+//    UIFont *artistAutoFont = [UIFont autoHeightFontWithName:self.trackArtist.font.fontName forUILabelSize:self.trackArtist.frame.size withMinSize:0];
+//    self.trackArtist.font = artistAutoFont;
+////    self.trackArtist.font = artistAutoFont;
+//    
+//    UIFont *albumAutoFont = [UIFont autoHeightFontWithName:self.trackAlbum.font.fontName forUILabelSize:self.trackAlbum.frame.size withMinSize:0];
+//    self.trackAlbum.font = albumAutoFont;
+////    self.trackAlbum.font = albumAutoFont;
+
     
     if (self.isMainCard == NO) {
         self.trackSlider.hidden = YES;
@@ -154,7 +134,7 @@
 
 }
 
--(void)updateUIWithTrack:(Track *)track{
+-(void)updateUIWithTrack:(Track *)track andPrepareTrack:(Track *)nextTrack{
     
     self.overlayImage.hidden = YES;
     
@@ -162,12 +142,43 @@
     SPTPartialArtist *artist = track.spotifyTrack.artists[0];
     self.trackArtist.text = artist.name;
     self.trackAlbum.text = track.spotifyTrack.album.name;
-    self.trackImage.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:track.spotifyTrack.album.largestCover.imageURL]];
+
+    [self updateDataWithTrack:track andNextTrack:nextTrack];
     
+    self.trackImage.image = [UIImage imageWithData:self.currentImageData];
 
     [spot.player play];
 
 
+}
+
+-(void)updateDataWithTrack:(Track *)track andNextTrack:(Track *)nextTrack {
+    self.currentImageData = self.nextImageData;
+    self.nextImageData = demoImageData;
+    
+    dispatch_queue_t download_queue = dispatch_queue_create("com.discoverfy.downloadimagequeue", NULL);
+    
+    [self processImageDataWithTrack:track inQueue:download_queue callbackBlock:^(NSData *imageData) {
+        self.currentImageData = imageData;
+        self.trackImage.image = [UIImage imageWithData:self.currentImageData];
+    }];
+    
+    [self processImageDataWithTrack:nextTrack inQueue:download_queue callbackBlock:^(NSData *nextImageData) {
+        self.nextImageData = nextImageData;
+    }];
+}
+
+-(void)processImageDataWithTrack:(Track*)track inQueue:(dispatch_queue_t)queue callbackBlock:(void(^)(NSData *imageData))imageBlock {
+    NSURL *url = track.spotifyTrack.album.largestCover.imageURL;
+    
+    dispatch_async(queue, ^{
+        NSData *imageData = [NSData dataWithContentsOfURL:url];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            imageBlock(imageData);
+        });
+    });
+    
 }
 
 - (IBAction)skipButtonPressed:(id)sender {
@@ -268,6 +279,63 @@
     CMTime time = CMTimeMake(0, 1);
     
     [spot.player seekToTime:time];
+    
+}
+-(void)updateViewConstraints {
+    
+    CGFloat cardWidth = [UIScreen mainScreen].bounds.size.width * .8;
+    CGFloat cardHeight = [UIScreen mainScreen].bounds.size.height * .8 - 32;
+    
+    
+    CGFloat labelOverlap = - 6;
+    
+    CGFloat remainder = cardHeight - cardWidth - (170 + labelOverlap * 2);
+    
+    CGFloat spacing = remainder / 3;
+    NSLog(@"spacing: %f",spacing);
+    CGFloat titleSpace = spacing - 15;
+    if (spacing < 5) {
+        titleSpace = 1;
+    }
+    
+    NSDictionary *imageElements = NSDictionaryOfVariableBindings(_trackImage,_trackTitle,_trackArtist,_trackAlbum, _playButton);
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(==0)-[_trackImage(<=%f)]-(>=%f)-[_trackTitle(==%f)]-(>=%f)-[_trackArtist(==%f)]-(>=%f)-[_trackAlbum(==%f)]-(>=%f)-[_playButton(==%f)]-(>=%f)-|",
+                                                                               cardWidth,
+                                                                               titleSpace,
+                                                                               40.0,
+                                                                               labelOverlap,
+                                                                               30.0,
+                                                                               labelOverlap,
+                                                                               30.0,
+                                                                               spacing,
+                                                                               60.0,
+                                                                               spacing]
+                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                      metrics:nil
+                                                                        views:imageElements]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-(==0)-[_trackImage(<=%f)]-(==0)-|",(cardWidth)]
+                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                      metrics:nil
+                                                                        views:imageElements]];
+    
+    
+    
+    
+    // Constraints of Overlay Image
+    NSDictionary *overlayImageElements = NSDictionaryOfVariableBindings(_overlayImage);
+    
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"V:|-(==0)-[_overlayImage(<=%f)]-(>=0)-|",(cardWidth)]
+                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                      metrics:nil
+                                                                        views:overlayImageElements]];
+    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:[NSString stringWithFormat:@"H:|-(==0)-[_overlayImage(<=%f)]-(==0)-|",(cardWidth)]
+                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
+                                                                      metrics:nil
+                                                                        views:overlayImageElements]];
+    
+    
+    [super updateViewConstraints];
     
 }
 

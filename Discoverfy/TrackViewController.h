@@ -21,6 +21,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *overlayImage;
 @property (nonatomic) BOOL isMainCard;
 
--(void)updateUIWithTrack:(Track *)track;
+-(void)updateUIWithTrack:(Track *)track andPrepareTrack:(Track *)nextTrack;
 
 @end
