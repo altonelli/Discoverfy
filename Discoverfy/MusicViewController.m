@@ -560,9 +560,11 @@
     CGFloat cardCenterX = CGRectGetWidth(self.view.bounds) / 2 + coords.x;
     CGFloat cardCenterY = CGRectGetHeight(self.view.bounds) / 2 + coords.y;
     
-    CGFloat scale = log10f(- pow((3 * ((cardCenterX - viewCenterX) / viewWidth)),4.0) + 10);
+    CGFloat percentFromCenter = 1 - pow(( (cardCenterX - viewCenterX) / viewWidth) ,4) / 4;
     
-    CGAffineTransform rotation = CGAffineTransformMakeRotation(coords.x / 400);
+    CGFloat scale = percentFromCenter ;
+    
+    CGAffineTransform rotation = CGAffineTransformMakeRotation(coords.x / 700);
     
     CGAffineTransform stretch = CGAffineTransformScale(rotation, scale, scale);
     
