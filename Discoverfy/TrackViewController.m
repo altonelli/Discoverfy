@@ -34,6 +34,8 @@
 
 @property (nonatomic, strong) NSData *currentImageData;
 @property (nonatomic, strong) NSData *nextImageData;
+//@property (nonatomic,strong) NSData *demoImageData;
+
 
 
 
@@ -143,9 +145,16 @@
     self.trackArtist.text = artist.name;
     self.trackAlbum.text = track.spotifyTrack.album.name;
 
+//    self.trackImage.image = [UIImage imageWithData:self.nextImageData];
+
+    
     [self updateDataWithTrack:track andNextTrack:nextTrack];
+    NSLog(@"currentimage for updating data %@", self.currentImageData);
+//    NSLog(@"demo data for updating data %@", demoImageData);
     
     self.trackImage.image = [UIImage imageWithData:self.currentImageData];
+    
+    NSLog(@"updated image");
 
     [spot.player play];
 
@@ -153,18 +162,36 @@
 }
 
 -(void)updateDataWithTrack:(Track *)track andNextTrack:(Track *)nextTrack {
+    NSLog(@"updating data");
+    
+    NSLog(@"current data == next data: %d",[self.currentImageData isEqualToData:self.nextImageData]);
     self.currentImageData = self.nextImageData;
+    NSLog(@"current data == next data: %d",[self.currentImageData isEqualToData:self.nextImageData]);
+
     self.nextImageData = demoImageData;
+    NSLog(@"current data == next data: %d",[self.currentImageData isEqualToData:self.nextImageData]);
+    
+    NSLog(@"current data nil?: %d | next data nil?: %d",[self.currentImageData isEqualToData:[[NSData alloc]init]],[self.nextImageData isEqualToData:[[NSData alloc]init]]);
+
+    
+    NSLog(@"updated data");
     
     dispatch_queue_t download_queue = dispatch_queue_create("com.discoverfy.downloadimagequeue", NULL);
     
+    NSData *NullDataTest = [[NSData alloc]init];
+    NSLog(@"null data test: %@",NullDataTest);
+    
     [self processImageDataWithTrack:track inQueue:download_queue callbackBlock:^(NSData *imageData) {
-        self.currentImageData = imageData;
-        self.trackImage.image = [UIImage imageWithData:self.currentImageData];
+        if (![ imageData isEqualToData:NullDataTest ]){
+            self.currentImageData = imageData;
+            self.trackImage.image = [UIImage imageWithData:self.currentImageData];
+        }
     }];
     
     [self processImageDataWithTrack:nextTrack inQueue:download_queue callbackBlock:^(NSData *nextImageData) {
-        self.nextImageData = nextImageData;
+        if (![ nextImageData isEqualToData:NullDataTest ]){
+            self.nextImageData = nextImageData;
+        }
     }];
 }
 
@@ -172,11 +199,19 @@
     NSURL *url = track.spotifyTrack.album.largestCover.imageURL;
     
     dispatch_async(queue, ^{
-        NSData *imageData = [NSData dataWithContentsOfURL:url];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            imageBlock(imageData);
-        });
+        NSError *error;
+        NSData *imageData = [NSData dataWithContentsOfURL:url options:NSDataReadingMappedIfSafe error:&error];
+        if(error){
+            NSLog(@"error on image get: %@",error);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                imageBlock([[NSData alloc]init]);
+            });
+            
+        } else {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                imageBlock(imageData);
+            });
+        }
     });
     
 }

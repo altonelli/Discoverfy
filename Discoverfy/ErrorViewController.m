@@ -15,11 +15,13 @@
 #import <Spotify/Spotify.h>
 #import "DiscoverfyError.h"
 #import "PopOverView.h"
+#import "UIImage+animatedGIF.h"
 
 @interface ErrorViewController ()
 
 @property (nonatomic,weak) IBOutlet UILabel *text;
 @property (nonatomic,weak) IBOutlet UIActivityIndicatorView *spinner;
+@property (nonatomic,weak) IBOutlet UIImageView *gif;
 
 
 @end
@@ -40,7 +42,9 @@
     PopOverView *view = [[PopOverView alloc] init];
 
     self.view = view;
-        
+    
+    self.view.userInteractionEnabled = YES;
+    
     [self addElements];
     
 }
@@ -82,74 +86,112 @@
 }
 - (IBAction)refresh:(id)sender {
     NSLog(@"Refresh button tapped with error: %@", self.discError);
+    self.view.userInteractionEnabled = NO;
+    
     SpotifyService *spot = [SpotifyService sharedService];
     SPTSession *session = [[SPTAuth defaultInstance]session];
     NSString *accessToken = [session accessToken];
     
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     NSManagedObjectContext *context = [appDelegate managedObjectContext];
+    
     NSLog(@"*** made it here");
     
-    if ([self.discError.appState  isEqual: @"batchError"]) {
+    if ([[DiscoverfyService sharedService] hasNetworkConnection]){
         
+        NSURL *imgPath = [[NSBundle mainBundle]URLForResource:@"newLoading" withExtension:@"gif"];
+        NSString *pathString = [imgPath absoluteString];
+        NSData *imgData = [[NSData alloc]initWithContentsOfURL:[NSURL URLWithString:pathString]];
+        
+        UIImage *img = [UIImage animatedImageWithAnimatedGIFData:imgData];
+        UIImageView *gif = [[UIImageView alloc]initWithImage:img];
+        gif.frame = CGRectMake((220/2.0 - 60/2.0), 10.0, 60.0, 60.0);
+        self.gif = gif;
+        
+        self.text.text = @"";
+        [self.view.subviews[0] addSubview:self.gif];
     
-            [spot queueSongsWithAccessToken:accessToken user:self.user queue:dispatch_get_main_queue() callback:^{
-                self.parentController.queuing = NO;
-                self.parentController.mainContainer.userInteractionEnabled = YES;
-                
-                [spot.player play];
-                [self.view removeFromSuperview];
-            }];
-        
-    } else if ([self.discError.appState isEqualToString:@"initialError"]){
-        
-        NSLog(@"In initalError state");
-        
-        [spot emptyArrays];
-        
-        
-        dispatch_group_t group = dispatch_group_create();
-        
-        dispatch_group_enter(group);
-        [[DiscoverfyService sharedService]fetchSongsWithUser:self.user.name completionHandler:^(NSArray *tracks) {
-            for (NSDictionary *track in tracks) {
-                NSString *songID = [track valueForKey:@"songID"];
-                NSString *type = [track valueForKey:@"type"];
-                [Song storeSongWithSongID:songID ofType:type withUser:self.user inManangedObjectContext:context];
-            }
-            NSLog(@"************************************ Discoverfy fetch complete");
-            dispatch_group_leave(group);
-        }];
-        
-        
-        dispatch_group_enter(group);
-        [spot fetchPlaylistSongsWithAccessToken:accessToken session:session offset:0 user:self.user queue:dispatch_get_main_queue() callback:^{
+        if ([self.discError.appState  isEqual: @"batchError"]) {
             
-            // Retreived Songs from Spotify Users Playlists. Next retrieve favorite artists.
-            NSLog(@"******************************** Spotify fetch complete");
-            dispatch_group_leave(group);
-            
-        }];
         
-        
-        dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+//                [spot queueSongsWithAccessToken:accessToken user:self.user queue:dispatch_get_main_queue() callback:^{
+//                    self.parentController.queuing = NO;
+//                    self.parentController.mainContainer.userInteractionEnabled = YES;
+//                    
+//                    [spot.player play];
+//                    [self.view removeFromSuperview];
+//                    
+//                }];
             
-            NSLog(@"******************************** fetching Artists");
-            
-            [spot getArtistsListWithAccessToken:accessToken queue:dispatch_get_main_queue() callback:^{
-                
-                [spot queueSongsWithAccessToken:accessToken user:self.user queue:dispatch_get_main_queue() callback:^{
+                [spot queueBatchSongsUsingTracksWithAccessToken:accessToken user:self.user callback:^{
+                    self.parentController.queuing = NO;
+                    self.parentController.mainContainer.userInteractionEnabled = YES;
                     
+                    [spot.player play];
+                    [self.view removeFromSuperview];
+                }];
+            
+        } else if ([self.discError.appState isEqualToString:@"initialError"]){
+            
+            NSLog(@"In initalError state");
+            
+            [spot emptyArrays];
+            
+            
+            dispatch_group_t group = dispatch_group_create();
+            
+            dispatch_group_enter(group);
+            [[DiscoverfyService sharedService]fetchSongsWithUser:self.user.name completionHandler:^(NSArray *tracks) {
+                for (NSDictionary *track in tracks) {
+                    NSString *songID = [track valueForKey:@"songID"];
+                    NSString *type = [track valueForKey:@"type"];
+                    [Song storeSongWithSongID:songID ofType:type withUser:self.user inManangedObjectContext:context];
+                }
+                NSLog(@"************************************ Discoverfy fetch complete");
+                dispatch_group_leave(group);
+            }];
+            
+            
+            dispatch_group_enter(group);
+            [spot fetchPlaylistSongsWithAccessToken:accessToken session:session offset:0 user:self.user queue:dispatch_get_main_queue() callback:^{
+                
+                // Retreived Songs from Spotify Users Playlists. Next retrieve favorite artists.
+                NSLog(@"******************************** Spotify fetch complete");
+                dispatch_group_leave(group);
+                
+            }];
+            
+            
+            dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+                
+                NSLog(@"******************************** fetching top songs");
+                
+                
+                [spot queueBatchSongsUsingTracksWithAccessToken:accessToken user:self.user callback:^{
                     NSLog(@"************************************** Song Queueing Complete");
                     
                     [[NSNotificationCenter defaultCenter]postNotificationName:@"ErrorResolved" object:nil];
                     [self.view removeFromSuperview];
-                    
                 }];
-            }];
+                
+                
+//                [spot getArtistsListWithAccessToken:accessToken queue:dispatch_get_main_queue() callback:^{
+//                    
+//                    [spot queueSongsWithAccessToken:accessToken user:self.user queue:dispatch_get_main_queue() callback:^{
+//                        
+//                        NSLog(@"************************************** Song Queueing Complete");
+//                        
+//                        [[NSNotificationCenter defaultCenter]postNotificationName:@"ErrorResolved" object:nil];
+//                        [self.view removeFromSuperview];
+//                        
+//                    }];
+//                }];
+                
+            });
             
-        });
-        
+        }
+    } else {
+        self.view.userInteractionEnabled = YES;
     }
     
 }
