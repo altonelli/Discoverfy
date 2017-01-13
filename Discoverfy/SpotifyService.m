@@ -53,6 +53,9 @@
 //        self.player = [[AVQueuePlayer alloc]init];
 
         _player = [[AVQueuePlayer alloc]init];
+        [[AVAudioSession sharedInstance]
+                          setCategory: AVAudioSessionCategoryPlayback
+                          error: nil];
         
         _spot_service_queue = dispatch_queue_create("com.discoverfy.addToPlayerQueue", DISPATCH_QUEUE_SERIAL);
         _spot_core_data_queue = dispatch_queue_create("com.discoverfy.addToCoreDataQueue", DISPATCH_QUEUE_SERIAL);
@@ -263,7 +266,7 @@
         
         if ((items.count == 50) && hasDiscoverfyPlaylist != YES){
 //            NSLog(@"Reached limit and no playlist found");
-            [self fetchPlaylistSongsWithAccessToken:accessToken session:session offset:(offset + 50) user:user queue:queue callback:nil];
+            [self fetchPlaylistSongsWithAccessToken:accessToken session:session offset:(offset + 50) user:user queue:queue callback:callbackBlock];
         } else if (items.count < 50 && hasDiscoverfyPlaylist != YES){
 //            NSLog(@"Below limit and no item found. Creating new Playlist.");
             
@@ -288,7 +291,7 @@
         } else if(items.count == 50 && hasDiscoverfyPlaylist == YES) {
 //            NSLog(@"Below limit and item found! %@",self.discoverfyPlaylist.name);
 //            NSLog(@"Retrieving other playlists");
-            [self fetchPlaylistSongsWithAccessToken:accessToken session:session offset:(offset + 50) user:user queue:queue callback:nil];
+            [self fetchPlaylistSongsWithAccessToken:accessToken session:session offset:(offset + 50) user:user queue:queue callback:callbackBlock];
         } else {
 //            NSLog(@"Below limit and item was previously found; name: %@",self.discoverfyPlaylist.name);
             dispatch_async(queue, ^{

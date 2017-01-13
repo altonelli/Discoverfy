@@ -38,6 +38,7 @@
     UIImage *logo = [[UIImage alloc]init];
     UIImageView *logoView = [[UIImageView alloc] initWithFrame:CGRectMake(0.0, 0.0, 200.0, 200.0)];
     [logoView setImage:logo];
+    [logoView setAccessibilityLabel:@"discoverfy logo"];
     [self.view addSubview:logoView];
     
     

@@ -21,6 +21,7 @@
 }
 
 @property (atomic, readwrite) SPTAuthViewController *authViewController;
+@property (weak, nonatomic) IBOutlet UIButton *logInButton;
 @property (nonatomic, strong) UIImageView *logoView;
 //@property (atomic, readwrite) BOOL firstLoad;
 

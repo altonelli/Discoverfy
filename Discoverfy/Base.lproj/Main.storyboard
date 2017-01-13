@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3wl-uQ-S4x">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="3wl-uQ-S4x">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -57,6 +57,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="X8Z-Yx-KEl">
                                 <color key="backgroundColor" red="0.09061670241" green="0.71710260930000003" blue="0.98105979369999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <accessibility key="accessibilityConfiguration" label="Log in to Spotify"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="dDy-du-RKt"/>
                                     <constraint firstAttribute="width" constant="216" id="yNW-Q3-kTl"/>
@@ -82,6 +83,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="ntp-1v-kJh"/>
                     <connections>
+                        <outlet property="logInButton" destination="X8Z-Yx-KEl" id="8BY-n2-CrB"/>
                         <segue destination="R7x-0V-5Ug" kind="show" identifier="ShowPlayer" id="eUN-sy-OTa"/>
                     </connections>
                 </viewController>
@@ -116,6 +118,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gRM-UJ-Rn4">
                                         <frame key="frameInset" minX="312" minY="26" width="55" height="30"/>
+                                        <accessibility key="accessibilityConfiguration" label="Log out button"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="55" id="0NR-nH-yc6"/>
                                             <constraint firstAttribute="height" constant="30" id="zEg-36-Div"/>
@@ -213,6 +216,7 @@
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="20" translatesAutoresizingMaskIntoConstraints="NO" id="c36-RZ-5wt">
                                 <frame key="frameInset" minX="24" minY="337" width="295" height="40"/>
+                                <accessibility key="accessibilityConfiguration" label="Track Title"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="tMI-iI-2a9"/>
                                 </constraints>
@@ -222,6 +226,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6p1-Bv-DSi">
                                 <frame key="frameInset" minX="225" minY="431" width="45" height="45"/>
+                                <accessibility key="accessibilityConfiguration" label="Restart Song"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="6p1-Bv-DSi" secondAttribute="height" multiplier="1:1.15" id="5Px-6O-0U8"/>
                                     <constraint firstAttribute="height" constant="40" id="jDU-sd-P3F"/>
@@ -236,6 +241,7 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qft-gm-9kW">
                                 <frame key="frameInset" minX="72" minY="431" width="45" height="45"/>
+                                <accessibility key="accessibilityConfiguration" label="Skip Song"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="bB1-hC-Uxq"/>
                                     <constraint firstAttribute="width" constant="40" id="bz6-MQ-5Vn"/>
@@ -252,6 +258,7 @@
                                 <color key="tintColor" red="0.2784313725" green="0.70980392160000005" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <accessibility key="accessibilityConfiguration">
                                     <accessibilityTraits key="traits" notEnabled="YES"/>
+                                    <bool key="isElement" value="NO"/>
                                 </accessibility>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="9IL-dC-vdb"/>
@@ -259,6 +266,7 @@
                             </slider>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SdZ-mq-gHj">
                                 <frame key="frameInset" minX="136" minY="419" width="70" height="70"/>
+                                <accessibility key="accessibilityConfiguration" label="Pause"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="5VA-d9-MQJ"/>
                                     <constraint firstAttribute="height" constant="60" id="Z4r-vY-T5j"/>
@@ -272,6 +280,7 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Album" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="0iw-5b-72Y">
                                 <frame key="frameInset" minX="24" minY="391" width="295" height="30"/>
+                                <accessibility key="accessibilityConfiguration" label="Album"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="tQf-Q7-GeU"/>
                                 </constraints>
@@ -281,6 +290,7 @@
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Artist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="WLa-ti-psX">
                                 <frame key="frameInset" minX="150" minY="366" width="42.5" height="30"/>
+                                <accessibility key="accessibilityConfiguration" label="Artirst"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="nHd-6L-FbK"/>
                                 </constraints>
@@ -290,6 +300,7 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Rr-3x-7ue">
                                 <frame key="frameInset" minX="136" minY="419" width="70" height="70"/>
+                                <accessibility key="accessibilityConfiguration" label="Play"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="60" id="S77-cj-aXa"/>
                                     <constraint firstAttribute="height" constant="60" id="sTc-AB-uVT"/>

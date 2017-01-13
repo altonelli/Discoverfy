@@ -141,9 +141,12 @@
     self.overlayImage.hidden = YES;
     
     self.trackTitle.text = track.spotifyTrack.name;
+    self.trackTitle.accessibilityLabel = [NSString stringWithFormat:@"Title: %@",track.spotifyTrack.name];
     SPTPartialArtist *artist = track.spotifyTrack.artists[0];
     self.trackArtist.text = artist.name;
+    self.trackArtist.accessibilityLabel = [NSString stringWithFormat:@"Artist: %@",artist.name];
     self.trackAlbum.text = track.spotifyTrack.album.name;
+    self.trackAlbum.accessibilityLabel = [NSString stringWithFormat:@"Album: %@",track.spotifyTrack.album.name];
 
 //    self.trackImage.image = [UIImage imageWithData:self.nextImageData];
 
@@ -155,7 +158,9 @@
     self.trackImage.image = [UIImage imageWithData:self.currentImageData];
     
     NSLog(@"updated image");
-
+//    [[AVAudioSession sharedInstance]
+//     setCategory: AVAudioSessionCategoryPlayback
+//     error: nil];
     [spot.player play];
 
 

@@ -22,6 +22,7 @@
 #import "Constants.h"
 
 
+
 @interface MusicViewController (){
     SpotifyService *spot;
     NSString *accessToken;
@@ -32,6 +33,7 @@
     CGRect screenRect;
     CGFloat screenWidth;
     CGFloat screenHeight;
+
 }
 
 @property (weak, nonatomic) IBOutlet UIView *rearContainer;
@@ -48,6 +50,7 @@
 
 @implementation MusicViewController
 
+
 -(void)loadView{
     [super loadView];
     
@@ -56,7 +59,9 @@
     screenHeight = screenRect.size.height;
     
     
+    [self loadAccessibility];
     [self.view setNeedsUpdateConstraints];
+    
     
     
     
@@ -69,12 +74,17 @@
     if([segueName isEqualToString:@"embedSegue"]){
         self.trackController = (TrackViewController *) [segue destinationViewController];
         self.trackController.isMainCard = YES;
+        self.trackController.isAccessibilityElement = YES;
+        self.trackController.view.accessibilityLabel = @"Track Card";
+        self.trackController.view.accessibilityHint = @"Drag right to add to playlist. Drag left to remove.";
     }
     
     if([segueName isEqualToString:@"embedSegue2"]){
         self.rearTrackController = (TrackViewController *) [segue destinationViewController];
         self.rearTrackController.isMainCard = NO;
+        
 //        self.rearTrackController.userInteractionEnabled = NO;
+        self.rearTrackController.view.accessibilityElementsHidden = YES;
     }
     
     
@@ -757,5 +767,62 @@
 -(void)printArtists{
     NSLog(@"post dispatch %@", spot.artistList);
 }
+
+-(BOOL)accessibilityPerformMagicTap{
+    if (spot.player.rate == 0.0) {
+        [spot.player play];
+        self.trackController.playButton.hidden = YES;
+        self.trackController.pauseButton.hidden = NO;
+    } else {
+        [spot.player pause];
+        self.trackController.playButton.hidden = NO;
+        self.trackController.pauseButton.hidden = YES;
+    }
+    
+    return YES;
+}
+
+-(IBAction)acceptButtonPressed:(id)sender{
+    Track *track = spot.partialTrackList[0];
+    [self songAcceptedWithTrack:track.spotifyTrack];
+}
+
+-(IBAction)rejectButtonPressed:(id)sender{
+    Track *track = spot.partialTrackList[0];
+    [self songRejectedWithTrack:track.spotifyTrack];
+}
+
+-(void)loadAccessibility{
+    CGRect screenSize = [[UIScreen mainScreen] bounds];
+    CGFloat screenWidth = screenSize.size.width;
+    CGFloat screenHeight = screenSize.size.height;
+    
+    UIButton *acceptButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [acceptButton addTarget:self action:@selector(acceptButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [acceptButton setTitle:@"Add" forState:UIControlStateNormal];
+    acceptButton.frame =  CGRectMake(screenWidth + 44, 80, 44, 44);
+    acceptButton.isAccessibilityElement = YES;
+    acceptButton.accessibilityLabel = @"Add to playlist";
+    acceptButton.accessibilityFrame = CGRectMake(screenWidth - 44, 80, 44, 44);
+    [acceptButton.titleLabel setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
+    acceptButton.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+    [self.view insertSubview:acceptButton atIndex:0];
+    
+    
+    UIButton *rejectButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    [rejectButton addTarget:self action:@selector(rejectButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [rejectButton setTitle:@"Pass" forState:UIControlStateNormal];
+    rejectButton.frame = CGRectMake(0 - 44, screenHeight - 44, 44, 44);
+    rejectButton.isAccessibilityElement = YES;
+    rejectButton.accessibilityLabel = @"Remove song from queue";
+    rejectButton.accessibilityFrame = CGRectMake(0, 80, 44, 44);
+    [rejectButton.titleLabel setTextColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:0]];
+    rejectButton.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0];
+    [self.view insertSubview:rejectButton atIndex:0];
+    
+    
+}
+
+
 
 @end

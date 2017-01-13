@@ -21,6 +21,10 @@
 
 @implementation SpinnerViewController
 
+-(void)viewDidAppear:(BOOL)animated{
+    UIAccessibilityPostNotification(UIAccessibilityAnnouncementNotification, @"Currating songs.");
+}
+
 
 -(void)loadView{
     [super loadView];
