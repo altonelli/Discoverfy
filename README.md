@@ -34,3 +34,8 @@ Issues are tracked and can be added [here](https://github.com/altonelli/Discover
 ## Author
 
 **Arthur Tonelli** - Feel free to check out more about me [here](http://arthurtonelli.me) or check out my GitHub [here](https://github.com/altonelli).
+
+## Acknowledgements
+
+* *[Rob Mayoff](https://github.com/mayoff)* - Repo on creating catagory to create a UIImage out of a GIF. Repository is [here](https://github.com/mayoff/uiimage-from-animated-gif).
+* *[Tony Million](https://github.com/tonymillion)* - Reachability framework for testing if the device has signal. Repository is [here](https://github.com/tonymillion/Reachability).
