@@ -52,6 +52,7 @@
 		9E25ABE81DC06BD500828B2B /* DiscoverfyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E25ABE71DC06BD500828B2B /* DiscoverfyItem.m */; };
 		9E2E29611E4D91CB00BCE848 /* DiscoverfyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E29601E4D91CB00BCE848 /* DiscoverfyTests.m */; };
 		9E2E29711E4D966600BCE848 /* DiscoverfyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E29701E4D966600BCE848 /* DiscoverfyUITests.m */; };
+		9E2E29791E516FDB00BCE848 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E29781E516FDB00BCE848 /* README.md */; };
 		9E3EAAF61DB5275E00F4B264 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3EAAF51DB5275E00F4B264 /* UIImage+animatedGIF.m */; };
 		9E3EAAF81DB527E000F4B264 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E3EAAF71DB527E000F4B264 /* ImageIO.framework */; };
 		9E4100451DA4AFBA00B9FAB9 /* HorseShitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4100441DA4AFBA00B9FAB9 /* HorseShitView.m */; };
@@ -176,6 +177,7 @@
 		9E2E296E1E4D966600BCE848 /* DiscoverfyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverfyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E2E29701E4D966600BCE848 /* DiscoverfyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoverfyUITests.m; sourceTree = "<group>"; };
 		9E2E29721E4D966600BCE848 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E2E29781E516FDB00BCE848 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		9E3EAAF41DB5275E00F4B264 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
 		9E3EAAF51DB5275E00F4B264 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
 		9E3EAAF71DB527E000F4B264 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -328,6 +330,7 @@
 		9E135D661D47E18200B52C47 = {
 			isa = PBXGroup;
 			children = (
+				9E2E29781E516FDB00BCE848 /* README.md */,
 				9E135D711D47E18200B52C47 /* Discoverfy */,
 				9E2E295F1E4D91CB00BCE848 /* DiscoverfyTests */,
 				9E2E296F1E4D966600BCE848 /* DiscoverfyUITests */,
@@ -580,6 +583,7 @@
 				9E0C42CB1D95E5C500FD6DC2 /* CardView.m in Sources */,
 				9E12481D1D553E6800F5B477 /* MusicViewController.m in Sources */,
 				9EBAE1991DA5C41C000DC995 /* PopOverView.m in Sources */,
+				9E2E29791E516FDB00BCE848 /* README.md in Sources */,
 				9EBAE1961DA4BE25000DC995 /* ErrorView.m in Sources */,
 				9E12481C1D553E6800F5B477 /* LogInController.m in Sources */,
 				9E135D801D47E18200B52C47 /* Discoverfy.xcdatamodeld in Sources */,
@@ -869,6 +873,7 @@
 				9E2E29661E4D91CB00BCE848 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9E2E29751E4D966600BCE848 /* Build configuration list for PBXNativeTarget "DiscoverfyUITests" */ = {
 			isa = XCConfigurationList;
@@ -877,6 +882,7 @@
 				9E2E29771E4D966600BCE848 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
