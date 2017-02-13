@@ -50,6 +50,8 @@
 		9E2283D21D6B7AA7004C4AD7 /* addSongImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E2283D11D6B7AA7004C4AD7 /* addSongImage.jpg */; };
 		9E2283D41D6B7C3E004C4AD7 /* removeSongImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */; };
 		9E25ABE81DC06BD500828B2B /* DiscoverfyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E25ABE71DC06BD500828B2B /* DiscoverfyItem.m */; };
+		9E2E29611E4D91CB00BCE848 /* DiscoverfyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E29601E4D91CB00BCE848 /* DiscoverfyTests.m */; };
+		9E2E29711E4D966600BCE848 /* DiscoverfyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E29701E4D966600BCE848 /* DiscoverfyUITests.m */; };
 		9E3EAAF61DB5275E00F4B264 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3EAAF51DB5275E00F4B264 /* UIImage+animatedGIF.m */; };
 		9E3EAAF81DB527E000F4B264 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E3EAAF71DB527E000F4B264 /* ImageIO.framework */; };
 		9E4100451DA4AFBA00B9FAB9 /* HorseShitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4100441DA4AFBA00B9FAB9 /* HorseShitView.m */; };
@@ -65,6 +67,42 @@
 		9EEFB3EC1DAF346D00E8C4FF /* AutoHeightFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EEFB3EB1DAF346D00E8C4FF /* AutoHeightFont.m */; };
 		9EEFB3EF1DAF40B500E8C4FF /* UIFont+AutoHeightFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EEFB3EE1DAF40B500E8C4FF /* UIFont+AutoHeightFont.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		9E2E29681E4D957D00BCE848 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+		};
+		9E2E29691E4D957E00BCE848 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXContainerItemProxy section */
+		9E2E29631E4D91CB00BCE848 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9E135D671D47E18200B52C47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9E135D6E1D47E18200B52C47;
+			remoteInfo = Discoverfy;
+		};
+		9E2E29731E4D966600BCE848 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9E135D671D47E18200B52C47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9E135D6E1D47E18200B52C47;
+			remoteInfo = Discoverfy;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		9E0C429D1D94800400FD6DC2 /* AlbumImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumImageView.h; sourceTree = "<group>"; };
@@ -132,6 +170,12 @@
 		9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = removeSongImage.jpg; sourceTree = "<group>"; };
 		9E25ABE61DC06BD500828B2B /* DiscoverfyItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverfyItem.h; sourceTree = "<group>"; };
 		9E25ABE71DC06BD500828B2B /* DiscoverfyItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverfyItem.m; sourceTree = "<group>"; };
+		9E2E295E1E4D91CB00BCE848 /* DiscoverfyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverfyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E2E29601E4D91CB00BCE848 /* DiscoverfyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoverfyTests.m; sourceTree = "<group>"; };
+		9E2E29621E4D91CB00BCE848 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E2E296E1E4D966600BCE848 /* DiscoverfyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverfyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E2E29701E4D966600BCE848 /* DiscoverfyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoverfyUITests.m; sourceTree = "<group>"; };
+		9E2E29721E4D966600BCE848 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9E3EAAF41DB5275E00F4B264 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
 		9E3EAAF51DB5275E00F4B264 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
 		9E3EAAF71DB527E000F4B264 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -167,6 +211,20 @@
 				9E12482B1D5540A400F5B477 /* SystemConfiguration.framework in Frameworks */,
 				9E1248261D553F6D00F5B477 /* AVFoundation.framework in Frameworks */,
 				9E1248281D553FD700F5B477 /* Spotify.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E2E295B1E4D91CB00BCE848 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E2E296B1E4D966600BCE848 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +329,8 @@
 			isa = PBXGroup;
 			children = (
 				9E135D711D47E18200B52C47 /* Discoverfy */,
+				9E2E295F1E4D91CB00BCE848 /* DiscoverfyTests */,
+				9E2E296F1E4D966600BCE848 /* DiscoverfyUITests */,
 				9E135D701D47E18200B52C47 /* Products */,
 				9E1248291D553FF000F5B477 /* Frameworks */,
 			);
@@ -280,6 +340,8 @@
 			isa = PBXGroup;
 			children = (
 				9E135D6F1D47E18200B52C47 /* Discoverfy.app */,
+				9E2E295E1E4D91CB00BCE848 /* DiscoverfyTests.xctest */,
+				9E2E296E1E4D966600BCE848 /* DiscoverfyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -331,6 +393,24 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		9E2E295F1E4D91CB00BCE848 /* DiscoverfyTests */ = {
+			isa = PBXGroup;
+			children = (
+				9E2E29601E4D91CB00BCE848 /* DiscoverfyTests.m */,
+				9E2E29621E4D91CB00BCE848 /* Info.plist */,
+			);
+			path = DiscoverfyTests;
+			sourceTree = "<group>";
+		};
+		9E2E296F1E4D966600BCE848 /* DiscoverfyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9E2E29701E4D966600BCE848 /* DiscoverfyUITests.m */,
+				9E2E29721E4D966600BCE848 /* Info.plist */,
+			);
+			path = DiscoverfyUITests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -343,6 +423,8 @@
 				9E135D6D1D47E18200B52C47 /* Resources */,
 			);
 			buildRules = (
+				9E2E29691E4D957E00BCE848 /* PBXBuildRule */,
+				9E2E29681E4D957D00BCE848 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -350,6 +432,42 @@
 			productName = Discoverfy;
 			productReference = 9E135D6F1D47E18200B52C47 /* Discoverfy.app */;
 			productType = "com.apple.product-type.application";
+		};
+		9E2E295D1E4D91CB00BCE848 /* DiscoverfyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E2E29671E4D91CB00BCE848 /* Build configuration list for PBXNativeTarget "DiscoverfyTests" */;
+			buildPhases = (
+				9E2E295A1E4D91CB00BCE848 /* Sources */,
+				9E2E295B1E4D91CB00BCE848 /* Frameworks */,
+				9E2E295C1E4D91CB00BCE848 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9E2E29641E4D91CB00BCE848 /* PBXTargetDependency */,
+			);
+			name = DiscoverfyTests;
+			productName = DiscoverfyTests;
+			productReference = 9E2E295E1E4D91CB00BCE848 /* DiscoverfyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9E2E296D1E4D966600BCE848 /* DiscoverfyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E2E29751E4D966600BCE848 /* Build configuration list for PBXNativeTarget "DiscoverfyUITests" */;
+			buildPhases = (
+				9E2E296A1E4D966600BCE848 /* Sources */,
+				9E2E296B1E4D966600BCE848 /* Frameworks */,
+				9E2E296C1E4D966600BCE848 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9E2E29741E4D966600BCE848 /* PBXTargetDependency */,
+			);
+			name = DiscoverfyUITests;
+			productName = DiscoverfyUITests;
+			productReference = 9E2E296E1E4D966600BCE848 /* DiscoverfyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -363,6 +481,18 @@
 					9E135D6E1D47E18200B52C47 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 663M9C4UE5;
+					};
+					9E2E295D1E4D91CB00BCE848 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 663M9C4UE5;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 9E135D6E1D47E18200B52C47;
+					};
+					9E2E296D1E4D966600BCE848 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 663M9C4UE5;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 9E135D6E1D47E18200B52C47;
 					};
 				};
 			};
@@ -380,6 +510,8 @@
 			projectRoot = "";
 			targets = (
 				9E135D6E1D47E18200B52C47 /* Discoverfy */,
+				9E2E295D1E4D91CB00BCE848 /* DiscoverfyTests */,
+				9E2E296D1E4D966600BCE848 /* DiscoverfyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -412,6 +544,20 @@
 				9E2283D21D6B7AA7004C4AD7 /* addSongImage.jpg in Resources */,
 				9E1151F71DD167F900B7A7EB /* FinalLogo.png in Resources */,
 				9E203A801D6E653800D0490C /* demoAlbumArt.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E2E295C1E4D91CB00BCE848 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E2E296C1E4D966600BCE848 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,7 +600,36 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9E2E295A1E4D91CB00BCE848 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E2E29611E4D91CB00BCE848 /* DiscoverfyTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E2E296A1E4D966600BCE848 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E2E29711E4D966600BCE848 /* DiscoverfyUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9E2E29641E4D91CB00BCE848 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9E135D6E1D47E18200B52C47 /* Discoverfy */;
+			targetProxy = 9E2E29631E4D91CB00BCE848 /* PBXContainerItemProxy */;
+		};
+		9E2E29741E4D966600BCE848 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9E135D6E1D47E18200B52C47 /* Discoverfy */;
+			targetProxy = 9E2E29731E4D966600BCE848 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9E135D7B1D47E18200B52C47 /* Main.storyboard */ = {
@@ -600,6 +775,72 @@
 			};
 			name = Release;
 		};
+		9E2E29651E4D91CB00BCE848 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEVELOPMENT_TEAM = 663M9C4UE5;
+				INFOPLIST_FILE = DiscoverfyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.altonelli.DiscoverfyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Discoverfy.app/Discoverfy";
+			};
+			name = Debug;
+		};
+		9E2E29661E4D91CB00BCE848 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEVELOPMENT_TEAM = 663M9C4UE5;
+				INFOPLIST_FILE = DiscoverfyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.altonelli.DiscoverfyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Discoverfy.app/Discoverfy";
+			};
+			name = Release;
+		};
+		9E2E29761E4D966600BCE848 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEVELOPMENT_TEAM = 663M9C4UE5;
+				INFOPLIST_FILE = DiscoverfyUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.altonelli.DiscoverfyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Discoverfy;
+			};
+			name = Debug;
+		};
+		9E2E29771E4D966600BCE848 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEVELOPMENT_TEAM = 663M9C4UE5;
+				INFOPLIST_FILE = DiscoverfyUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.altonelli.DiscoverfyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Discoverfy;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -620,6 +861,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		9E2E29671E4D91CB00BCE848 /* Build configuration list for PBXNativeTarget "DiscoverfyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E2E29651E4D91CB00BCE848 /* Debug */,
+				9E2E29661E4D91CB00BCE848 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9E2E29751E4D966600BCE848 /* Build configuration list for PBXNativeTarget "DiscoverfyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E2E29761E4D966600BCE848 /* Debug */,
+				9E2E29771E4D966600BCE848 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 
