@@ -17,14 +17,12 @@
 -(void)startSpinner{
     
     self.view.hidden = NO;
-    [self.spinner startAnimating];
     
 }
 
 -(void)stopSpinner{
     
     self.view.hidden = YES;
-    [self.spinner stopAnimating];
     
 }
 

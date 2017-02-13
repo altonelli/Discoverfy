@@ -22,6 +22,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 -(void)removeAllSongsFromUser:(NSString *)username inManagedObjectContext:(NSManagedObjectContext *)context;
 
+-(NSNumber *)countAllSongsFromUser:(NSString *)username inManagedObjectContext:(NSManagedObjectContext *)context;
+
 
 @end
 

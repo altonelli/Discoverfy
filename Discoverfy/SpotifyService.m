@@ -13,6 +13,8 @@
 #import "AppDelegate.h"
 #import "CoreDataService.h"
 #import "Reachability.h"
+#import "DiscoverfyService.h"
+#import "DiscoverfyItem.h"
 
 @interface SpotifyService (){
     SPTPlaylistList *playlist;
@@ -20,6 +22,7 @@
     SPTAuth *auth;
     AppDelegate *appDelegate;
     NSManagedObjectContext *context;
+    NSManagedObjectContext *privateContext;
 }
 
 @end
@@ -41,7 +44,8 @@
         auth = [SPTAuth defaultInstance];
         
         appDelegate = [[UIApplication sharedApplication]delegate];
-        context = [appDelegate managedObjectContext];
+        
+        _topTrackList = [[NSArray alloc]init];
         
         _artistList = [[NSMutableArray alloc]init];
         _uriList = [[NSMutableArray alloc]init];
@@ -49,8 +53,20 @@
 //        self.player = [[AVQueuePlayer alloc]init];
 
         _player = [[AVQueuePlayer alloc]init];
+        [[AVAudioSession sharedInstance]
+                          setCategory: AVAudioSessionCategoryPlayback
+                          error: nil];
         
         _spot_service_queue = dispatch_queue_create("com.discoverfy.addToPlayerQueue", DISPATCH_QUEUE_SERIAL);
+        _spot_core_data_queue = dispatch_queue_create("com.discoverfy.addToCoreDataQueue", DISPATCH_QUEUE_SERIAL);
+        
+        context = [appDelegate managedObjectContext];
+        
+        dispatch_sync(self.spot_core_data_queue, ^{
+            
+            privateContext = [appDelegate privateContext];
+            
+        });
 
         self.player.actionAtItemEnd = AVPlayerActionAtItemEndNone;
 
@@ -64,7 +80,9 @@
 }
 
 -(void)trackDidFinish:(NSNotification *)notification{
-    AVPlayerItem *item = [notification object];
+//    AVPlayerItem *item = [notification object];
+    
+    DiscoverfyItem *item = [notification object];
     [item seekToTime:kCMTimeZero];
 }
 
@@ -79,6 +97,7 @@
         dispatch_async(queue, ^{
         if(error != nil){
             NSLog(@"*** Error on top artist get %@",error);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
             return;
         }
             
@@ -100,6 +119,7 @@
 }
 
 -(void)queueSongsWithAccessToken:(NSString *)accessToken user:(User*)user queue:(dispatch_queue_t)queue callback:(nullable void (^)(void))callbackBlock{
+
 
         [self getArtistsListWithAccessToken:accessToken queue:queue callback:^{
                 
@@ -137,6 +157,8 @@
 
         if(error != nil){
             NSLog(@"*** Error on song get %@",error);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+
             return;
         }
         
@@ -147,6 +169,8 @@
         
         if(err != nil){
             NSLog(@"error of results dictionary %@",err);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+            return;
         }
         
         NSArray *tracks = [jsonDict objectForKey:@"tracks"];
@@ -166,21 +190,25 @@
 
         if(partialError != nil){
             NSLog(@"*** Partial Error %@",partialError);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+            
+            return;
+
         }
 
+        
         
         if (![Song songExistsForUser:user trackID:partialtrack.identifier inManagedObjectContext:context]){
             
             Track *newTrack = [[Track alloc]initWithSpotifyTrack:partialtrack];
-//            NSLog(@"testing 1235");
-//            NSLog(@"player: %@", self.player);
-//            NSLog(@"partial playlist: %@", self.partialTrackList);
             
             [newTrack addToService:self withQueue:self.spot_service_queue];
             
             
         } else {
+            
 //            NSLog(@"Already have song, ignoring.");
+            
         }
     };
     
@@ -196,6 +224,8 @@
     [[SPTRequest sharedHandler]performRequest:playlistsReq callback:^(NSError *error, NSURLResponse *response, NSData *data) {
         if (error != nil){
             NSLog(@"*** Error on playlist get %@",error);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+            return;
         }
         playlist = [SPTPlaylistList playlistListFromData:data withResponse:response error:&error];
         
@@ -211,6 +241,8 @@
                 [SPTPlaylistSnapshot playlistWithURI:partialPlaylist.uri session:session callback:^(NSError *error, id object) {
                     if (error != nil){
                         NSLog(@"*** Error on playlist snapshot create %@",error);
+                        [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+                        return;
                     }
                     
                     self.discoverfyPlaylist = object;
@@ -234,13 +266,15 @@
         
         if ((items.count == 50) && hasDiscoverfyPlaylist != YES){
 //            NSLog(@"Reached limit and no playlist found");
-            [self fetchPlaylistSongsWithAccessToken:accessToken session:session offset:(offset + 50) user:user queue:queue callback:nil];
+            [self fetchPlaylistSongsWithAccessToken:accessToken session:session offset:(offset + 50) user:user queue:queue callback:callbackBlock];
         } else if (items.count < 50 && hasDiscoverfyPlaylist != YES){
 //            NSLog(@"Below limit and no item found. Creating new Playlist.");
             
             [SPTPlaylistList createPlaylistWithName:@"Discoverfy App" publicFlag:YES session:session callback:^(NSError *error, SPTPlaylistSnapshot *returnedPlaylist) {
                 if (error != nil){
                     NSLog(@"*** Error on playlist create %@",error);
+                    [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+                    return;
                 } else {
                     self.discoverfyPlaylist = returnedPlaylist;
 //                    NSLog(@"Discoverfy playlist created");
@@ -257,11 +291,11 @@
         } else if(items.count == 50 && hasDiscoverfyPlaylist == YES) {
 //            NSLog(@"Below limit and item found! %@",self.discoverfyPlaylist.name);
 //            NSLog(@"Retrieving other playlists");
-            [self fetchPlaylistSongsWithAccessToken:accessToken session:session offset:(offset + 50) user:user queue:queue callback:nil];
+            [self fetchPlaylistSongsWithAccessToken:accessToken session:session offset:(offset + 50) user:user queue:queue callback:callbackBlock];
         } else {
 //            NSLog(@"Below limit and item was previously found; name: %@",self.discoverfyPlaylist.name);
             dispatch_async(queue, ^{
-
+                
             callbackBlock();
                 
             });
@@ -298,6 +332,8 @@
         
         if (error != nil) {
             NSLog(@"*** Error on track get from %@: %@",userPlaylist.name,error);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+            return;
         }
         
         
@@ -315,8 +351,16 @@
             
             
             if (trackID){
-                
-                Song *song = [Song storeSongWithSongID:trackID ofType:@"Spotify" withUser:user inManangedObjectContext:context];
+                dispatch_async(self.spot_core_data_queue, ^{
+                    
+                    [privateContext performBlock:^{
+                        NSLog(@"adding playlist track to core data: %@", trackID);
+                        
+                        Song *song = [Song storeSongWithSongID:trackID ofType:@"Spotify" withUser:user inManangedObjectContext:privateContext];
+                        
+                    }];
+                    
+                });
                 
             }
             
@@ -330,13 +374,227 @@
     }];
 }
 
+-(void)queueInitialSongsUsingTracksWithAccessToken:(NSString *)accessToken user:(User*)user callback:(void(^)(void))callbackBlock{
+    
+    [self fetchTopTracksWithAccessToken:accessToken callback:^(NSArray *trackIDs) {
+        
+        [self queueBatchSongsUsingTracksWithAccessToken:accessToken user:user callback:^{
+            
+            if (callbackBlock != nil) {
+                return callbackBlock();
+            }
+            
+        }];
+        
+    }];
+    
+}
+
+-(void)queueBatchSongsUsingTracksWithAccessToken:(NSString *)accessToken user:(User*)user callback:(void(^)(void))callbackBlock{
+    
+    [self fetchRecommendedSongsFromTracks:self.topTrackList accessToken:accessToken callback:^(NSArray *resultTracks) {
+        
+        [self convertTracksWithTracks:resultTracks user:user];
+        
+        if (callbackBlock != nil) {
+            return callbackBlock();
+        }
+        
+    }];
+    
+}
+
+
+-(NSArray *)getFiveRandomFromArray:(NSArray*)array{
+    
+    NSMutableArray *mutableArray = [[NSMutableArray alloc]init];
+    
+    int arrayCount = self.topTrackList.count;
+    
+    for (int i = 0; i < 5; i++){
+        int num = arc4random_uniform(arrayCount);
+        [mutableArray addObject:array[num]];
+    }
+    
+    
+    NSArray *smallArray = [NSArray arrayWithArray:mutableArray];
+    
+    return smallArray;
+}
+
+-(void)fetchTopTracksWithAccessToken:(NSString *)accessToken callback:(void (^)(NSArray *trackIDs))callbackBlock {
+    
+    NSURL *url = [NSURL URLWithString:@"https://api.spotify.com/v1/me/top/tracks?limit=20&time_range=short_term"];
+    
+    NSError *error;
+    NSURLRequest *artistsReq = [SPTRequest createRequestForURL:url withAccessToken:accessToken httpMethod:@"GET" values:nil valueBodyIsJSON:YES sendDataAsQueryString:YES error:&error];
+    
+    [[SPTRequest sharedHandler]performRequest:artistsReq callback:^(NSError *error, NSURLResponse *response, NSData *data) {
+
+            if(error != nil){
+                NSLog(@"*** Error on top track get %@",error);
+                [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+                return;
+            }
+            
+            NSError *err;
+            NSDictionary *trackDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+            
+            NSArray *items = [trackDictionary valueForKey:@"items"];
+        
+            NSMutableArray *tempIDArray = [[NSMutableArray alloc]init];
+        
+        if (!self.topTrackList){
+            self.topTrackList = [[NSArray alloc]init];
+        }
+        
+            for(NSObject *track in items){
+                NSString *id = [track valueForKey:@"id"];
+                [tempIDArray addObject:id];
+            }
+        
+        self.topTrackList = [NSArray arrayWithArray:tempIDArray];
+        NSLog(@"topTrackList count: %lu", (unsigned long)[self.topTrackList count]);
+            
+            callbackBlock(self.topTrackList);
+        
+        return;
+        
+    }];
+    
+}
+
+
+-(void)fetchRecommendedSongsFromTracks:(NSArray *)tracks accessToken:(NSString *)accessToken callback:(void(^)(NSArray *resultTracks))callbackBlock{
+
+    
+    NSMutableString *urlString = [NSMutableString stringWithFormat:@"https://api.spotify.com/v1/recommendations?seed_tracks="];
+    
+    NSArray *fiveRandom = [self getFiveRandomFromArray:tracks];
+    
+    for (NSString *artistID in fiveRandom){
+        [urlString appendString:[NSString stringWithFormat:@"%@,",artistID]];
+    }
+    
+    [urlString deleteCharactersInRange:NSMakeRange([urlString length]-1, 1)];
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSError *error;
+    NSURLRequest *songReq = [SPTRequest createRequestForURL:url withAccessToken:accessToken httpMethod:@"GET" values:nil valueBodyIsJSON:YES sendDataAsQueryString:YES error:&error];
+    
+    [[SPTRequest sharedHandler]performRequest:songReq callback:^(NSError *error, NSURLResponse *response, NSData *data) {
+            
+            if(error != nil){
+                NSLog(@"*** Error on song get %@",error);
+                [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+                
+                return;
+            }
+            
+            NSError *err;
+            NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+            
+            
+            
+            if(err != nil){
+                NSLog(@"error of results dictionary %@",err);
+                [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+                return;
+            }
+            
+            NSArray *recommendedTracks = [jsonDict objectForKey:@"tracks"];
+            
+            callbackBlock(recommendedTracks);
+        
+        return;
+    }];
+    
+}
+
+-(void)fetchAllSavedSongsWithAccessToken:(NSString *)accessToken user:(User*)user callback:(void(^)(void))callbackBlock{
+    
+    int offset = 0;
+    int limit = 50;
+    
+    __block __weak void(^weak_recursion)(int returnCount, int offset, int limit);
+    void(^recursion)(int returnCount, int offset, int limit);
+    weak_recursion = recursion = ^(int returnCount, int offset, int limit) {
+        
+        if (returnCount < limit) {
+            callbackBlock();
+            return;
+        } else {
+            offset = offset + 50;
+
+            [self fetchSavedSongsWithAccessToken:accessToken offset:offset limit:limit user:user callback:weak_recursion];
+        }
+        
+    };
+                                                                               
+    [self fetchSavedSongsWithAccessToken:accessToken offset:offset limit:limit user:user callback:weak_recursion];
+    
+}
+
+
+
+-(void)fetchSavedSongsWithAccessToken:(NSString *)accessToken offset:(int)offset limit:(int)limit user:(User *)user callback:(void (^)(int returnCount, int offset, int limit))callbackBlock{
+    
+    NSError *error;
+    
+    NSURLRequest *request = [SPTYourMusic createRequestForCurrentUsersSavedTracksWithAccessToken:accessToken error:&error];
+    
+    [[SPTRequest sharedHandler] performRequest:request callback:^(NSError *error, NSURLResponse *response, NSData *data) {
+        if (error != nil) {
+            NSLog(@"*** Error in saved song fetch: %@", error);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+            return;
+        }
+        
+        NSError *jsonError;
+        NSDictionary *trackDictionary = [NSJSONSerialization JSONObjectWithData:data options:0 error:&jsonError];
+        
+        if (jsonError != nil) {
+            NSLog(@"*** Error in saved song serialization: %@", jsonError);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+            return;
+        }
+        
+        NSArray *items = [trackDictionary objectForKey:@"items"];
+        
+        for (NSObject*track in items) {
+            NSString *id = [track valueForKey:@"id"];
+            dispatch_async(self.spot_core_data_queue, ^{
+    
+                [privateContext performBlock:^{
+                    Song *newSong = [Song storeSongWithSongID:id ofType:@"Spotify" withUser:user inManangedObjectContext:privateContext];
+                }];
+                
+            });
+        }
+        
+        int returnCount = items.count;
+        
+        return callbackBlock(returnCount, offset, limit);
+        
+    }];
+    
+}
+
 -(void)emptyArrays{
     
-    [self.player removeAllItems];
-    [self.artistList removeAllObjects];
-    [self.uriList removeAllObjects];
-    [self.partialTrackList removeAllObjects];
-    self.discoverfyPlaylist = nil;
+    for (DiscoverfyItem*item in self.player.items){
+        [item.asset cancelLoading];
+        [self.player advanceToNextItem];
+    }
+    
+        [self.player removeAllItems];
+    
+        [self.artistList removeAllObjects];
+        [self.uriList removeAllObjects];
+        [self.partialTrackList removeAllObjects];
+        self.discoverfyPlaylist = nil;
+
     
 }
 

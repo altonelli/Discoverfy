@@ -22,13 +22,18 @@
 @implementation AppDelegate
 
 
+
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions{
     
     SPTAuth *auth = [SPTAuth defaultInstance];
+    [auth setTokenSwapURL:[NSURL URLWithString:@"https://discoverfy.herokuapp.com/swap"]];
+    [auth setTokenRefreshURL:[NSURL URLWithString:@"https://discoverfy.herokuapp.com/refresh"]];
     
     [auth setClientID:@kClientId];
     [auth setRedirectURL:[NSURL URLWithString:@kCallbackURL]];
     [auth setRequestedScopes:@[SPTAuthStreamingScope, SPTAuthPlaylistReadPrivateScope, SPTAuthPlaylistModifyPrivateScope,SPTAuthPlaylistModifyPublicScope, @"user-top-read"]];
+    [auth setSessionUserDefaultsKey:@"userDefaultsKey"];
     
 //    NSURL *loginURL = [auth loginURL];
 //    
@@ -50,13 +55,28 @@
         }
         
         auth.session = session;
+        
+        NSData *sessionData = [NSKeyedArchiver archivedDataWithRootObject:auth.session];
+        NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+        
+        if ([defaults objectForKey:auth.sessionUserDefaultsKey] != nil) {
+            [defaults removeObjectForKey:auth.sessionUserDefaultsKey];
+        }
+        
+        [defaults setObject:sessionData forKey:auth.sessionUserDefaultsKey];
+        [defaults synchronize];
+        
+        
         [[NSNotificationCenter defaultCenter]postNotificationName:@"sessionUpdated" object:self];
         
     };
-    
-    NSLog(@"auth url trying to open: %@", url);
+
+
     
     if([auth canHandleURL:url]) {
+        
+        NSLog(@"can handle url");
+        
         [auth handleAuthCallbackWithTriggeredAuthURL:url callback:authCallback];
         
         return YES;
@@ -68,7 +88,17 @@
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
-    [[[SpotifyService sharedService]player]pause];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    UIViewController *currentViewController = (UIViewController*)((UINavigationController*)appDelegate.window.rootViewController).visibleViewController;
+    
+    if ([currentViewController isKindOfClass:[MusicViewController class]]){
+        MusicViewController *musicViewController = (MusicViewController *)currentViewController;
+        musicViewController.trackController.pauseButton.hidden = YES;
+        musicViewController.trackController.playButton.hidden = NO;
+        
+        [[[SpotifyService sharedService]player]pause];
+    }
+    
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application {
@@ -82,19 +112,41 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    [[[SpotifyService sharedService]player]play];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication]delegate];
+    UIViewController *currentViewController = (UIViewController*)((UINavigationController*)appDelegate.window.rootViewController).visibleViewController;
+    
+    if ([currentViewController isKindOfClass:[MusicViewController class]]){
+        MusicViewController *musicViewController = (MusicViewController *)currentViewController;
+        musicViewController.trackController.pauseButton.hidden = NO;
+        musicViewController.trackController.playButton.hidden = YES;
+        
+        [[[SpotifyService sharedService]player]play];
+    }
 
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
-    [self saveContext];
+    SpotifyService* spot = [SpotifyService sharedService];
+    
+    dispatch_queue_t backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0);
+    dispatch_async(backgroundQueue, ^{
+        
+        [spot emptyArrays];
+        
+        
+        [self saveContext];
+        
+        NSLog(@"GOOD BYE");
+    });
+    
 }
 
 #pragma mark - Core Data stack
 
 @synthesize managedObjectContext = _managedObjectContext;
+@synthesize privateContext = _privateContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
@@ -153,8 +205,26 @@
         return nil;
     }
     _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSMainQueueConcurrencyType];
+//    _managedObjectContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+
     [_managedObjectContext setPersistentStoreCoordinator:coordinator];
     return _managedObjectContext;
+}
+
+- (NSManagedObjectContext *)privateContext {
+    // Returns the private managed object context for the application with parent context of managedObjectContext (which is already bound to the persistent store coordinator for the application.)
+    if (_privateContext != nil) {
+        return _privateContext;
+    }
+    
+    NSPersistentStoreCoordinator *coordinator = [self persistentStoreCoordinator];
+    if (!coordinator) {
+        return nil;
+    }
+    _privateContext = [[NSManagedObjectContext alloc] initWithConcurrencyType:NSPrivateQueueConcurrencyType];
+    
+    [_privateContext setParentContext:[self managedObjectContext]];
+    return _privateContext;
 }
 
 #pragma mark - Core Data Saving support

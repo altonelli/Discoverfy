@@ -14,9 +14,13 @@
 @interface TrackViewController : UIViewController
 
 @property (weak, nonatomic) IBOutlet UISlider *trackSlider;
-@property (weak, nonatomic) IBOutlet AlbumImageView *overlayImage;
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
+@property (weak, nonatomic) IBOutlet UIButton *pauseButton;
+
+
+@property (weak, nonatomic) IBOutlet UIImageView *overlayImage;
 @property (nonatomic) BOOL isMainCard;
 
--(void)updateUIWithTrack:(Track *)track;
+-(void)updateUIWithTrack:(Track *)track andPrepareTrack:(Track *)nextTrack;
 
 @end

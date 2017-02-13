@@ -9,15 +9,17 @@
 #import <UIKit/UIKit.h>
 #import <Spotify/Spotify.h>
 #import <AVFoundation/AVFoundation.h>
+#import "TrackViewController.h"
 #import "User.h"
 
 
-@interface MusicViewController : UIViewController <SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate>
+@interface MusicViewController : UIViewController <AVAudioPlayerDelegate,SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate>
 
-@property (nonatomic,strong) User* user;
+@property (nonatomic,strong) User * user;
 @property (nonatomic) BOOL firstPlay;
 @property (nonatomic) BOOL queuing;
 
+@property (nonatomic,strong) TrackViewController *trackController;
 @property (weak, nonatomic) IBOutlet UIView *mainContainer;
 
 

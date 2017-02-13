@@ -10,6 +10,14 @@
 		9E0C429F1D94800400FD6DC2 /* AlbumImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C429E1D94800400FD6DC2 /* AlbumImageView.m */; };
 		9E0C42CB1D95E5C500FD6DC2 /* CardView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C42CA1D95E5C500FD6DC2 /* CardView.m */; };
 		9E0C42D01D9CBC3000FD6DC2 /* SpinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E0C42CF1D9CBC3000FD6DC2 /* SpinnerViewController.m */; };
+		9E1151CC1DD04D5500B7A7EB /* newLoading.gif in Resources */ = {isa = PBXBuildFile; fileRef = 9E1151CB1DD04D5500B7A7EB /* newLoading.gif */; };
+		9E1151F51DD166E100B7A7EB /* LaunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1151F41DD166E100B7A7EB /* LaunchViewController.m */; };
+		9E1151F71DD167F900B7A7EB /* FinalLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E1151F61DD167F900B7A7EB /* FinalLogo.png */; };
+		9E1151F91DD174CC00B7A7EB /* DiscoverfyBackgroundGradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E1151F81DD174CC00B7A7EB /* DiscoverfyBackgroundGradient.png */; };
+		9E1151FE1DD3D3F800B7A7EB /* discResetBottonSm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E1151FA1DD3D3F800B7A7EB /* discResetBottonSm.png */; };
+		9E1151FF1DD3D3F800B7A7EB /* discPlayButtonSm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E1151FB1DD3D3F800B7A7EB /* discPlayButtonSm.png */; };
+		9E1152001DD3D3F800B7A7EB /* discPauseBottonSm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E1151FC1DD3D3F800B7A7EB /* discPauseBottonSm.png */; };
+		9E1152011DD3D3F800B7A7EB /* discCancelButtonSm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E1151FD1DD3D3F800B7A7EB /* discCancelButtonSm.png */; };
 		9E1248101D553E2F00F5B477 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E12480F1D553E2F00F5B477 /* AppDelegate.m */; };
 		9E12481C1D553E6800F5B477 /* LogInController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1248131D553E6800F5B477 /* LogInController.m */; };
 		9E12481D1D553E6800F5B477 /* MusicViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E1248151D553E6800F5B477 /* MusicViewController.m */; };
@@ -41,8 +49,60 @@
 		9E203A8B1D72AB9100D0490C /* ErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E203A8A1D72AB9100D0490C /* ErrorViewController.m */; };
 		9E2283D21D6B7AA7004C4AD7 /* addSongImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E2283D11D6B7AA7004C4AD7 /* addSongImage.jpg */; };
 		9E2283D41D6B7C3E004C4AD7 /* removeSongImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */; };
+		9E25ABE81DC06BD500828B2B /* DiscoverfyItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E25ABE71DC06BD500828B2B /* DiscoverfyItem.m */; };
+		9E2E29611E4D91CB00BCE848 /* DiscoverfyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E29601E4D91CB00BCE848 /* DiscoverfyTests.m */; };
+		9E2E29711E4D966600BCE848 /* DiscoverfyUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E2E29701E4D966600BCE848 /* DiscoverfyUITests.m */; };
+		9E3EAAF61DB5275E00F4B264 /* UIImage+animatedGIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E3EAAF51DB5275E00F4B264 /* UIImage+animatedGIF.m */; };
+		9E3EAAF81DB527E000F4B264 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9E3EAAF71DB527E000F4B264 /* ImageIO.framework */; };
+		9E4100451DA4AFBA00B9FAB9 /* HorseShitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9E4100441DA4AFBA00B9FAB9 /* HorseShitView.m */; };
+		9E80F74F1DE8F70A00D25D9F /* thinResetButtonFlatSm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E80F74B1DE8F70A00D25D9F /* thinResetButtonFlatSm.png */; };
+		9E80F7501DE8F70A00D25D9F /* thinPlayButtonFlatSm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E80F74C1DE8F70A00D25D9F /* thinPlayButtonFlatSm.png */; };
+		9E80F7511DE8F70A00D25D9F /* thinPauseButtonFlatSm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E80F74D1DE8F70A00D25D9F /* thinPauseButtonFlatSm.png */; };
+		9E80F7521DE8F70A00D25D9F /* thinCancelButtonFlatSm.png in Resources */ = {isa = PBXBuildFile; fileRef = 9E80F74E1DE8F70A00D25D9F /* thinCancelButtonFlatSm.png */; };
+		9EADBCD81DDE606500600BB6 /* discPauseButtonSm1.png in Resources */ = {isa = PBXBuildFile; fileRef = 9EADBCD71DDE606500600BB6 /* discPauseButtonSm1.png */; };
+		9EBAE1961DA4BE25000DC995 /* ErrorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAE1951DA4BE25000DC995 /* ErrorView.m */; };
+		9EBAE1991DA5C41C000DC995 /* PopOverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EBAE1981DA5C41C000DC995 /* PopOverView.m */; };
 		9EC49FCD1D9CE1B700376990 /* DiscoverfyError.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC49FCC1D9CE1B700376990 /* DiscoverfyError.m */; };
+		9EC49FD01DA224C400376990 /* ImageButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EC49FCF1DA224C400376990 /* ImageButton.m */; };
+		9EEFB3EC1DAF346D00E8C4FF /* AutoHeightFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EEFB3EB1DAF346D00E8C4FF /* AutoHeightFont.m */; };
+		9EEFB3EF1DAF40B500E8C4FF /* UIFont+AutoHeightFont.m in Sources */ = {isa = PBXBuildFile; fileRef = 9EEFB3EE1DAF40B500E8C4FF /* UIFont+AutoHeightFont.m */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXBuildRule section */
+		9E2E29681E4D957D00BCE848 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+		};
+		9E2E29691E4D957E00BCE848 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			isEditable = 1;
+			outputFiles = (
+			);
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXContainerItemProxy section */
+		9E2E29631E4D91CB00BCE848 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9E135D671D47E18200B52C47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9E135D6E1D47E18200B52C47;
+			remoteInfo = Discoverfy;
+		};
+		9E2E29731E4D966600BCE848 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9E135D671D47E18200B52C47 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9E135D6E1D47E18200B52C47;
+			remoteInfo = Discoverfy;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		9E0C429D1D94800400FD6DC2 /* AlbumImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumImageView.h; sourceTree = "<group>"; };
@@ -51,6 +111,15 @@
 		9E0C42CA1D95E5C500FD6DC2 /* CardView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardView.m; sourceTree = "<group>"; };
 		9E0C42CE1D9CBC3000FD6DC2 /* SpinnerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpinnerViewController.h; sourceTree = "<group>"; };
 		9E0C42CF1D9CBC3000FD6DC2 /* SpinnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SpinnerViewController.m; sourceTree = "<group>"; };
+		9E1151CB1DD04D5500B7A7EB /* newLoading.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = newLoading.gif; sourceTree = "<group>"; };
+		9E1151F31DD166E100B7A7EB /* LaunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LaunchViewController.h; sourceTree = "<group>"; };
+		9E1151F41DD166E100B7A7EB /* LaunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LaunchViewController.m; sourceTree = "<group>"; };
+		9E1151F61DD167F900B7A7EB /* FinalLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FinalLogo.png; sourceTree = "<group>"; };
+		9E1151F81DD174CC00B7A7EB /* DiscoverfyBackgroundGradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = DiscoverfyBackgroundGradient.png; sourceTree = "<group>"; };
+		9E1151FA1DD3D3F800B7A7EB /* discResetBottonSm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discResetBottonSm.png; sourceTree = "<group>"; };
+		9E1151FB1DD3D3F800B7A7EB /* discPlayButtonSm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discPlayButtonSm.png; sourceTree = "<group>"; };
+		9E1151FC1DD3D3F800B7A7EB /* discPauseBottonSm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discPauseBottonSm.png; sourceTree = "<group>"; };
+		9E1151FD1DD3D3F800B7A7EB /* discCancelButtonSm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discCancelButtonSm.png; sourceTree = "<group>"; };
 		9E12480E1D553E2F00F5B477 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		9E12480F1D553E2F00F5B477 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		9E1248111D553E6800F5B477 /* Config.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Config.h; sourceTree = "<group>"; };
@@ -99,8 +168,37 @@
 		9E203A8A1D72AB9100D0490C /* ErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorViewController.m; sourceTree = "<group>"; };
 		9E2283D11D6B7AA7004C4AD7 /* addSongImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = addSongImage.jpg; sourceTree = "<group>"; };
 		9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = removeSongImage.jpg; sourceTree = "<group>"; };
+		9E25ABE61DC06BD500828B2B /* DiscoverfyItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverfyItem.h; sourceTree = "<group>"; };
+		9E25ABE71DC06BD500828B2B /* DiscoverfyItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverfyItem.m; sourceTree = "<group>"; };
+		9E2E295E1E4D91CB00BCE848 /* DiscoverfyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverfyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E2E29601E4D91CB00BCE848 /* DiscoverfyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoverfyTests.m; sourceTree = "<group>"; };
+		9E2E29621E4D91CB00BCE848 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E2E296E1E4D966600BCE848 /* DiscoverfyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DiscoverfyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		9E2E29701E4D966600BCE848 /* DiscoverfyUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DiscoverfyUITests.m; sourceTree = "<group>"; };
+		9E2E29721E4D966600BCE848 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9E3EAAF41DB5275E00F4B264 /* UIImage+animatedGIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+animatedGIF.h"; sourceTree = "<group>"; };
+		9E3EAAF51DB5275E00F4B264 /* UIImage+animatedGIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+animatedGIF.m"; sourceTree = "<group>"; };
+		9E3EAAF71DB527E000F4B264 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		9E4100431DA4AFBA00B9FAB9 /* HorseShitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HorseShitView.h; sourceTree = "<group>"; };
+		9E4100441DA4AFBA00B9FAB9 /* HorseShitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HorseShitView.m; sourceTree = "<group>"; };
+		9E80F74B1DE8F70A00D25D9F /* thinResetButtonFlatSm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thinResetButtonFlatSm.png; sourceTree = "<group>"; };
+		9E80F74C1DE8F70A00D25D9F /* thinPlayButtonFlatSm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thinPlayButtonFlatSm.png; sourceTree = "<group>"; };
+		9E80F74D1DE8F70A00D25D9F /* thinPauseButtonFlatSm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thinPauseButtonFlatSm.png; sourceTree = "<group>"; };
+		9E80F74E1DE8F70A00D25D9F /* thinCancelButtonFlatSm.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thinCancelButtonFlatSm.png; sourceTree = "<group>"; };
+		9EADBCD71DDE606500600BB6 /* discPauseButtonSm1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discPauseButtonSm1.png; sourceTree = "<group>"; };
+		9EBAE1941DA4BE25000DC995 /* ErrorView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ErrorView.h; sourceTree = "<group>"; };
+		9EBAE1951DA4BE25000DC995 /* ErrorView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ErrorView.m; sourceTree = "<group>"; };
+		9EBAE1971DA5C41C000DC995 /* PopOverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopOverView.h; sourceTree = "<group>"; };
+		9EBAE1981DA5C41C000DC995 /* PopOverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopOverView.m; sourceTree = "<group>"; };
+		9EBAE19A1DA6E9C8000DC995 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		9EC49FCB1D9CE1B700376990 /* DiscoverfyError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DiscoverfyError.h; sourceTree = "<group>"; };
 		9EC49FCC1D9CE1B700376990 /* DiscoverfyError.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DiscoverfyError.m; sourceTree = "<group>"; };
+		9EC49FCE1DA224C400376990 /* ImageButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageButton.h; sourceTree = "<group>"; };
+		9EC49FCF1DA224C400376990 /* ImageButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageButton.m; sourceTree = "<group>"; };
+		9EEFB3EA1DAF346D00E8C4FF /* AutoHeightFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AutoHeightFont.h; sourceTree = "<group>"; };
+		9EEFB3EB1DAF346D00E8C4FF /* AutoHeightFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AutoHeightFont.m; sourceTree = "<group>"; };
+		9EEFB3ED1DAF40B500E8C4FF /* UIFont+AutoHeightFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+AutoHeightFont.h"; sourceTree = "<group>"; };
+		9EEFB3EE1DAF40B500E8C4FF /* UIFont+AutoHeightFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+AutoHeightFont.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,10 +206,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E3EAAF81DB527E000F4B264 /* ImageIO.framework in Frameworks */,
 				9E12485B1D5D1F4500F5B477 /* CoreData.framework in Frameworks */,
 				9E12482B1D5540A400F5B477 /* SystemConfiguration.framework in Frameworks */,
 				9E1248261D553F6D00F5B477 /* AVFoundation.framework in Frameworks */,
 				9E1248281D553FD700F5B477 /* Spotify.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E2E295B1E4D91CB00BCE848 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E2E296B1E4D966600BCE848 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +246,8 @@
 				9E1248191D553E6800F5B477 /* Track.m */,
 				9EC49FCB1D9CE1B700376990 /* DiscoverfyError.h */,
 				9EC49FCC1D9CE1B700376990 /* DiscoverfyError.m */,
+				9E25ABE61DC06BD500828B2B /* DiscoverfyItem.h */,
+				9E25ABE71DC06BD500828B2B /* DiscoverfyItem.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -142,6 +257,24 @@
 			children = (
 				9E135D7B1D47E18200B52C47 /* Main.storyboard */,
 				9E135D831D47E18200B52C47 /* LaunchScreen.storyboard */,
+				9EC49FCE1DA224C400376990 /* ImageButton.h */,
+				9EC49FCF1DA224C400376990 /* ImageButton.m */,
+				9E0C429D1D94800400FD6DC2 /* AlbumImageView.h */,
+				9E0C429E1D94800400FD6DC2 /* AlbumImageView.m */,
+				9E0C42C91D95E5C500FD6DC2 /* CardView.h */,
+				9E0C42CA1D95E5C500FD6DC2 /* CardView.m */,
+				9E4100431DA4AFBA00B9FAB9 /* HorseShitView.h */,
+				9E4100441DA4AFBA00B9FAB9 /* HorseShitView.m */,
+				9EBAE1941DA4BE25000DC995 /* ErrorView.h */,
+				9EBAE1951DA4BE25000DC995 /* ErrorView.m */,
+				9EBAE1971DA5C41C000DC995 /* PopOverView.h */,
+				9EBAE1981DA5C41C000DC995 /* PopOverView.m */,
+				9EEFB3EA1DAF346D00E8C4FF /* AutoHeightFont.h */,
+				9EEFB3EB1DAF346D00E8C4FF /* AutoHeightFont.m */,
+				9EEFB3ED1DAF40B500E8C4FF /* UIFont+AutoHeightFont.h */,
+				9EEFB3EE1DAF40B500E8C4FF /* UIFont+AutoHeightFont.m */,
+				9E3EAAF41DB5275E00F4B264 /* UIImage+animatedGIF.h */,
+				9E3EAAF51DB5275E00F4B264 /* UIImage+animatedGIF.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -157,12 +290,10 @@
 				9E12481B1D553E6800F5B477 /* TrackViewController.m */,
 				9E203A891D72AB9100D0490C /* ErrorViewController.h */,
 				9E203A8A1D72AB9100D0490C /* ErrorViewController.m */,
-				9E0C429D1D94800400FD6DC2 /* AlbumImageView.h */,
-				9E0C429E1D94800400FD6DC2 /* AlbumImageView.m */,
-				9E0C42C91D95E5C500FD6DC2 /* CardView.h */,
-				9E0C42CA1D95E5C500FD6DC2 /* CardView.m */,
 				9E0C42CE1D9CBC3000FD6DC2 /* SpinnerViewController.h */,
 				9E0C42CF1D9CBC3000FD6DC2 /* SpinnerViewController.m */,
+				9E1151F31DD166E100B7A7EB /* LaunchViewController.h */,
+				9E1151F41DD166E100B7A7EB /* LaunchViewController.m */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -185,6 +316,7 @@
 		9E1248291D553FF000F5B477 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9E3EAAF71DB527E000F4B264 /* ImageIO.framework */,
 				9E12485A1D5D1F4500F5B477 /* CoreData.framework */,
 				9E12482A1D5540A400F5B477 /* SystemConfiguration.framework */,
 				9E1248251D553F6D00F5B477 /* AVFoundation.framework */,
@@ -197,6 +329,8 @@
 			isa = PBXGroup;
 			children = (
 				9E135D711D47E18200B52C47 /* Discoverfy */,
+				9E2E295F1E4D91CB00BCE848 /* DiscoverfyTests */,
+				9E2E296F1E4D966600BCE848 /* DiscoverfyUITests */,
 				9E135D701D47E18200B52C47 /* Products */,
 				9E1248291D553FF000F5B477 /* Frameworks */,
 			);
@@ -206,6 +340,8 @@
 			isa = PBXGroup;
 			children = (
 				9E135D6F1D47E18200B52C47 /* Discoverfy.app */,
+				9E2E295E1E4D91CB00BCE848 /* DiscoverfyTests.xctest */,
+				9E2E296E1E4D966600BCE848 /* DiscoverfyUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -214,6 +350,7 @@
 			isa = PBXGroup;
 			children = (
 				9E1248111D553E6800F5B477 /* Config.h */,
+				9EBAE19A1DA6E9C8000DC995 /* Constants.h */,
 				9E12480E1D553E2F00F5B477 /* AppDelegate.h */,
 				9E12480F1D553E2F00F5B477 /* AppDelegate.m */,
 				9E1248241D553ED900F5B477 /* Services */,
@@ -231,6 +368,15 @@
 		9E135D721D47E18200B52C47 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9E80F74B1DE8F70A00D25D9F /* thinResetButtonFlatSm.png */,
+				9E80F74C1DE8F70A00D25D9F /* thinPlayButtonFlatSm.png */,
+				9E80F74D1DE8F70A00D25D9F /* thinPauseButtonFlatSm.png */,
+				9E80F74E1DE8F70A00D25D9F /* thinCancelButtonFlatSm.png */,
+				9E1151FA1DD3D3F800B7A7EB /* discResetBottonSm.png */,
+				9E1151FB1DD3D3F800B7A7EB /* discPlayButtonSm.png */,
+				9E1151FC1DD3D3F800B7A7EB /* discPauseBottonSm.png */,
+				9E1151FD1DD3D3F800B7A7EB /* discCancelButtonSm.png */,
+				9E1151CB1DD04D5500B7A7EB /* newLoading.gif */,
 				9E203A771D6D00C600D0490C /* playButtonImage.png */,
 				9E203A781D6D00C600D0490C /* skipButtonImage.png */,
 				9E203A791D6D00C600D0490C /* repeatButtonImage.png */,
@@ -238,10 +384,31 @@
 				9E2283D31D6B7C3E004C4AD7 /* removeSongImage.jpg */,
 				9E2283D11D6B7AA7004C4AD7 /* addSongImage.jpg */,
 				9E203A7F1D6E653800D0490C /* demoAlbumArt.png */,
+				9EADBCD71DDE606500600BB6 /* discPauseButtonSm1.png */,
+				9E1151F81DD174CC00B7A7EB /* DiscoverfyBackgroundGradient.png */,
 				9E203A811D6E661100D0490C /* demoAlbumArt2.png */,
+				9E1151F61DD167F900B7A7EB /* FinalLogo.png */,
 				9E135D731D47E18200B52C47 /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		9E2E295F1E4D91CB00BCE848 /* DiscoverfyTests */ = {
+			isa = PBXGroup;
+			children = (
+				9E2E29601E4D91CB00BCE848 /* DiscoverfyTests.m */,
+				9E2E29621E4D91CB00BCE848 /* Info.plist */,
+			);
+			path = DiscoverfyTests;
+			sourceTree = "<group>";
+		};
+		9E2E296F1E4D966600BCE848 /* DiscoverfyUITests */ = {
+			isa = PBXGroup;
+			children = (
+				9E2E29701E4D966600BCE848 /* DiscoverfyUITests.m */,
+				9E2E29721E4D966600BCE848 /* Info.plist */,
+			);
+			path = DiscoverfyUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,6 +423,8 @@
 				9E135D6D1D47E18200B52C47 /* Resources */,
 			);
 			buildRules = (
+				9E2E29691E4D957E00BCE848 /* PBXBuildRule */,
+				9E2E29681E4D957D00BCE848 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -263,6 +432,42 @@
 			productName = Discoverfy;
 			productReference = 9E135D6F1D47E18200B52C47 /* Discoverfy.app */;
 			productType = "com.apple.product-type.application";
+		};
+		9E2E295D1E4D91CB00BCE848 /* DiscoverfyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E2E29671E4D91CB00BCE848 /* Build configuration list for PBXNativeTarget "DiscoverfyTests" */;
+			buildPhases = (
+				9E2E295A1E4D91CB00BCE848 /* Sources */,
+				9E2E295B1E4D91CB00BCE848 /* Frameworks */,
+				9E2E295C1E4D91CB00BCE848 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9E2E29641E4D91CB00BCE848 /* PBXTargetDependency */,
+			);
+			name = DiscoverfyTests;
+			productName = DiscoverfyTests;
+			productReference = 9E2E295E1E4D91CB00BCE848 /* DiscoverfyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		9E2E296D1E4D966600BCE848 /* DiscoverfyUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9E2E29751E4D966600BCE848 /* Build configuration list for PBXNativeTarget "DiscoverfyUITests" */;
+			buildPhases = (
+				9E2E296A1E4D966600BCE848 /* Sources */,
+				9E2E296B1E4D966600BCE848 /* Frameworks */,
+				9E2E296C1E4D966600BCE848 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				9E2E29741E4D966600BCE848 /* PBXTargetDependency */,
+			);
+			name = DiscoverfyUITests;
+			productName = DiscoverfyUITests;
+			productReference = 9E2E296E1E4D966600BCE848 /* DiscoverfyUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -276,6 +481,18 @@
 					9E135D6E1D47E18200B52C47 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 663M9C4UE5;
+					};
+					9E2E295D1E4D91CB00BCE848 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 663M9C4UE5;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 9E135D6E1D47E18200B52C47;
+					};
+					9E2E296D1E4D966600BCE848 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = 663M9C4UE5;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 9E135D6E1D47E18200B52C47;
 					};
 				};
 			};
@@ -293,6 +510,8 @@
 			projectRoot = "";
 			targets = (
 				9E135D6E1D47E18200B52C47 /* Discoverfy */,
+				9E2E295D1E4D91CB00BCE848 /* DiscoverfyTests */,
+				9E2E296D1E4D966600BCE848 /* DiscoverfyUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -303,16 +522,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				9E203A7C1D6D00C600D0490C /* skipButtonImage.png in Resources */,
+				9E80F74F1DE8F70A00D25D9F /* thinResetButtonFlatSm.png in Resources */,
 				9E135D851D47E18200B52C47 /* LaunchScreen.storyboard in Resources */,
 				9E203A821D6E661100D0490C /* demoAlbumArt2.png in Resources */,
 				9E203A7E1D6D00C600D0490C /* pauseButtonImage.png in Resources */,
+				9E1152011DD3D3F800B7A7EB /* discCancelButtonSm.png in Resources */,
+				9E1151CC1DD04D5500B7A7EB /* newLoading.gif in Resources */,
 				9E203A7D1D6D00C600D0490C /* repeatButtonImage.png in Resources */,
+				9E1151F91DD174CC00B7A7EB /* DiscoverfyBackgroundGradient.png in Resources */,
+				9E1152001DD3D3F800B7A7EB /* discPauseBottonSm.png in Resources */,
+				9E80F7521DE8F70A00D25D9F /* thinCancelButtonFlatSm.png in Resources */,
+				9E1151FE1DD3D3F800B7A7EB /* discResetBottonSm.png in Resources */,
 				9E135D821D47E18200B52C47 /* Assets.xcassets in Resources */,
 				9E203A7B1D6D00C600D0490C /* playButtonImage.png in Resources */,
+				9EADBCD81DDE606500600BB6 /* discPauseButtonSm1.png in Resources */,
+				9E80F7511DE8F70A00D25D9F /* thinPauseButtonFlatSm.png in Resources */,
 				9E135D7D1D47E18200B52C47 /* Main.storyboard in Resources */,
+				9E80F7501DE8F70A00D25D9F /* thinPlayButtonFlatSm.png in Resources */,
 				9E2283D41D6B7C3E004C4AD7 /* removeSongImage.jpg in Resources */,
+				9E1151FF1DD3D3F800B7A7EB /* discPlayButtonSm.png in Resources */,
 				9E2283D21D6B7AA7004C4AD7 /* addSongImage.jpg in Resources */,
+				9E1151F71DD167F900B7A7EB /* FinalLogo.png in Resources */,
 				9E203A801D6E653800D0490C /* demoAlbumArt.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E2E295C1E4D91CB00BCE848 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E2E296C1E4D966600BCE848 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,30 +568,68 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9E1151F51DD166E100B7A7EB /* LaunchViewController.m in Sources */,
 				9E1248551D5CF1A900F5B477 /* Song.m in Sources */,
 				9E1248561D5CF1A900F5B477 /* Song+CoreDataProperties.m in Sources */,
 				9E1248591D5CF1A900F5B477 /* User.m in Sources */,
+				9EC49FD01DA224C400376990 /* ImageButton.m in Sources */,
 				9E203A851D70D56500D0490C /* DiscoverfyService.m in Sources */,
 				9E203A881D72931700D0490C /* Reachability.m in Sources */,
+				9E4100451DA4AFBA00B9FAB9 /* HorseShitView.m in Sources */,
 				9E1248541D5CF1A900F5B477 /* User+CoreDataProperties.m in Sources */,
 				9E0C42CB1D95E5C500FD6DC2 /* CardView.m in Sources */,
 				9E12481D1D553E6800F5B477 /* MusicViewController.m in Sources */,
+				9EBAE1991DA5C41C000DC995 /* PopOverView.m in Sources */,
+				9EBAE1961DA4BE25000DC995 /* ErrorView.m in Sources */,
 				9E12481C1D553E6800F5B477 /* LogInController.m in Sources */,
 				9E135D801D47E18200B52C47 /* Discoverfy.xcdatamodeld in Sources */,
 				9E203A8B1D72AB9100D0490C /* ErrorViewController.m in Sources */,
 				9E0C42D01D9CBC3000FD6DC2 /* SpinnerViewController.m in Sources */,
 				9EC49FCD1D9CE1B700376990 /* DiscoverfyError.m in Sources */,
 				9E135D741D47E18200B52C47 /* main.m in Sources */,
+				9EEFB3EC1DAF346D00E8C4FF /* AutoHeightFont.m in Sources */,
 				9E1248201D553E6800F5B477 /* TrackViewController.m in Sources */,
+				9E25ABE81DC06BD500828B2B /* DiscoverfyItem.m in Sources */,
 				9E0C429F1D94800400FD6DC2 /* AlbumImageView.m in Sources */,
 				9E12483D1D5BC04600F5B477 /* CoreDataService.m in Sources */,
+				9E3EAAF61DB5275E00F4B264 /* UIImage+animatedGIF.m in Sources */,
 				9E12481E1D553E6800F5B477 /* SpotifyService.m in Sources */,
 				9E1248101D553E2F00F5B477 /* AppDelegate.m in Sources */,
 				9E12481F1D553E6800F5B477 /* Track.m in Sources */,
+				9EEFB3EF1DAF40B500E8C4FF /* UIFont+AutoHeightFont.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E2E295A1E4D91CB00BCE848 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E2E29611E4D91CB00BCE848 /* DiscoverfyTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9E2E296A1E4D966600BCE848 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9E2E29711E4D966600BCE848 /* DiscoverfyUITests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		9E2E29641E4D91CB00BCE848 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9E135D6E1D47E18200B52C47 /* Discoverfy */;
+			targetProxy = 9E2E29631E4D91CB00BCE848 /* PBXContainerItemProxy */;
+		};
+		9E2E29741E4D966600BCE848 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 9E135D6E1D47E18200B52C47 /* Discoverfy */;
+			targetProxy = 9E2E29731E4D966600BCE848 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		9E135D7B1D47E18200B52C47 /* Main.storyboard */ = {
@@ -492,6 +775,72 @@
 			};
 			name = Release;
 		};
+		9E2E29651E4D91CB00BCE848 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEVELOPMENT_TEAM = 663M9C4UE5;
+				INFOPLIST_FILE = DiscoverfyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.altonelli.DiscoverfyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Discoverfy.app/Discoverfy";
+			};
+			name = Debug;
+		};
+		9E2E29661E4D91CB00BCE848 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEVELOPMENT_TEAM = 663M9C4UE5;
+				INFOPLIST_FILE = DiscoverfyTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.altonelli.DiscoverfyTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Discoverfy.app/Discoverfy";
+			};
+			name = Release;
+		};
+		9E2E29761E4D966600BCE848 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEVELOPMENT_TEAM = 663M9C4UE5;
+				INFOPLIST_FILE = DiscoverfyUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.altonelli.DiscoverfyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Discoverfy;
+			};
+			name = Debug;
+		};
+		9E2E29771E4D966600BCE848 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				DEVELOPMENT_TEAM = 663M9C4UE5;
+				INFOPLIST_FILE = DiscoverfyUITests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.altonelli.DiscoverfyUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Discoverfy;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -512,6 +861,22 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		9E2E29671E4D91CB00BCE848 /* Build configuration list for PBXNativeTarget "DiscoverfyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E2E29651E4D91CB00BCE848 /* Debug */,
+				9E2E29661E4D91CB00BCE848 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		9E2E29751E4D966600BCE848 /* Build configuration list for PBXNativeTarget "DiscoverfyUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9E2E29761E4D966600BCE848 /* Debug */,
+				9E2E29771E4D966600BCE848 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 /* End XCConfigurationList section */
 

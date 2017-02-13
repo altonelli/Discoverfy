@@ -10,6 +10,7 @@
 #import <Spotify/Spotify.h>
 #import "Reachability.h"
 #import "DiscoverfyError.h"
+#import "Constants.h"
 
 @implementation DiscoverfyService
 
@@ -38,6 +39,11 @@
     NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error){
             NSLog(@"*** Error on user post: %@",error);
+            
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+            return;
+            
+            
         } else {
 //            NSLog(@"data: %@", [[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
         }
@@ -57,6 +63,9 @@
     NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
             NSLog(@"*** Error on songs get: %@",error);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+            return;
+
         } else {
 //            NSLog(@"Successful data get: %@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
             NSArray *tracks = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
@@ -71,6 +80,70 @@
     [dataTask resume];
     
 }
+
+-(void)fetchSongsWithUser:(NSString *)user offset:(int)offset limit:(int)limit addToArray:(NSMutableArray *_Nullable)array completionHandler:(void (^)(NSMutableArray *tracks))callbackBlock{
+    NSMutableArray *tracks = [[NSMutableArray alloc]init];
+    
+    if (array != NULL) {
+        [tracks addObjectsFromArray:array];
+    }
+    
+    
+    
+    
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject];
+    
+    
+    
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"https://discoverfy.herokuapp.com/api/users/%@/songs?offset=%d&limit=%d",user,offset,limit]];
+    NSLog(@"url for disc api string: %@",url);
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        if (error) {
+            NSLog(@"*** Error on songs get: %@",error);
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"initialError"];
+            return;
+            
+        } else {
+            NSLog(@"Successful data get: %@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+            NSArray *jsonTracks = [NSJSONSerialization JSONObjectWithData:data options:0 error:nil];
+            NSLog(@"*** jsontracks froom disc service: %lu",(unsigned long)jsonTracks.count);
+            
+//                        NSLog(@"Tracks data: %@", tracks);
+            
+            [tracks addObjectsFromArray:jsonTracks];
+            
+            NSLog(@"*** tracks froom disc service: %lu",(unsigned long)tracks.count);
+            
+            if (jsonTracks.count < limit) {
+                
+                callbackBlock(tracks);
+
+            } else {
+                
+                [self fetchSongsWithUser:user offset:(offset + limit) limit:limit addToArray:tracks completionHandler:callbackBlock];
+                
+            }
+            
+            
+            
+        }
+    }];
+    
+    [dataTask resume];
+    
+}
+
+
+-(void)fetchAllSongsWithUser:(NSString *)user completionHandler:(void (^)(NSMutableArray *tracks))callbackBlock{
+    
+    
+    
+}
+
 
 -(void)postSongWithSongID:(NSString *)songID type:(NSString *)type user:(NSString *)user{
     
@@ -87,7 +160,14 @@
     
     NSURLSessionDataTask *dataTask = [defaultSession dataTaskWithRequest:request completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         if (error) {
+        
             NSLog(@"*** Error on song post: %@",error);
+            
+            [[DiscoverfyService sharedService]handleError:NULL withState:@"batchError"];
+            
+            return;
+
+            
         } else {
 //            NSLog(@"Successful post: %@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
         }
@@ -120,18 +200,20 @@
     
 }
 
--(void)handleError:(NSError *)error withType:(NSString *)type{
+-(void)handleError:(NSError * _Nullable)error withState:(NSString *)state{
     
     DiscoverfyError *discError = [[DiscoverfyError alloc]init];
     
     discError.error = error;
-    discError.appState = type;
+    discError.appState = state;
     
-    if(error.code == 1009){
-        
+//    if(error.code == 1009){
+    
+    NSLog(@"disc error: %@", discError);
+    
         [[NSNotificationCenter defaultCenter]postNotificationName:@"NoNetworkConnectivity" object:discError];
         
-    }
+//    }
     
 }
 

@@ -10,17 +10,58 @@
 
 @implementation CardView
 
-//-(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
-//    
-//    if (CGRectContainsPoint(self.bounds, point)) {
-//        
-//        return YES;
-//        
-//    }
-//    
-//    return [super pointInside:point withEvent:event];
-//    
-//}
+-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event{
+    
+//    NSLog(@"hittest called on CardView");
+    
+    
+    if ( !self.userInteractionEnabled || self.hidden || self.alpha == 0) {
+        return nil;
+    }
+    
+    
+    if ([self pointInside:point withEvent:event]){
+        
+        UIView *hitView = self;
+        
+        UIView *hitSubview;
+        
+        for (UIView *subview in self.subviews){
+            
+            CGPoint insideSubview = [self convertPoint:point toView:subview];
+            hitSubview = [subview hitTest:insideSubview withEvent:event];
+            
+            if (hitSubview){
+                
+                hitView = hitSubview;
+            }
+        }
+        
+        
+//        NSLog(@"CardView: %@, hits?: %@ ",self.class, hitView);
+        
+        return hitView;
+        
+    }
+    
+    
+    return nil;
+    
+}
+
+-(BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event{
+    
+//    NSLog(@"point inside CardView called");
+    
+    if (CGRectContainsPoint(self.bounds, point)) {
+        
+        return YES;
+        
+    }
+    
+    return NO;
+    
+}
 
 /*
 // Only override drawRect: if you perform custom drawing.

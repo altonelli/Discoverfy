@@ -9,11 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "User.h"
 #import "MusicViewController.h"
+#import "DiscoverfyError.h"
 
 @interface ErrorViewController : UIViewController
 
-@property (nonatomic,strong) NSString *errorState;
+@property (nonatomic,strong) DiscoverfyError *discError;
 @property (nonatomic,strong) User *user;
-@property (nonatomic,strong) MusicViewController *parentController;
+@property (nonatomic,weak) MusicViewController *parentController;
+
+-(id)initWithDiscoverfyError:(DiscoverfyError *)discError;
+
 
 @end
